@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './Screens/LoginScreen'
 import HomeTab from './HomeTab';
 import AddTicketScreen from './Screens/AddTicketScreen';
-import LoginScreen from './Screens/LoginScreen';
 import AddAccount from './components/AddAccount';
 
 export default function Rooting() {
