@@ -3,32 +3,42 @@ import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { HighlightColor } from '../Assets/colors'
-const MainMenuBox = (props) => {
+import { useNavigation } from '@react-navigation/native'
 
-    return (
-        <Pressable style = {styles.MainMenuBox}
-        android_ripple = {{
+// const MainMenuBox = (props) => {
 
-            color: '#E57F84',
-            radius: 115
-        }}>
-            <Image
-            source = {props.source}
-            style={{width: '50%', height: '50%', marginBottom: 5}}
-            />
-            <Text style = {{fontSize: 15, fontWeight: 'bold', color: '#F4EAE6', textAlign: 'center'}}>
-                {props.title}
-            </Text>
-        </Pressable>
-    )
+//     return (
+//         <Pressable style = {styles.MainMenuBox}
+//         android_ripple = {{
 
+//             color: '#E57F84',
+//             radius: 115
+//         }}>
+//             <Image
+//             source = {props.source}
+//             style={{width: '50%', height: '50%', marginBottom: 5}}
+//             />
+//             <Text style = {{fontSize: 15, fontWeight: 'bold', color: '#F4EAE6', textAlign: 'center'}}>
+//                 {props.title}
+//             </Text>
+//         </Pressable>
+//     )
+
+// }
+
+const newdata = () => {
+    console.log('yes')
 }
 
 export default function HomeScreen() {
+
+    const navigation = useNavigation()
+
   return (
     <LinearGradient colors={['#F4EAE6', '#F4EAE6', '#2F5061', ]}    style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}} >
         <View style  = {{height: '50%', width: '95%', alignItems: 'center', justifyContent: 'center'}}>
             <View style = {{flexDirection: 'column', width: '100%', justifyContent: 'center', alignItems: 'center', height: '50%', margin: 0}}>
+           
             </View>
         
         </View>
@@ -39,9 +49,18 @@ export default function HomeScreen() {
             name='add'
             color= '#fff'
             size={50}
-
+            onPress={newdata}
             />
-        </Pressable>    
+        </Pressable>
+        <Pressable style={styles.AddUser} > 
+            <Icon
+            name='add'
+            color= '#fff'
+            size={50}
+             onPress = {() => navigation.navigate('AddAccount')}
+            />
+        </Pressable>
+        
         <Text style = {{fontSize: 10, color: '#fff', position:  'absolute', bottom: 5}} >Violation Ticketing System 1.0.0</Text>
     </LinearGradient>
   )
@@ -67,7 +86,7 @@ const styles = StyleSheet.create({
 
         width: 70,
         height: 70,
-        backgroundColor: HighlightColor,
+        backgroundColor: 'red',
         borderRadius: 100,
         position: 'absolute',
         bottom: 0,
@@ -76,6 +95,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 20,
 
+      
+    },
+    AddUser: {
+
+        width: 70,
+        height: 70,
+        backgroundColor: 'green',
+        borderRadius: 100,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        justifyContent: 'center',   
+        alignItems: 'center',
+        margin: 20,
+
+      
     }
 
 })

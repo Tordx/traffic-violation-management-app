@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './Screens/LoginScreen';
 import HomeScreen from './Screens/HomeScreen';
+import AddAccount from './components/AddAccount';
 
 export default function Rooting() {
 
@@ -25,6 +26,15 @@ export default function Rooting() {
             
             name='HomeScreen'
             component={HomeScreen}
+            options = {{
+                headerShown: false,
+            }}
+
+        />
+             <Stack.Screen
+            
+            name='AddAccount'
+            component={AddAccount}
             options = {{
                 headerShown: false,
             }}

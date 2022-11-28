@@ -1,4 +1,4 @@
-import Reac , {useState} from 'react';
+import React , {useState} from 'react';
 import { 
     
     View,
@@ -15,7 +15,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import { iconColor, textColor } from '../Assets/colors';
 import { useNavigation } from '@react-navigation/native';
-import { remoteDBAcoount } from '../Database/pouchDB';
+import uuid from 'react-native-uuid';
+import { localDBAccount , SyncAccount } from '../Database/pouchDB';
 
 // const LoginInput = (props) => {
 //     return (
@@ -38,48 +39,47 @@ import { remoteDBAcoount } from '../Database/pouchDB';
 // }
 
 
-export default function LoginScreen() {
+export default function AddAccount() {
 
     const navigation = useNavigation()
+    const id = uuid.v4();
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    //   const LoginData = async () => {
+    const createAccount = () => {
 
-    //     var result = await remoteDBAcoount.allDocs({
-    //         include_docs: true,
-    //         attachments: true
-    //       });
-    //       if(result.rows){
-    //           let modifiedArr = result.rows.map(function(item){
-    //           return item.doc
-    //       });
-    //       let filteredData = modifiedArr.filter(item => {
-    //           return item.Username === username
-    //         });
-    //         if(!filteredData.length == 0) {
-    //             let newFilterData = filteredData.map(item => {
-    //                 return item
-    //             })
+        if(1+1 == 3){
+          console.log('hey')
+        }
+       else{
+         try {
+           var NewAccount = {
+            _id: id,
+             Username : username,
+             Password : password,
+           }
+        localDBAccount.put(NewAccount)
+           .then((response) =>{
+             Alert.alert('Your Account has been successfully added!')
+             console.log(response)
+             SyncAccount()
+             navigation.navigate('LoginScreen')
+           })
+           .catch(err=>console.log(err))
+           
+         } catch (error) {
+          console.log(error)
+         }
+         }
+    }
 
-    //             // dispatch(setStudentInfo(newFilterData))
-    //             const Username = newFilterData[0].Username;
-    //             const Password = newFilterData[0].Password
-
-    //             if((username == Username ) && (password == Password) ){
-    //                 navigation.navigate('HomeScreen')
-
-    //                }else{
-    //                  Alert.alert('StudentID and Birthdate not match')
-    //                }
-    //         }else{
-    //             Alert.alert('StudentID and Birthdate not match')
-    //         }
-            
-    //     }
-       
-    //   }
+    const login =  () => {
+        
+        username == '' ? Alert.alert('Please Enter Username') : 
+        (password == '' ? Alert.alert('Please Enter Password') : 
+         createAccount())
+    }
     
 
   return (
@@ -92,8 +92,8 @@ export default function LoginScreen() {
             style = {{width: '30%', height: '15%'}}
         /> */}
 
-            <Text style = {{fontSize: 35, fontWeight: 'bold',  textAlign: 'center', color: textColor, marginTop: 15}} > Welcome Back!</Text>
-            <Text style = {{fontSize: 15, textAlign: 'center',  color: textColor, marginBottom: 5}} > Login to your Account </Text>
+            <Text style = {{fontSize: 35, fontWeight: 'bold',  textAlign: 'center', color: textColor, marginTop: 15}} > Create Account</Text>
+            <Text style = {{fontSize: 15, textAlign: 'center',  color: textColor, marginBottom: 5}} > Please Enter The Information </Text>
             <View style = {styles.InputContainer}>
                 <Icon
                     style = {{marginLeft: 10,}}
@@ -103,8 +103,8 @@ export default function LoginScreen() {
 
                 />
                 <TextInput
-                // onChangeText={(value) => setUsername(value)}
-                // value={username}
+                onChangeText={(value) => setUsername(value)}
+                value={username}
                 placeholderTextColor={iconColor}
                 placeholder={'usename'}
                 style = {{fontSize: 17}}
@@ -119,25 +119,26 @@ export default function LoginScreen() {
 
                 />
                 <TextInput
-                // onChangeText={(value) => setPassword(value)}
-                // value={password}
+                onChangeText={(value) => setPassword(value)}
+                value={password}
                 placeholderTextColor={iconColor}
                 placeholder={'password'}
                 style = {{fontSize: 17}}
                 />
             </View>
+           
             <Pressable style = {{justifyContent: 'flex-end', width: '75%',}}>
-            <Text style = {{marginTop: 10, textAlign: 'right'}}> forgot password </Text>
+            {/* <Text style = {{marginTop: 10, textAlign: 'right'}}> forgot password </Text> */}
             </Pressable>
             <Pressable style = {styles.loginButton}
-            onPress = {() => navigation.navigate('HomeScreen')}
+            onPress = {login}
             android_ripple = {{
 
                 color: '#E57F84'
 
             }}
             >
-                <Text style = {{textAlign: 'center', fontSize: 20, color: '#fff', fontWeight: '700'}} >LOG IN</Text>
+                <Text style = {{textAlign: 'center', fontSize: 20, color: '#fff', fontWeight: '700'}} >ADD ACCOUNT</Text>
             </Pressable>
            
         </View>
