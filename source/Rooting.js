@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './Screens/LoginScreen'
 import HomeTab from './HomeTab';
 import AddTicketScreen from './Screens/AddTicketScreen';
+import LoginScreen from './Screens/LoginScreen';
+import AddAccount from './components/AddAccount';
 
 export default function Rooting() {
 
@@ -40,7 +42,15 @@ export default function Rooting() {
                 }}
 
             />
+             <Stack.Screen
+            
+            name='AddAccount'
+            component={AddAccount}
+            options = {{
+                headerShown: false,
+            }}
 
+        />
         </Stack.Navigator>
     </NavigationContainer>
   )
