@@ -15,7 +15,7 @@ import LinearGradient from 'react-native-linear-gradient'
 
 const InputText = (props) => {
 
-    
+    // huwag idisable, gumamit ng props
 
     return (
         <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center',}}>
@@ -33,7 +33,7 @@ const InputText = (props) => {
             
             placeholderTextColor={'#c4c7cc'}
             placeholder={props.placeholder}
-            style = {{fontSize: 17}}
+            style = {{fontSize: 17, fontWeight: '300'}}
             />
         </View>
 
@@ -50,7 +50,7 @@ export default function AddTicketScreen() {
     return (
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
         {   next?  <View style = {{width: '100%'}}> 
-                <Text style = {{ alignSelf: 'center', marginHorizontal: 25, marginVertical: 20, fontSize: 25, fontWeight: '500'}} >PERSONAL INFORMATION</Text>
+        <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
             <InputText
                 placeholder = 'e.g. John Doe'
                 title = "Driver's Name"
@@ -63,18 +63,23 @@ export default function AddTicketScreen() {
                 placeholder = "09xxxxxxxxx"
                 title = "Contact Number"
             />
+            <InputText
+                placeholder = "A12-34567890"
+                title = "License Number"
+            />
              
             </View>
             :
-            <View><Text style = {{ alignSelf: 'center', marginHorizontal: 25, marginVertical: 20, fontSize: 25, fontWeight: '500'}} >VEHICLE INFORMATION</Text>
+            <View>
+                <Text style = {styles.HeaderText} >VEHICLE INFORMATION</Text>
         </View>}
                { next? <TouchableOpacity
-                style = {{justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 20}}
+                style = {styles.nextbutton}
                 onPress={() => setNext(!next)}
              >
                 <Text>PRESS ME</Text>
             </TouchableOpacity> : <TouchableOpacity
-                style = {{justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 20}}
+                style = {styles.nextbutton}
                 onPress={() => setNext(!next)}
              >
                 <Text>PRESS ME</Text>
@@ -89,6 +94,25 @@ export default function AddTicketScreen() {
 
 const styles = StyleSheet.create({
 
+    HeaderText: { 
+        
+        alignSelf: 'center', 
+        marginHorizontal: 25, 
+        marginVertical: 20, 
+        fontSize: 25, 
+        fontWeight: '500'
+    
+    },
+
+    nextbutton: {
+
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        position: 'absolute', 
+        bottom: 20
+
+    },
+
 
     InputContainer: { 
         
@@ -100,7 +124,15 @@ const styles = StyleSheet.create({
         borderRadius: 5, 
         flexDirection: 'row',
         borderWidth: 0.3,
-        borderColor: '#c1cde0'
+        borderColor: '#c1cde0',
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 3,
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 1,
+        elevation: 2,
     },
 
     container: {

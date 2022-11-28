@@ -16,7 +16,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { iconColor, textColor } from '../Assets/colors';
 import { useNavigation } from '@react-navigation/native';
 import uuid from 'react-native-uuid';
-import { localDBAccount , SyncAccount } from '../Database/pouchDB';
 
 // const LoginInput = (props) => {
 //     return (
@@ -143,7 +142,7 @@ export default function AddAccount() {
            
         </View>
         
-            <Text style = {{fontSize: 10, color: '#fff', position: 'absolute', bottom: 5}} >Violation Ticketing System 1.0.0</Text>
+            <Text style = {{fontSize: 10, color: '#fff', position: 'absolute', bottom: 150}} >Violation Ticketing System 1.0.0</Text>
             
     </LinearGradient>
   )
