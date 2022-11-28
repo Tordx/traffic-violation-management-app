@@ -2,8 +2,9 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native';
-import LoginScreen from './Screens/LoginScreen';
-import HomeScreen from './Screens/HomeScreen';
+import LoginScreen from './Screens/LoginScreen'
+import HomeTab from './HomeTab';
+import AddTicketScreen from './Screens/AddTicketScreen';
 
 export default function Rooting() {
 
@@ -23,13 +24,23 @@ export default function Rooting() {
             />
             <Stack.Screen
             
-            name='HomeScreen'
-            component={HomeScreen}
-            options = {{
-                headerShown: false,
-            }}
+                name='HomeTab'
+                component={HomeTab}
+                options = {{
+                    headerShown: false,
+                }}
 
-        />
+            />
+            <Stack.Screen
+            
+                name = 'AddTicketScreen'
+                component={AddTicketScreen}
+                options = {{
+                    headerShown: false
+                }}
+
+            />
+
         </Stack.Navigator>
     </NavigationContainer>
   )

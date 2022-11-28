@@ -2,7 +2,8 @@ import { View, Text, Pressable, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { HighlightColor } from '../Assets/colors'
+import { HighlightColor } from '../../Assets/colors'
+import { useNavigation } from '@react-navigation/native'
 const MainMenuBox = (props) => {
 
     return (
@@ -24,7 +25,10 @@ const MainMenuBox = (props) => {
 
 }
 
-export default function HomeScreen() {
+export default function TicketingScreen() {
+
+    const navigation = useNavigation();
+
   return (
     <LinearGradient colors={['#F4EAE6', '#F4EAE6', '#2F5061', ]}    style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}} >
         <View style  = {{height: '50%', width: '95%', alignItems: 'center', justifyContent: 'center'}}>
@@ -34,7 +38,15 @@ export default function HomeScreen() {
         </View>
         
         
-        <Pressable style={styles.AddTicket} > 
+        <Pressable style={styles.AddTicket} 
+            onPress = {() => navigation.navigate('AddTicketScreen')}
+            android_ripple = {{
+
+                color: '#F4EAE6',
+                radius: 35,
+
+            }}
+        > 
             <Icon
             name='add'
             color= '#fff'
@@ -70,11 +82,19 @@ const styles = StyleSheet.create({
         backgroundColor: HighlightColor,
         borderRadius: 100,
         position: 'absolute',
-        bottom: 0,
+        bottom: 100,
         right: 0,
         justifyContent: 'center',   
         alignItems: 'center',
         margin: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 5,
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 6.68,
+        elevation: 11,
 
     }
 

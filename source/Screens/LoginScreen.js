@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
-import { iconColor, textColor } from '../Assets/colors';
+import { iconColor, textColor } from '../      ../../Assets/colors';
 import { useNavigation } from '@react-navigation/native';
 
 const LoginInput = (props) => {
@@ -51,7 +51,7 @@ export default function LoginScreen() {
             style = {{width: '30%', height: '15%'}}
         /> */}
 
-            <Text style = {{fontSize: 35, fontWeight: 'bold',  textAlign: 'center', color: textColor, marginTop: 15}} > Welcome Back!</Text>
+            {/* <Text style = {{fontSize: 35, fontWeight: 'bold',  textAlign: 'center', color: textColor, marginTop: 15}} > Welcome Back!</Text> */}
             <Text style = {{fontSize: 15, textAlign: 'center',  color: textColor, marginBottom: 5}} > Login to your Account </Text>
             <LoginInput
       
@@ -68,7 +68,7 @@ export default function LoginScreen() {
             <Text style = {{marginTop: 10, textAlign: 'right'}}> forgot password </Text>
             </Pressable>
             <Pressable style = {styles.loginButton}
-            onPress = {() => navigation.navigate('HomeScreen')}
+            onPress = {() => navigation.navigate('HomeTab')}
             android_ripple = {{
 
                 color: '#E57F84'
