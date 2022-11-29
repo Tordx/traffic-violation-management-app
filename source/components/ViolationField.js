@@ -36,7 +36,8 @@ export const Checbox = (props) => {
   );
 };
 
-export const ViolationField = () => {
+export const ViolationField = (props) => {
+
 
     //vehicle related
     
@@ -55,6 +56,15 @@ export const ViolationField = () => {
     const [speeding, setSpeeding] = useState(false);
     const [reckless, setReckless] = useState(false);
 
+
+        props.obstruction(obstruction)
+        props.registration(registration)
+        props.orcr(orcr)
+        props.nolicense(nolicense)
+        props.document(document)
+        props.expiredLicense(expiredLicense)
+  
+
     return (
       
     <View style = {{flex: 1, justifyContent: 'center', alignItems:'center'}}>
@@ -63,11 +73,12 @@ export const ViolationField = () => {
             
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
-        
+                        
                         status = {nolicense? 'checked' : 'unchecked'}
                         onPress = {() => setNoLicense(!nolicense)}
                         style = {styles.CheckBoxStyle}
                         color = '#a11'
+                        
 
                     />
                     <Text style = {styles.Text}>{NoLicense}</Text>
