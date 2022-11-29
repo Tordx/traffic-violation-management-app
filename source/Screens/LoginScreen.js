@@ -99,13 +99,13 @@ export default function LoginScreen() {
                     style = {{marginLeft: 10,}}
                     name={'person'}
                     size = {25}
-                    color =  '#B7CFDC'
+                    color =  '#c4c7cc'
 
                 />
                 <TextInput
                 // onChangeText={(value) => setUsername(value)}
                 // value={username}
-                placeholderTextColor={iconColor}
+                placeholderTextColor={'#c4c7cc'}
                 placeholder={'usename'}
                 style = {{fontSize: 17}}
                 />
@@ -115,13 +115,13 @@ export default function LoginScreen() {
                     style = {{marginLeft: 10,}}
                     name={'lock'}
                     size = {25}
-                    color =  '#B7CFDC'
+                    color =  '#c4c7cc'
 
                 />
                 <TextInput
                 // onChangeText={(value) => setPassword(value)}
                 // value={password}
-                placeholderTextColor={iconColor}
+                placeholderTextColor={'#c4c7cc'}
                 placeholder={'password'}
                 style = {{fontSize: 17}}
                 />
@@ -176,13 +176,23 @@ const styles = StyleSheet.create({
 
     InputContainer: { 
         
-        backgroundColor: '#fff', 
+        backgroundColor: '#fffe', 
         height: 50, 
-        width: '75%', 
+        width: '86%', 
         alignItems: 'center', 
-        marginTop: 20, 
+        marginVertical: 10, 
         borderRadius: 5, 
         flexDirection: 'row',
+        borderWidth: 0.3,
+        borderColor: '#c1cde0',
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 3,
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 1,
+        elevation: 2,
     },
 
     container: {
