@@ -49,8 +49,9 @@ export default function AddTicketScreen() {
   
     return (
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
-        {   next?  <View style = {{width: '100%'}}> 
-        <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
+        {next?  
+        <View style = {{width: '100%'}}> 
+            <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
             <InputText
                 placeholder = 'e.g. John Doe'
                 title = "Driver's Name"
@@ -70,20 +71,35 @@ export default function AddTicketScreen() {
              
             </View>
             :
-            <View>
-                <Text style = {styles.HeaderText} >VEHICLE INFORMATION</Text>
-        </View>}
-               { next? <TouchableOpacity
-                style = {styles.nextbutton}
-                onPress={() => setNext(!next)}
-             >
-                <Text>PRESS ME</Text>
-            </TouchableOpacity> : <TouchableOpacity
-                style = {styles.nextbutton}
-                onPress={() => setNext(!next)}
-             >
-                <Text>PRESS ME</Text>
-            </TouchableOpacity>}
+            <View style = {{width: '100%'}}> 
+                <Text style = {styles.HeaderText}>VEHICLE INFORMATION</Text>
+                <InputText
+                    placeholder = 'ABC 1234'
+                    title = "License Plate"
+                />
+                <InputText
+                    placeholder = "Bus, Jeep, Motorcycle ..."
+                    title = "Vehicle Type"
+                />
+                <Text style = {styles.HeaderText}>VIOLATION</Text>
+                </View> 
+                
+                }
+               {next? 
+               
+                <TouchableOpacity
+                    style = {styles.nextbutton}
+                    onPress={() => setNext(!next)}
+                >
+                    <Text style = {styles.buttontext}>NEXT</Text>
+                </TouchableOpacity> 
+            
+            :   <TouchableOpacity
+                    style = {styles.nextbutton}
+                    onPress={() => setNext(!next)}
+                >
+                    <Text style = {styles.buttontext}>SUBMIT</Text>
+                </TouchableOpacity>}
 
             <CloseButton
             onPress = {() => navigation.goBack('HomeTab')}
@@ -109,7 +125,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center', 
         position: 'absolute', 
-        bottom: 20
+        bottom: 20,
+        width: '86%',
+        height: 50,
+        backgroundColor: '#E57F84',
+        borderRadius: 5,
+
+    },
+
+    buttontext: {
+
+        textAlign: 'center',
+        fontSize: 17,
+        fontWeight: '500',
+        color: '#fff'
 
     },
 
