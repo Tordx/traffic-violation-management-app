@@ -12,6 +12,7 @@ import { iconColor } from '../Assets/colors'
 import { CloseButton } from '../components/buttons'
 import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
+import { ViolationField } from '../components/ViolationField'
 
 const InputText = (props) => {
 
@@ -81,7 +82,10 @@ export default function AddTicketScreen() {
                     placeholder = "Bus, Jeep, Motorcycle ..."
                     title = "Vehicle Type"
                 />
-                <Text style = {styles.HeaderText}>VIOLATION</Text>
+                <Text style = {styles.HeaderText}>TRAFFIC VIOLATION</Text>
+                <View style = {{flexDirection: 'row', justifyContent: 'center',  width: 420}}>
+                    <ViolationField/>
+                </View>     
                 </View> 
                 
                 }
