@@ -4,7 +4,8 @@ import {
     Text, 
     TextInput,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native'
 import React, { useState } from 'react'
 import Icon  from 'react-native-vector-icons/MaterialIcons'
@@ -49,7 +50,9 @@ export default function AddTicketScreen() {
     const [next, setNext] = useState(true);
   
     return (
+
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
+            <ScrollView>
         {next?  
         <View style = {{width: '100%'}}> 
             <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
@@ -82,6 +85,12 @@ export default function AddTicketScreen() {
                     placeholder = "Bus, Jeep, Motorcycle ..."
                     title = "Vehicle Type"
                 />
+                <TouchableOpacity
+                   style = {styles.uploadPhoto}
+                   onPress={() => setNext(!next)}
+               >
+                   <Text style = {[styles.buttontext, {color: 'grey'}]}>Upload Photo</Text>
+               </TouchableOpacity>
                 <Text style = {styles.HeaderText}>TRAFFIC VIOLATION</Text>
                 <View style = {{flexDirection: 'row', justifyContent: 'center',  width: 420}}>
                     <ViolationField/>
@@ -89,25 +98,27 @@ export default function AddTicketScreen() {
                 </View> 
                 
                 }
-               {next? 
+              
+            </ScrollView>
+            {next? 
                
-                <TouchableOpacity
-                    style = {styles.nextbutton}
-                    onPress={() => setNext(!next)}
-                >
-                    <Text style = {styles.buttontext}>NEXT</Text>
-                </TouchableOpacity> 
-            
-            :   <TouchableOpacity
-                    style = {styles.nextbutton}
-                    onPress={() => setNext(!next)}
-                >
-                    <Text style = {styles.buttontext}>SUBMIT</Text>
-                </TouchableOpacity>}
+               <TouchableOpacity
+                   style = {styles.nextbutton}
+                   onPress={() => setNext(!next)}
+               >
+                   <Text style = {styles.buttontext}>NEXT</Text>
+               </TouchableOpacity> 
+           
+           :   <TouchableOpacity
+                   style = {styles.nextbutton}
+                   onPress={() => setNext(!next)}
+               >
+                   <Text style = {styles.buttontext}>SUBMIT</Text>
+               </TouchableOpacity>}
 
-            <CloseButton
-            onPress = {() => navigation.goBack('HomeTab')}
-            />
+           <CloseButton
+           onPress = {() => navigation.goBack('HomeTab')}
+           />
         </LinearGradient>
   )
 }
@@ -117,11 +128,25 @@ const styles = StyleSheet.create({
     HeaderText: { 
         
         alignSelf: 'center', 
-        marginHorizontal: 25, 
+        marginHorizontal: 30, 
         marginVertical: 20, 
         fontSize: 25, 
         fontWeight: '500'
     
+    },
+
+    uploadPhoto: {
+
+        justifyContent: 'center', 
+        alignSelf: 'center', 
+        width: '86%',
+        height: 50,
+        borderWidth: 2,
+        borderStyle: 'dashed',
+        borderRadius: 5,
+        borderColor: 'grey',
+        marginTop: 20,
+
     },
 
     nextbutton: {
