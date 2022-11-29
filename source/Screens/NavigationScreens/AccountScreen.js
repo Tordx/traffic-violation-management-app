@@ -1,7 +1,13 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 import  Icon from 'react-native-vector-icons/MaterialIcons'
+import { useNavigation } from '@react-navigation/native'
+
+
 export default function AccountScreen() {
+
+  const navigation = useNavigation()
+
   return (
     <View style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       
