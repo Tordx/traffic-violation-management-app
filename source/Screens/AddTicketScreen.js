@@ -21,21 +21,14 @@ const InputText = (props) => {
 
     return (
         <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center',}}>
-        <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 30, fontSize: 16, fontWeight: '300'}} >{props.title}</Text>
+        <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 20, fontSize: 16, fontWeight: '300'}} >{props.title}</Text>
         <View style = {styles.InputContainer}>
-            
-            <Icon
-                style = {{marginLeft: 10,}}
-                name={props.name}
-                size = {25}
-                color =  '#B7CFDC'
-    
-            />
             <TextInput
             
             placeholderTextColor={'#c4c7cc'}
             placeholder={props.placeholder}
-            style = {{fontSize: 17, fontWeight: '300'}}
+            style = {{fontSize: 17, fontWeight: '300', marginLeft: 10}}
+            onChangeText = {props.onChangeText}
             />
         </View>
 
@@ -52,9 +45,10 @@ export default function AddTicketScreen() {
     return (
 
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
-            <ScrollView>
+            <ScrollView style = {{width: '100%'}}>
+            <View></View>
         {next?  
-        <View style = {{width: '100%'}}> 
+        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}> 
             <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
             <InputText
                 placeholder = 'e.g. John Doe'
@@ -75,7 +69,7 @@ export default function AddTicketScreen() {
              
             </View>
             :
-            <View style = {{width: '100%'}}> 
+            <View style = {{width: '100%', paddingBottom: 100, justifyContent: 'center', alignItems: 'center'}}> 
                 <Text style = {styles.HeaderText}>VEHICLE INFORMATION</Text>
                 <InputText
                     placeholder = 'ABC 1234'
@@ -92,9 +86,14 @@ export default function AddTicketScreen() {
                    <Text style = {[styles.buttontext, {color: 'grey'}]}>Upload Photo</Text>
                </TouchableOpacity>
                 <Text style = {styles.HeaderText}>TRAFFIC VIOLATION</Text>
-                <View style = {{flexDirection: 'row', justifyContent: 'center',  width: 420}}>
+                <View style = {{flexDirection: 'row', justifyContent: 'center',  width: 420, marginBottom: 20,}}>
                     <ViolationField/>
-                </View>     
+                </View>
+                
+                <InputText
+                    placeholder = "Specify here ..."
+                    title = "Others"
+                />
                 </View> 
                 
                 }
@@ -127,8 +126,8 @@ const styles = StyleSheet.create({
 
     HeaderText: { 
         
-        alignSelf: 'center', 
-        marginHorizontal: 30, 
+        textAlign: 'center',
+        marginHorizontal: 20, 
         marginVertical: 20, 
         fontSize: 25, 
         fontWeight: '500'
@@ -155,7 +154,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         position: 'absolute', 
         bottom: 20,
-        width: '86%',
+        width: '90%',
         height: 50,
         backgroundColor: '#E57F84',
         borderRadius: 5,
@@ -176,11 +175,11 @@ const styles = StyleSheet.create({
         
         backgroundColor: '#fffe', 
         height: 50, 
-        width: '86%', 
-        alignItems: 'center', 
-        marginVertical: 10, 
-        borderRadius: 5, 
-        flexDirection: 'row',
+        width: '90%', 
+        alignItems: 'flex-start',
+        alignSelf: 'center',
+        marginVertical: 10,
+        borderRadius: 5,
         borderWidth: 0.3,
         borderColor: '#c1cde0',
         shadowColor: "#000",
