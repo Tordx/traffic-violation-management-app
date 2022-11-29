@@ -56,13 +56,14 @@ export const ViolationField = (props) => {
     const [speeding, setSpeeding] = useState(false);
     const [reckless, setReckless] = useState(false);
 
+    // shows error : undefined
 
-        props.obstruction(obstruction)
-        props.registration(registration)
-        props.orcr(orcr)
-        props.nolicense(nolicense)
-        props.document(document)
-        props.expiredLicense(expiredLicense)
+        // props.obstruction(obstruction)
+        // props.registration(registration)
+        // props.orcr(orcr)
+        // props.nolicense(nolicense)
+        // props.document(document)
+        // props.expiredLicense(expiredLicense)
   
 
     return (

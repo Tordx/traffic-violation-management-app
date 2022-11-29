@@ -104,7 +104,7 @@ export default function AddTicketScreen() {
            }
            locaDBViolation.put(NewViolation)
            .then((response) =>{
-             Alert.alert('Your Account has been successfully added!')
+             Alert.alert('Ticket sucessfully submitted')
              console.log(response)
              SyncViolation()
              navigation.navigate('HomeTab')
@@ -150,6 +150,7 @@ export default function AddTicketScreen() {
              
             </View>
             :
+            
             <View style = {{width: '100%', paddingBottom: 100, justifyContent: 'center', alignItems: 'center'}}> 
                 <Text style = {styles.HeaderText}>VEHICLE INFORMATION</Text>
                 <InputText
@@ -164,6 +165,12 @@ export default function AddTicketScreen() {
                     placeholder = "Bus, Jeep, Motorcycle ..."
                     title = "Vehicle Type"
                 />
+                <TouchableOpacity
+                    style = {styles.oPenCamera}
+                    onPress={() => console.log('Camera open')}
+                >
+                    <Text style = {[styles.buttontext,{color: 'grey'}]}>Upload Photo</Text>
+                </TouchableOpacity>
                 <Text style = {styles.HeaderText}>TRAFFIC VIOLATION</Text>
                 <View style = {{flexDirection: 'row', justifyContent: 'center',  width: 420, marginBottom: 20,}}>
                     <ViolationField/>
@@ -202,6 +209,20 @@ export default function AddTicketScreen() {
 }
 
 const styles = StyleSheet.create({
+
+    oPenCamera: {
+
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginTop: 5,
+        width: '90%',
+        height: 50,
+        borderWidth: 2,
+        borderColor: '#000',
+        borderStyle: 'dashed',
+        borderRadius: 5,
+
+    },
 
     HeaderText: { 
         
