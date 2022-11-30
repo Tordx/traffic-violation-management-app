@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import {StatusBar } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import  Icon from 'react-native-vector-icons/MaterialIcons'
@@ -6,11 +6,17 @@ import TicketingScreen from './Screens/NavigationScreens/TicketingScreen'
 import AccountScreen from './Screens/NavigationScreens/AccountScreen'
 import NewsScreen from './Screens/NavigationScreens/NewsScreen'
 
+
 export default function HomeTab() {
 
     const Tab = createBottomTabNavigator();
 
   return (
+    <>
+    <StatusBar
+    backgroundColor="#F4EAE6"
+    barStyle="dark-content"
+  />
     <Tab.Navigator
 
     screenOptions={({route}) => ({
@@ -19,10 +25,11 @@ export default function HomeTab() {
         tabBarStyle: { 
             position: 'absolute',
             bottom: 30,
-            left: 35,
-            right: 35,
-            borderRadius: 15,
-            height: 70,
+            left: 30,
+            right: 30,
+            borderRadius: 10,
+            height: 60,
+            backgroundColor: '#fff'
 
         },
         tabBarIcon:({focused, size, color}) => {
@@ -83,5 +90,7 @@ export default function HomeTab() {
         
         />
     </Tab.Navigator>
+    </>
+
   )
 }
