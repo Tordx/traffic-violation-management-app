@@ -159,7 +159,7 @@ export const ViolationField = (props) => {
                         
         </View> 
         </View>
-        <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 20, marginBottom: 10, alignSelf: 'flex-start'}}>Vehicle Related</Text>
+        <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 10, marginBottom: 10, alignSelf: 'flex-start'}}>Vehicle Related</Text>
         <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
