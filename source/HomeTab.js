@@ -37,17 +37,17 @@ export default function HomeTab() {
             if(route.name==='TicketingScreen'){
               iconName = 'article';
               size = focused ? 37 : 35;
-              color = focused ? '#4297A0': 'grey'; 
+              color = focused ? '#1240ac': 'grey'; 
 
             } else if (route.name === 'NewsScreen') {
                 iconName = 'announcement';
                 size = focused ? 37 : 35;
-                color = focused ? '#4297A0': 'grey'; 
+                color = focused ? '#1240ac': 'grey'; 
   
             } else if (route.name === 'AccountScreen') {
               iconName = 'account-circle';
               size = focused ? 37 : 35;
-              color = focused ? '#4297A0': 'grey'; 
+              color = focused ? '#1240ac': 'grey'; 
 
             } 
 

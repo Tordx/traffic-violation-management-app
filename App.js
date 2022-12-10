@@ -6,8 +6,6 @@ export default function App() {
   return (
     <>
     <StatusBar
-    barStyle={'dark-content'}
-    backgroundColor = {''}
     />
     <Rooting/>
     </>

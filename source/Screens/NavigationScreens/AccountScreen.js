@@ -19,7 +19,7 @@ export default function AccountScreen() {
         }}>
       <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: 'grey'}}>Account</Text>
       </View>
-      <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 1,}}>
+      <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 5,}}>
         <Icon
         name='settings'
         size={30}
@@ -39,14 +39,14 @@ export default function AccountScreen() {
 
       </View>
 
-      <Pressable style={styles.AddUser} > 
+      {/* <Pressable style={styles.AddUser} > 
             <Icon
             name='add'
             color= '#fff'
             size={50}
              onPress = {() => navigation.navigate('AddAccount')}
             />
-        </Pressable>
+        </Pressable> */}
 
     </View>
   )

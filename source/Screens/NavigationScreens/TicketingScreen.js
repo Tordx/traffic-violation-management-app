@@ -12,14 +12,15 @@ export default function TicketingScreen() {
     const navigation = useNavigation();
 
   return (
-    <LinearGradient colors={['#f2f2f2', '#f2f2f2', '#fff', ]}    style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}} >
+    <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}} >
       <StatusBar
-      backgroundColor={'#fff'}
+      backgroundColor={'#1240ac'}
+      barStyle = {'light-content'}
       />
-        <ScrollView style={{width: '100%'}}>
-        
+        <ScrollView>
+          <View style={{width: '100%'}}>
             <TicketingList/>
-            
+            </View>
        
       <View style = {{height: 100, justifyContent: 'center',
         alignItems: 'center',}}>
@@ -30,8 +31,8 @@ export default function TicketingScreen() {
             onPress = {() => navigation.navigate('AddTicketScreen')}
             android_ripple = {{
 
-                color: '#F4EAE6',
-                radius: 35,
+                color: '#1240ac',
+                radius: 40,
 
             }}
         > 
@@ -47,17 +48,18 @@ export default function TicketingScreen() {
         alignSelf: 'center',
         borderRadius: 5,
         }}>
-      <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: 'grey'}}>Violators List</Text>
+      <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Citation List</Text>
       </View>
       <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 1,}}>
         <Icon
         name='search'
         size={30}
+        color = '#fff'
         />
       </Pressable>
       </View>
         <Text style = {{fontSize: 10, color: '#000', position:  'absolute', bottom: 5}} >{version}</Text>
-    </LinearGradient>
+    </View>
   )
 }
 
@@ -65,10 +67,10 @@ const styles = StyleSheet.create({
 
     HeaderContainer: {
     
-        top: 0, 
+        top: 0,
         position: 'absolute',
         width: '100%', 
-        backgroundColor: '#fff',
+        backgroundColor: '#1240ac',
         height: 60, 
         justifyContent: 'center',
         alignItems: 'center',
@@ -88,22 +90,16 @@ const styles = StyleSheet.create({
 
         width: 70,
         height: 70,
-        backgroundColor: '#E57F84',
-        borderRadius: 100,
+        backgroundColor: '#00000019',
+        borderRadius: 25  ,
         position: 'absolute',
         bottom: 100,
         right: 0,
         justifyContent: 'center',   
         alignItems: 'center',
         margin: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-	        width: 0,
-	        height: 5,
-        },
-        shadowOpacity: 0.36,
-        shadowRadius: 6.68,
-        elevation: 11,
+        borderColor: '#1240ac',
+        borderWidth: .5,
 
       
     },

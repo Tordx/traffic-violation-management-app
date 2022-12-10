@@ -69,12 +69,13 @@ export const NewsScreen = () => {
         alignSelf: 'center',
         borderRadius: 5,
         }}>
-      <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: 'grey'}}>Announcements</Text>
+      <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Announcements</Text>
       </View>
       <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 1,}}>
         <Icon
         name='search'
         size={30}
+        color = '#fff'
         />
       </Pressable>
       </View>
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#a1b3dd',
 
     
   },
@@ -130,8 +132,8 @@ const styles = StyleSheet.create({
     
     top: 0, 
     position: 'absolute',
-    width: '100%', 
-    backgroundColor: '#fff',
+    width: '100%',         
+    backgroundColor: '#1240ac',
     height: 60, 
     justifyContent: 'center',
     alignItems: 'center',
