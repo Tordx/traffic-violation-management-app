@@ -1,7 +1,7 @@
 # Traffic Violation Management App
 
 This Project status: 
-## HOLD
+### HOLD
 
 
 ## Get Started
@@ -57,6 +57,6 @@ to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## Thesis Project Developers
-[Roven Kyle Narra](https://www.facebook.com/Alsorry) | [Ryan Cezar Vallo]() | [Erika Joy]() | [Carlo Movilla]()
+## Project Developers
+[Roven Kyle Narra](https://www.facebook.com/Alsorry) | [Ryan Cezar Vallo]()
 
