@@ -17,12 +17,13 @@ export default function AccountScreen() {
         alignSelf: 'center',
         borderRadius: 5,
         }}>
-      <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: 'grey'}}>Account</Text>
+      <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Account</Text>
       </View>
       <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 5,}}>
         <Icon
         name='settings'
         size={30}
+        color = '#fff'
         />
       </Pressable>
       </View>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     top: 0, 
     position: 'absolute',
     width: '100%', 
-    backgroundColor: '#fff',
+    backgroundColor: '#1240ac',
     height: 60, 
     justifyContent: 'center',
     alignItems: 'center',

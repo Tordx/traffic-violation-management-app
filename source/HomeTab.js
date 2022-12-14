@@ -20,33 +20,35 @@ export default function HomeTab() {
     <Tab.Navigator
 
     screenOptions={({route}) => ({
-        
-        tabBarShowLabel: false,
+      
+        tabBarLabelStyle: {
+
+          bottom: 3,
+          fontSize: 10,
+
+        },
         tabBarStyle: { 
-            position: 'absolute',
-            bottom: 30,
-            left: 30,
-            right: 30,
-            borderRadius: 10,
-            height: 60,
-            backgroundColor: '#fff'
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 65,
+            backgroundColor: '#fff',
 
         },
         tabBarIcon:({focused, size, color}) => {
           let iconName;
-            if(route.name==='TicketingScreen'){
+            if(route.name==='Ticketing'){
               iconName = 'article';
-              size = focused ? 37 : 35;
+              size = focused ? 35 : 32;
               color = focused ? '#1240ac': 'grey'; 
 
-            } else if (route.name === 'NewsScreen') {
+            } else if (route.name === 'News') {
                 iconName = 'announcement';
-                size = focused ? 37 : 35;
+                size = focused ? 35 : 32;
                 color = focused ? '#1240ac': 'grey'; 
   
-            } else if (route.name === 'AccountScreen') {
+            } else if (route.name === 'Account') {
               iconName = 'account-circle';
-              size = focused ? 37 : 35;
+              size = focused ? 35 : 32;
               color = focused ? '#1240ac': 'grey'; 
 
             } 
@@ -70,21 +72,21 @@ export default function HomeTab() {
     >
         <Tab.Screen
 
-            name = 'TicketingScreen' 
+            name = 'Ticketing' 
             component={TicketingScreen}
             options = {{headerShown: false}}
         />
         
         <Tab.Screen
 
-            name = 'NewsScreen' 
+            name = 'News' 
             component={NewsScreen}
             options = {{headerShown: false}}
         
         />
         <Tab.Screen
 
-            name = 'AccountScreen' 
+            name = 'Account' 
             component={AccountScreen}
             options = {{headerShown: false}}
         

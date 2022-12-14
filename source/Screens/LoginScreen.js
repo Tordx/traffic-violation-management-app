@@ -83,9 +83,10 @@ export default function LoginScreen() {
     
 
   return (
-    <LinearGradient colors={['#F4EAE6', '#F4EAE6', '#2F5061']}   style = {styles.container} >
+    <LinearGradient colors={['#F4EAE6', '#F4EAE6', '#1240ac']}   style = {styles.container} >
         <StatusBar
         backgroundColor={'#F4EAE6'}
+        barStyle = {'dark-content'}
         />
         
         <View style = {styles.loginContainer} >
@@ -132,7 +133,7 @@ export default function LoginScreen() {
             onPress = {() => navigation.navigate('HomeTab')}
             android_ripple = {{
 
-                color: '#E57F84'
+                color: '#1240ac'
 
             }}
             >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, TouchableOpacity, ListViewComponent, SectionList } from 'react-native';
 
 const DATA = [
   {
@@ -51,11 +51,15 @@ const DATA = [
 export const TicketingList = () => {
 
   const renderItem = ({ item }) => (
-    
-  <View style={styles.item}>
-  <Text style={styles.title}>#{item.rn}</Text>
-  <Text>{item.fullname}</Text>
-</View>
+ 
+    <View style={styles.item}> 
+      <TouchableOpacity>
+        <Text style={styles.title}>#{item.rn}</Text>
+        <Text>{item.fullname}</Text>
+      </TouchableOpacity>
+      
+    </View>
+ 
   );
 
   return (
@@ -66,6 +70,7 @@ export const TicketingList = () => {
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
+     
     </SafeAreaView>
   );
 }
@@ -78,7 +83,8 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 60,
+    paddingTop: '25%',
+    paddingBottom: '30%',
     backgroundColor: '#fffc '
 
     
@@ -90,7 +96,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 3,
     marginHorizontal: 5,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.3,
     borderColor: '#808080',
   },
 
