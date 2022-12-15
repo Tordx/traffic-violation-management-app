@@ -1,5 +1,5 @@
-import {StatusBar } from 'react-native'
-import React from 'react'
+import {BackHandler, StatusBar } from 'react-native'
+import React, { useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import  Icon from 'react-native-vector-icons/MaterialIcons'
 import TicketingScreen from './Screens/NavigationScreens/TicketingScreen'
@@ -9,14 +9,15 @@ import NewsScreen from './Screens/NavigationScreens/NewsScreen'
 
 export default function HomeTab() {
 
+      useEffect(() => {
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+        return () => backHandler.remove()
+      }, [])
+
     const Tab = createBottomTabNavigator();
 
   return (
-    <>
-    <StatusBar
-    backgroundColor="#F4EAE6"
-    barStyle="dark-content"
-  />
+
     <Tab.Navigator
 
     screenOptions={({route}) => ({
@@ -25,6 +26,7 @@ export default function HomeTab() {
 
           bottom: 3,
           fontSize: 10,
+          color: '#1240ac'
 
         },
         tabBarStyle: { 
@@ -39,17 +41,17 @@ export default function HomeTab() {
             if(route.name==='Ticketing'){
               iconName = 'article';
               size = focused ? 35 : 32;
-              color = focused ? '#1240ac': 'grey'; 
+              color = focused ? '#1240ac': '#c1cde0'; 
 
             } else if (route.name === 'News') {
                 iconName = 'announcement';
                 size = focused ? 35 : 32;
-                color = focused ? '#1240ac': 'grey'; 
+                color = focused ? '#1240ac': '#c1cde0'; 
   
             } else if (route.name === 'Account') {
               iconName = 'account-circle';
               size = focused ? 35 : 32;
-              color = focused ? '#1240ac': 'grey'; 
+              color = focused ? '#1240ac': '#c1cde0'; 
 
             } 
 
@@ -92,7 +94,6 @@ export default function HomeTab() {
         
         />
     </Tab.Navigator>
-    </>
 
   )
 }
