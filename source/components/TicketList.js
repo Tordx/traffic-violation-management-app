@@ -55,7 +55,7 @@ export const TicketingList = () => {
     <View style={styles.item}> 
       <TouchableOpacity>
         <Text style={styles.title}>#{item.rn}</Text>
-        <Text>{item.fullname}</Text>
+        <Text style={styles.name}>{item.fullname}</Text>
       </TouchableOpacity>
       
     </View>
@@ -102,5 +102,10 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 32,
+    color: '#808080'
+  },
+
+  name: {
+    color: '#808080'
   },
 });

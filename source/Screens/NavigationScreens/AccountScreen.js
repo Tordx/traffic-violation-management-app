@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Image } from 'react-native'
+import { View, Text, Pressable, StyleSheet, Image, Alert } from 'react-native'
 import React from 'react'
 import  Icon from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
@@ -7,6 +7,23 @@ import { useNavigation } from '@react-navigation/native'
 export default function AccountScreen() {
 
   const navigation = useNavigation()
+
+  const logout = () => 
+
+  Alert.alert(
+    "Confirm Log out",
+    "Are you sure you want to logout from device?",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "Confirm", onPress: () => navigation.navigate('LoginScreen') },
+      
+    ]
+  );
+
 
   return (
     
@@ -19,24 +36,30 @@ export default function AccountScreen() {
         }}>
       <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Account</Text>
       </View>
-      <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 5,}}>
+      <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 5,}}
+        onPress = {logout}
+        >
         <Icon
-        name='settings'
+        name='logout'
         size={30}
         color = '#fff'
         />
       </Pressable>
       </View>
       
-      <View style = {{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 75}}>
+      <View style = {{justifyContent: 'center', alignItems: 'center'}}>
         <Image
         
-        source={require('../../Assets/Images/Cat-Studying-scaled.jpg')}
-        style = {{borderRadius: 100, height: 150, width: 150, margin: 20}}
+        source={require('../../Assets/Images/sample_officer.png')}
+        style = {styles.profileimage}
 
         />
 
-        <Text style = {{fontSize: 25, fontWeight: '400'}} >Professor Cat</Text>
+        <Text style = {styles.officername} >Juan Dela Cruz</Text>
+      <View>
+        <Image/>
+        <Text style={styles.officerrank}>Police Officer I</Text>
+      </View>
 
       </View>
 
@@ -54,6 +77,29 @@ export default function AccountScreen() {
 }
 
 const styles = StyleSheet.create({
+
+  officerrank: {
+    
+    color: '#808080'
+  
+  },
+
+  officername: {
+    
+    fontSize: 35, 
+    fontWeight: '500', 
+    color: '#808080'
+  
+  },
+
+  profileimage: {
+    
+    borderRadius: 100, 
+    height: 150, 
+    width: 150, 
+    margin: 20
+  
+  },
 
   AddUser: {
       width: 70,
@@ -97,7 +143,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6.68,
     elevation: 11, 
   
-},
+  },
 
 
 

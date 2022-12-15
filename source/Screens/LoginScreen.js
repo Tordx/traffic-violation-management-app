@@ -1,4 +1,4 @@
-import Reac , {useState} from 'react';
+import Reac , {useState, useEffect} from 'react';
 import { 
     
     View,
@@ -8,6 +8,8 @@ import {
     Pressable,
     Image,
     StatusBar,
+    BackHandler,
+    Alert
     
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -16,6 +18,8 @@ import { iconColor, textColor } from '../      ../../Assets/colors';
 import { useNavigation } from '@react-navigation/native';
 import { remoteDBAcoount } from '../Database/pouchDB';
 import { version } from '../components/ViolationData';
+
+
 
 // const LoginInput = (props) => {
 //     return (
@@ -39,6 +43,26 @@ import { version } from '../components/ViolationData';
 
 
 export default function LoginScreen() {
+
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", backAction);
+    
+        return () =>
+          BackHandler.removeEventListener("hardwareBackPress", backAction);
+      }, []);
+
+      const backAction = () => {
+        Alert.alert("Hold on!", "Are you sure you want to go Exit the App?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() }
+        ]);
+        return true;
+      };
+    
 
     const navigation = useNavigation()
 
@@ -86,7 +110,7 @@ export default function LoginScreen() {
     <LinearGradient colors={['#F4EAE6', '#F4EAE6', '#1240ac']}   style = {styles.container} >
         <StatusBar
         backgroundColor={'#F4EAE6'}
-        barStyle = {'dark-content'}
+        barStyle = 'dark-content'
         />
         
         <View style = {styles.loginContainer} >

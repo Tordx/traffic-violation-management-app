@@ -17,21 +17,23 @@ import LinearGradient from 'react-native-linear-gradient'
 import { ViolationField } from '../components/ViolationField'
 import { locaDBViolation ,  SyncViolation } from '../Database/pouchDB'
 import uuid from 'react-native-uuid';
+import { Signature } from '../components/Signature'
 const InputText = (props) => {
 
     // huwag idisable, gumamit ng props
 
     return (
         <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center',}}>
-        <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 20, fontSize: 16, fontWeight: '300'}} >{props.title}</Text>
+        <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 20, fontSize: 16, fontWeight: '300', color: '#808080'}} >{props.title}</Text>
         <View style = {styles.InputContainer}>
             <TextInput
             
             placeholderTextColor={'#c4c7cc'}
             placeholder={props.placeholder}
-            style = {{fontSize: 17, fontWeight: '300'}}
+            style = {{fontSize: 17, fontWeight: '300', color: '#808080'}}
             value = {props.value}
             onChangeText = {props.onChangeText}
+            keyboardType = {props.keyboardType}
             />
         </View>
 
@@ -116,10 +118,33 @@ export default function AddTicketScreen() {
          }
          }
     }
+
+    const SubmitSignature = ({base64DataUrl}) => {
+
+        console.log("submitted a signature" + base64DataUrl)
+        
+
+    }
+
+    const nextcondition = () => {
+
+        if (drivername.length == 0) {
+            Alert.alert("Please insert Driver's Fullname")   
+        } else if (driveraddress.length == 0) {
+            Alert.alert("Please insert Driver's Address")  
+        } else if (contactnumber.length != 10) {
+            Alert.alert("Contact number must be 11 Digit")   
+        } else if (licensenumber.length <= 11) {
+            Alert.alert("Driver's License must be at least 12 Alphanumeric ID")   
+        } else {
+            setNext(false)
+        }
+
+    }
   
     return (
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
-            <ScrollView style = {{width: '100%'}}>
+            <ScrollView style = {{width: '100%', paddingTop: 20}}>
         {next?  
         <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}> 
             <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
@@ -127,7 +152,7 @@ export default function AddTicketScreen() {
                 onChangeText={(value) => setDriverName(value)}
                 value={drivername}
                 placeholder = 'e.g. John Doe'
-                title = "Driver's Name"
+                title = "Driver's Full Name"
             />
             <InputText
                 onChangeText={(value) => setDriverAddress(value)}
@@ -140,6 +165,7 @@ export default function AddTicketScreen() {
                 value={contactnumber}
                 placeholder = "09xxxxxxxxx"
                 title = "Contact Number"
+                keyboardType = 'numeric'
             />
             <InputText
                 onChangeText={(value) => setLicenseNumber(value)}
@@ -180,7 +206,13 @@ export default function AddTicketScreen() {
                     placeholder = "Specify here ..."
                     title = "Others"
                 />
-                </View> 
+            
+                <Signature
+                
+                onChangeText = {SubmitSignature}
+                error = {(error) => {console.error(error)}}
+                />
+                </View>
                 
                 }
                 </ScrollView>
@@ -189,7 +221,7 @@ export default function AddTicketScreen() {
                
                 <TouchableOpacity
                     style = {styles.nextbutton}
-                    onPress={() => setNext(!next)}
+                    onPress={nextcondition}
                 >
                     <Text style = {styles.buttontext}>NEXT</Text>
                 </TouchableOpacity> 
@@ -230,7 +262,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 20, 
         marginVertical: 20, 
         fontSize: 25, 
-        fontWeight: '500'
+        fontWeight: '500',
+        color: '#808080'
     
     },
 

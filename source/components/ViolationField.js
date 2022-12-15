@@ -31,7 +31,7 @@ export const Checbox = (props) => {
     <Checkbox
       status={props.status}
       onPress={props.Speeding}
-      color = {props.color}
+      color = '#1240ac'
     />
   );
 };
@@ -70,7 +70,7 @@ export const ViolationField = (props) => {
       
     <View style = {{flex: 1, justifyContent: 'center', alignItems:'center'}}>
           <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 20, marginBottom: 10, alignSelf: 'flex-start'}}>Driver Related</Text>
-        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
+        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%', marginLeft: 5,}}>
             
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
@@ -78,7 +78,6 @@ export const ViolationField = (props) => {
                         status = {nolicense? 'checked' : 'unchecked'}
                         onPress = {() => setNoLicense(!nolicense)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
                         
 
                     />
@@ -91,7 +90,6 @@ export const ViolationField = (props) => {
                         status = {expiredLicense? 'checked' : 'unchecked'}
                         onPress = {() => setExpiredLicense(!expiredLicense)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{ExpiredLicense}</Text>        
@@ -102,7 +100,6 @@ export const ViolationField = (props) => {
                         status = {document? 'checked' : 'unchecked'}
                         onPress = {() => setDocument(!document)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                                  
@@ -114,21 +111,19 @@ export const ViolationField = (props) => {
                         status = {speeding? 'checked' : 'unchecked'}
                         onPress = {() => setSpeeding(!speeding)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{SpeedingVehicle}</Text>    
                         
         </View>   
         </View>
-        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
+        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%', marginLeft: 5,}}>
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
         
                         status = {reckless? 'checked' : 'unchecked'}
                         onPress = {() => setReckless(!reckless)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{RecklessDriving}</Text>    
@@ -140,8 +135,6 @@ export const ViolationField = (props) => {
                         status = {attire? 'checked' : 'unchecked'}
                         onPress = {() => setAttire(!attire)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
-
                     />
                     <Text style = {styles.Text}>{NoProperGear}</Text>    
                         
@@ -152,22 +145,20 @@ export const ViolationField = (props) => {
                         status = {dui? 'checked' : 'unchecked'}
                         onPress = {() => setDui(!dui)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{DirivingUnderInfluence}</Text>    
                         
         </View> 
         </View>
-        <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 10, marginBottom: 10, alignSelf: 'flex-start'}}>Vehicle Related</Text>
-        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
+        <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 10, marginBottom: 10, alignSelf: 'flex-start', }}>Vehicle Related</Text>
+        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%', marginLeft: 5,}}>
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
         
                         status = {obstruction? 'checked' : 'unchecked'}
                         onPress = {() => setObstruction(!obstruction)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{ObsturctionVehicle}</Text>
@@ -179,7 +170,6 @@ export const ViolationField = (props) => {
                         status = {registration? 'checked' : 'unchecked'}
                         onPress = {() => setRegistration(!registration)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{RegistrationRelated}</Text>        
@@ -190,8 +180,6 @@ export const ViolationField = (props) => {
                         status = {orcr? 'checked' : 'unchecked'}
                         onPress = {() => setOrcr(!orcr)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
-
                     />
                     <Text style = {styles.Text}>{ORCRrelated}</Text>        
         </View>
