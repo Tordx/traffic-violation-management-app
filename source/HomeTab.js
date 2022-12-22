@@ -19,7 +19,7 @@ export default function HomeTab() {
   return (
 
     <Tab.Navigator
-
+    initialRouteName='Ticketing'
     screenOptions={({route}) => ({
       
         tabBarLabelStyle: {
