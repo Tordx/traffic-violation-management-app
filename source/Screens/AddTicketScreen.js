@@ -16,6 +16,7 @@ import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
 import { ViolationField } from '../components/ViolationField'
 import { locaDBViolation ,  SyncViolation } from '../Database/pouchDB'
+import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
 import { Signature } from '../components/Signature'
 const InputText = (props) => {
@@ -106,7 +107,27 @@ export default function AddTicketScreen() {
            }
            locaDBViolation.put(NewViolation)
            .then((response) =>{
-             Alert.alert('Ticket sucessfully submitted')
+             Alert.alert('Your Account has been successfully added!')
+             SendSMS.send(
+                {
+                  // Message body
+                  body: response ,
+                  // Recipients Number
+                  recipients: [contactnumber],
+                  // An array of types 
+                  // "completed" response when using android
+                  successTypes: ['sent', 'queued'],
+                },
+                (completed, cancelled, error) => {
+                  if (completed) {
+                    console.log('SMS Sent Completedxxxxxxxxxxx');
+                  } else if (cancelled) {
+                    console.log('SMS Sent Cancelledyyyyyyyyyy');
+                  } else if (error) {
+                    console.log('Some error occuredddddddddddddddddddd');
+                  }
+                },
+              );
              console.log(response)
              SyncViolation()
              navigation.navigate('HomeTab')
@@ -117,28 +138,15 @@ export default function AddTicketScreen() {
           console.log(error)
          }
          }
-    }
 
-    const SubmitSignature = ({base64DataUrl}) => {
-
-        console.log("submitted a signature" + base64DataUrl)
+            // Check for perfect 10 digit length
+            // if (contactnumber.length != 10) {
+            //   alert('Please insert correct contact numberooooooooooooooo');
+            //   return;
+            // }
         
-
-    }
-
-    const nextcondition = () => {
-
-        if (drivername.length == 0) {
-            Alert.alert("Please insert Driver's Fullname")   
-        } else if (driveraddress.length == 0) {
-            Alert.alert("Please insert Driver's Address")  
-        } else if (contactnumber.length != 10) {
-            Alert.alert("Contact number must be 11 Digit")   
-        } else if (licensenumber.length <= 11) {
-            Alert.alert("Driver's License must be at least 12 Alphanumeric ID")   
-        } else {
-            setNext(false)
-        }
+          
+        
 
     }
   
