@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect} from 'react';
 import {
     
     View, 
@@ -23,6 +23,17 @@ import {
 
 } from './ViolationData';
 import Icon  from 'react-native-vector-icons/MaterialIcons';
+import { useDispatch } from 'react-redux';
+import { setObstruction } from '../Redux/ViolationSlice';
+import { setRegistration } from '../Redux/ViolationSlice';
+import { setOrCr } from '../Redux/ViolationSlice';
+import { setNoLicense } from '../Redux/ViolationSlice';
+import { setExpiredLicense } from '../Redux/ViolationSlice';
+import { setDUI } from '../Redux/ViolationSlice';
+import { setAttire } from '../Redux/ViolationSlice';
+import { setSpeeding } from '../Redux/ViolationSlice';
+import { setReckless } from '../Redux/ViolationSlice';
+import { setDocument } from '../Redux/ViolationSlice';
 
 export const Checbox = (props) => {
   
@@ -38,33 +49,61 @@ export const Checbox = (props) => {
 
 export const ViolationField = (props) => {
 
+    useEffect(() => {
+
+    //  dispatch(setObstruction(obstruction))
+    //  dispatch(setRegistration(registration))
+    //  dispatch(setOrCr(orcr))
+    //  dispatch(setNoLicense(nolicense))
+    //  dispatch(setExpiredLicense(expiredLicense))
+    //  dispatch(setDUI(dui))
+    //  dispatch(setAttire(attire))
+    //  dispatch(setSpeeding(speeding))
+    //  dispatch(setReckless(reckless))
+    //  dispatch(setDocument(document))
+      
+    }, [])
+    
+
+    const dispatch = useDispatch()
 
     //vehicle related
     
-    const [obstruction, setObstruction] = useState(false);
-    const [registration, setRegistration] = useState(false);
-    const [orcr, setOrcr] = useState(false);
+    const [obstruction, _setObstruction] = useState(false);
+    const [registration, _setRegistration] = useState(false);
+    const [orcr, _setOrcr] = useState(false);
 
     //license related 
-    const [nolicense, setNoLicense] = useState(false);
-    const [document, setDocument] =  useState(false);
-    const [expiredLicense, setExpiredLicense] = useState(false);
+    const [nolicense, _setNoLicense] = useState(false);
+    const [document, _setDocument] =  useState(false);
+    const [expiredLicense, _setExpiredLicense] = useState(false);
 
     //Driving related
-    const [dui, setDui] = useState(false);
-    const [attire, setAttire] = useState(false);
-    const [speeding, setSpeeding] = useState(false);
-    const [reckless, setReckless] = useState(false);
+    const [dui, _setDui] = useState(false);
+    const [attire, _setAttire] = useState(false);
+    const [speeding, _setSpeeding] = useState(false);
+    const [reckless, _setReckless] = useState(false);
+
+    dispatch(setObstruction(obstruction))
+    dispatch(setRegistration(registration))
+    dispatch(setOrCr(orcr))
+    dispatch(setNoLicense(nolicense))
+    dispatch(setExpiredLicense(expiredLicense))
+    dispatch(setDUI(dui))
+    dispatch(setAttire(attire))
+    dispatch(setSpeeding(speeding))
+    dispatch(setReckless(reckless))
+    dispatch(setDocument(document))
 
     // shows error : undefined
-
+    
         // props.obstruction(obstruction)
         // props.registration(registration)
         // props.orcr(orcr)
         // props.nolicense(nolicense)
         // props.document(document)
         // props.expiredLicense(expiredLicense)
-  
+        // dispatch(setObstruction(obstruction))
 
     return (
       
@@ -76,7 +115,7 @@ export const ViolationField = (props) => {
                     <Checkbox
                         
                         status = {nolicense? 'checked' : 'unchecked'}
-                        onPress = {() => setNoLicense(!nolicense)}
+                        onPress = {() => _setNoLicense(!nolicense)}
                         style = {styles.CheckBoxStyle}
                         
 
@@ -88,7 +127,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {expiredLicense? 'checked' : 'unchecked'}
-                        onPress = {() => setExpiredLicense(!expiredLicense)}
+                        onPress = {() => _setExpiredLicense(!expiredLicense)}
                         style = {styles.CheckBoxStyle}
 
                     />
@@ -98,7 +137,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {document? 'checked' : 'unchecked'}
-                        onPress = {() => setDocument(!document)}
+                        onPress = {() => _setDocument(!document)}
                         style = {styles.CheckBoxStyle}
 
                     />
@@ -109,7 +148,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {speeding? 'checked' : 'unchecked'}
-                        onPress = {() => setSpeeding(!speeding)}
+                        onPress = {() => _setSpeeding(!speeding)}
                         style = {styles.CheckBoxStyle}
 
                     />
@@ -122,7 +161,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {reckless? 'checked' : 'unchecked'}
-                        onPress = {() => setReckless(!reckless)}
+                        onPress = {() => _setReckless(!reckless)}
                         style = {styles.CheckBoxStyle}
 
                     />
@@ -133,7 +172,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {attire? 'checked' : 'unchecked'}
-                        onPress = {() => setAttire(!attire)}
+                        onPress = {() => _setAttire(!attire)}
                         style = {styles.CheckBoxStyle}
                     />
                     <Text style = {styles.Text}>{NoProperGear}</Text>    
@@ -143,7 +182,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {dui? 'checked' : 'unchecked'}
-                        onPress = {() => setDui(!dui)}
+                        onPress = {() => _setDui(!dui)}
                         style = {styles.CheckBoxStyle}
 
                     />
@@ -157,7 +196,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {obstruction? 'checked' : 'unchecked'}
-                        onPress = {() => setObstruction(!obstruction)}
+                        onPress = {() => _setObstruction(!obstruction)}
                         style = {styles.CheckBoxStyle}
 
                     />
@@ -168,7 +207,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {registration? 'checked' : 'unchecked'}
-                        onPress = {() => setRegistration(!registration)}
+                        onPress = {() => _setRegistration(!registration)}
                         style = {styles.CheckBoxStyle}
 
                     />
@@ -178,7 +217,7 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {orcr? 'checked' : 'unchecked'}
-                        onPress = {() => setOrcr(!orcr)}
+                        onPress = {() => _setOrcr(!orcr)}
                         style = {styles.CheckBoxStyle}
                     />
                     <Text style = {styles.Text}>{ORCRrelated}</Text>        

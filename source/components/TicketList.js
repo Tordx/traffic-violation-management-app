@@ -15,32 +15,30 @@ export const TicketingList = () => {
 
   useEffect(() => {
     rendertickets()
-
   },[])
 
   const [mytickets, setNewTickets] = useState('');
 
   const rendertickets = async() => {
-
+              
     var result = await remoteDBViolation.allDocs({
       include_docs: true,
-      attachments: true,
+      attachments: true
     });
-    if(result.row){
-      let modifiedArr = result.rows.map(function(item){
+    if(result.rows){
+        let modifiedArr = result.rows.map(function(item){
         return item.doc
+    });
+    let filteredData = modifiedArr.filter(item => {
+        return item
       });
-      let filteredData = modifiedArr.filter(item => {
-        return item;
-      });
-      if (filteredData) {
-        let newFilterData = filteredData.map(item => {
-            return item;
-        })
-        setNewTickets(newFilterData)
+      if(filteredData) {
+          let newFilterData = filteredData.map(item => {
+              return item
+          })
+          setNewTickets(newFilterData)
       }
-    }
-
+  }  
   }
   
 
@@ -48,8 +46,8 @@ export const TicketingList = () => {
   return (
     <View style={styles.item}> 
       <TouchableOpacity>
-        <Text style={styles.title}>#{item.DriverName}</Text>
-        <Text style={styles.name}>{item.LicenseNumber}</Text>
+        <Text style={styles.title}>{item._id}</Text>
+        <Text style={styles.name}>{item.DriverName}</Text>
       </TouchableOpacity>
       
     </View>
@@ -65,7 +63,6 @@ export const TicketingList = () => {
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
-     
     </SafeAreaView>
   );
 }
@@ -96,7 +93,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 32,
+    fontSize: 25,
     color: '#808080'
   },
 

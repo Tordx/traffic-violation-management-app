@@ -1,5 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import { Provider } from 'react-redux';
+import store from './Redux/Store';
+
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './Screens/LoginScreen'
@@ -15,6 +18,7 @@ export default function Rooting() {
     const Stack = createStackNavigator();
 
   return (
+    <Provider store={store}>
     <NavigationContainer>
         <Stack.Navigator initialRouteName='SplashScreen'>
 
@@ -85,5 +89,6 @@ export default function Rooting() {
             />
         </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   )
 }

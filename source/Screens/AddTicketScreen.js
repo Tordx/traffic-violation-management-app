@@ -19,6 +19,8 @@ import { locaDBViolation ,  SyncViolation } from '../Database/pouchDB'
 import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
 import { Signature } from '../components/Signature'
+import { useSelector } from 'react-redux'
+
 const InputText = (props) => {
 
     // huwag idisable, gumamit ng props
@@ -47,6 +49,20 @@ const InputText = (props) => {
 
 export default function AddTicketScreen() {
 
+  const {username} = useSelector((store) => store.login)
+  const {password} = useSelector((store) => store.login)
+  const {obstruction} = useSelector((store) => store.violation)
+  const {registration} = useSelector((store) => store.violation)
+  const {orcr} = useSelector((store) => store.violation)
+  const {nolicense} = useSelector((store) => store.violation)
+  const {expiredLicense} = useSelector((store) => store.violation)
+  const {dui} = useSelector((store) => store.violation)
+  const {attire} = useSelector((store) => store.violation)
+  const {speeding} = useSelector((store) => store.violation)
+  const {reckless} = useSelector((store) => store.violation)
+  const {document} = useSelector((store) => store.violation)
+  
+
     const id = uuid.v4();
     const navigation = useNavigation();
     const [next, setNext] = useState(true);
@@ -56,12 +72,12 @@ export default function AddTicketScreen() {
     const [licensenumber, setLicenseNumber] = useState('')
     const [licenseplate, setLicesnsePlate] = useState('')
     const [vehicletype, setVehicleType] = useState('')
-    const [obstruction, setObstruction] = useState('')
-    const [registration, setRegistration] = useState('')
-    const [orcr, setORCR] = useState('')
-    const [nolicense, setNoLicense] = useState('')
-    const [document, setDocument] = useState('')
-    const [expiredlicense, setExpiredLicense] = useState('')
+    const [Obstruction, setObstruction] = useState('')
+    const [Registration, setRegistration] = useState('')
+    const [Orcr, setORCR] = useState('')
+    const [Nolicense, setNoLicense] = useState('')
+    const [Document, setDocument] = useState('')
+    const [ExpiredLicense, setExpiredLicense] = useState('')
     const [referenceNumber, setReferenceNumber] = useState('this is a reference number');
 
     function _obstruction(text){
@@ -92,20 +108,25 @@ export default function AddTicketScreen() {
        else{
          try {
            var NewViolation = {
-            _id: id,
-             DriverName : drivername.toString(),
-             DriverAddress : driveraddress,
-             ContactNumber : contactnumber,
-             LicenseNumber : licensenumber,
-             LicensePlate : licenseplate,
-             VehicleType : vehicletype,
-             NoLicense : nolicense,
-             ExpiredLicense : expiredlicense,
-             FakeDocument : document,
-             Obstruction : obstruction,
-             NotRegistered : registration,
-             OrCrExpired : orcr,
-             rfn: referenceNumber.toString(),
+              _id: id,
+              DriverName : drivername.toString(),
+              UserName: username,
+              DriverAddress : driveraddress,
+              ContactNumber : contactnumber,
+              LicenseNumber : licensenumber,
+              LicensePlate : licenseplate,
+              VehicleType : vehicletype,
+              Obstruction : Obstruction,
+              rfn: referenceNumber.toString(),
+              Registration : Registration,
+              OrCr : Orcr,
+              Nolicense : Nolicense,
+              ExpiredLicense : ExpiredLicense,
+              DUI : dui,
+              Attire : attire,
+              Speeding : speeding,
+              Reckless : reckless,
+              Document : Document,
            }
            locaDBViolation.put(NewViolation)
            .then((response) =>{
@@ -232,11 +253,11 @@ export default function AddTicketScreen() {
                     title = "Others"
                 />
             
-                <Signature
+                {/* <Signature
                 
                 onChangeText = {SubmitSignature}
                 error = {(error) => {console.error(error)}}
-                />
+                /> */}
                 </View>
                 
                 }

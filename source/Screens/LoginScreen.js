@@ -20,10 +20,15 @@ import { iconColor, textColor } from '../      ../../Assets/colors';
 import { useNavigation } from '@react-navigation/native';
 import { remoteDBAcoount } from '../Database/pouchDB';
 import { version } from '../components/ViolationData';
+import { useDispatch } from 'react-redux';
+import { setUsername } from '../Redux/LoginSlice';
+import { setPassword } from '../Redux/LoginSlice';
 
 
 
 export default function LoginScreen() {
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         BackHandler.addEventListener("hardwareBackPress", backAction);
@@ -58,8 +63,8 @@ export default function LoginScreen() {
 
     const navigation = useNavigation()
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsernames] = useState('')
+    const [password, setPasswords] = useState('')
     const [input, setInput] = useState();
     const [inputsecure, setInputSecure] = useState(true)
 
@@ -84,7 +89,8 @@ export default function LoginScreen() {
                 // dispatch(setStudentInfo(newFilterData))
                 const Username = newFilterData[0].Username;
                 const Password = newFilterData[0].Password
-
+                dispatch(setUsername(username))
+                dispatch(setPassword(password))
                 if((username == Username ) && (password == Password) ){
                     navigation.navigate('HomeTab')
 
@@ -127,7 +133,7 @@ export default function LoginScreen() {
 
                 />
                 <TextInput
-                onChangeText={(value) => setUsername(value)}
+                onChangeText={(value) => setUsernames(value)}
                 value={username}
                 placeholderTextColor={'#c4c7cc'}
                 placeholder={'username'}
@@ -143,7 +149,7 @@ export default function LoginScreen() {
 
                 />
                 <TextInput
-                onChangeText={(value) => setPassword(value)}
+                onChangeText={(value) => setPasswords(value)}
                 value={password}
                 placeholderTextColor={'#c4c7cc'}
                 secureTextEntry = {inputsecure}
