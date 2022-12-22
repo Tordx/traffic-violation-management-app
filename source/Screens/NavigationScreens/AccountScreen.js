@@ -19,7 +19,7 @@ export default function AccountScreen() {
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel"
       },
-      { text: "Confirm", onPress: () => navigation.navigate('LoginScreen') },
+      { text: "Confirm", onPress: () => navigation.navigate('SplashScreen') },
       
     ]
   );
