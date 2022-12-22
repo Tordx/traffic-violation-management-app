@@ -19,6 +19,8 @@ import { locaDBViolation ,  SyncViolation } from '../Database/pouchDB'
 import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
 import { Signature } from '../components/Signature'
+import { useSelector } from 'react-redux'
+
 const InputText = (props) => {
 
     // huwag idisable, gumamit ng props
@@ -47,6 +49,20 @@ const InputText = (props) => {
 
 export default function AddTicketScreen() {
 
+  const {username} = useSelector((store) => store.login)
+  const {password} = useSelector((store) => store.login)
+  const {obstruction} = useSelector((store) => store.violation)
+  const {registration} = useSelector((store) => store.violation)
+  const {orcr} = useSelector((store) => store.violation)
+  const {nolicense} = useSelector((store) => store.violation)
+  const {expiredLicense} = useSelector((store) => store.violation)
+  const {dui} = useSelector((store) => store.violation)
+  const {attire} = useSelector((store) => store.violation)
+  const {speeding} = useSelector((store) => store.violation)
+  const {reckless} = useSelector((store) => store.violation)
+  const {document} = useSelector((store) => store.violation)
+  
+
     const id = uuid.v4();
     const navigation = useNavigation();
     const [next, setNext] = useState(true);
@@ -56,32 +72,6 @@ export default function AddTicketScreen() {
     const [licensenumber, setLicenseNumber] = useState('')
     const [licenseplate, setLicesnsePlate] = useState('')
     const [vehicletype, setVehicleType] = useState('')
-    const [obstruction, setObstruction] = useState('')
-    const [registration, setRegistration] = useState('')
-    const [orcr, setORCR] = useState('')
-    const [nolicense, setNoLicense] = useState('')
-    const [document, setDocument] = useState('')
-    const [expiredlicense, setExpiredLicense] = useState('')
-
-    function _obstruction(text){
-        setObstruction(text)
-      }
-      function _registration(text){
-        setRegistration(text)
-      }
-      function _orcr(text){
-        setORCR(text)
-      }
-      function _nolicense(text){
-        setNoLicense(text)
-      }
-      function _document(text){
-        setDocument(text)
-      }
-      function _expiredLicense(text){
-        setExpiredLicense(text)
-      }
-
 
     const createViolation = () => {
 
@@ -92,18 +82,24 @@ export default function AddTicketScreen() {
          try {
            var NewViolation = {
             _id: id,
+            UserName: username,
+            Password: password,
              DriverName : drivername,
              DriverAddress : driveraddress,
              ContactNumber : contactnumber,
              LicenseNumber : licensenumber,
              LicensePlate : licenseplate,
              VehicleType : vehicletype,
-             NoLicense : nolicense,
-             ExpiredLicense : expiredlicense,
-             FakeDocument : document,
              Obstruction : obstruction,
-             NotRegistered : registration,
-             OrCrExpired : orcr,
+             Registration : registration,
+             OrCr : orcr,
+             Nolicense : nolicense,
+             ExpiredLicense : expiredLicense,
+             DUI : dui,
+             Attire : attire,
+             Speeding : speeding,
+             Reckless : reckless,
+             Document : document
            }
            locaDBViolation.put(NewViolation)
            .then((response) =>{
@@ -111,7 +107,7 @@ export default function AddTicketScreen() {
              SendSMS.send(
                 {
                   // Message body
-                  body: response ,
+                  body: 'response' ,
                   // Recipients Number
                   recipients: [contactnumber],
                   // An array of types 
@@ -138,16 +134,6 @@ export default function AddTicketScreen() {
           console.log(error)
          }
          }
-
-            // Check for perfect 10 digit length
-            // if (contactnumber.length != 10) {
-            //   alert('Please insert correct contact numberooooooooooooooo');
-            //   return;
-            // }
-        
-          
-        
-
     }
   
     return (
@@ -215,11 +201,11 @@ export default function AddTicketScreen() {
                     title = "Others"
                 />
             
-                <Signature
+                {/* <Signature
                 
                 onChangeText = {SubmitSignature}
                 error = {(error) => {console.error(error)}}
-                />
+                /> */}
                 </View>
                 
                 }
@@ -229,7 +215,7 @@ export default function AddTicketScreen() {
                
                 <TouchableOpacity
                     style = {styles.nextbutton}
-                    onPress={nextcondition}
+                    onPress={() => {setNext(false)}}
                 >
                     <Text style = {styles.buttontext}>NEXT</Text>
                 </TouchableOpacity> 

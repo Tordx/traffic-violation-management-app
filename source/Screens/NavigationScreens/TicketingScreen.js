@@ -29,7 +29,6 @@ export default function TicketingScreen() {
       <Text style = {{textAlign: 'center', fontSize: 30, fontWeight: '500'}}>NO NEW FIELDS HERE </Text>
       </View>
         </View>
-
         <Pressable style={styles.AddTicket} 
             onPress = {() => navigation.navigate('AddTicketScreen')}
             android_ripple = {{
@@ -65,6 +64,7 @@ export default function TicketingScreen() {
       </TouchableOpacity>
       </View>
         <Text style = {{fontSize: 10, color: '#000', position:  'absolute', bottom: 5}} >{version}</Text>
+        
     </View>
   )
 }
