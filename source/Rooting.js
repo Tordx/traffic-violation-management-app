@@ -8,6 +8,7 @@ import AddTicketScreen from './Screens/AddTicketScreen';
 import AddAccount from './components/AddAccount';
 import SearchScreen from './Screens/SearchScreen';
 import SplashScreen from './Screens/SplashScreen';
+import ForgotPasswordScreen from './Screens/ForgotPasswordScreen';
 
 export default function Rooting() {
 
@@ -72,6 +73,15 @@ export default function Rooting() {
                 }}
 
 
+            />
+
+            <Stack.Screen
+            
+                name = 'ForgotPasswordScreen'
+                component={ForgotPasswordScreen}
+                options = {{
+                    headerShown: false,
+                }}
             />
         </Stack.Navigator>
     </NavigationContainer>
