@@ -21,27 +21,6 @@ import { version } from '../components/ViolationData';
 
 
 
-// const LoginInput = (props) => {
-//     return (
-//     <View style = {styles.InputContainer}>
-//         <Icon
-//             style = {{marginLeft: 10,}}
-//             name={props.name}
-//             size = {25}
-//             color =  '#B7CFDC'
-
-//         />
-//         <TextInput
-        
-//         placeholderTextColor={iconColor}
-//         placeholder={props.placeholder}
-//         style = {{fontSize: 17}}
-//         />
-//     </View>
-// )
-// }
-
-
 export default function LoginScreen() {
 
     useEffect(() => {
@@ -69,41 +48,41 @@ export default function LoginScreen() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    //   const LoginData = async () => {
+      const LoginData = async () => {
 
-    //     var result = await remoteDBAcoount.allDocs({
-    //         include_docs: true,
-    //         attachments: true
-    //       });
-    //       if(result.rows){
-    //           let modifiedArr = result.rows.map(function(item){
-    //           return item.doc
-    //       });
-    //       let filteredData = modifiedArr.filter(item => {
-    //           return item.Username === username
-    //         });
-    //         if(!filteredData.length == 0) {
-    //             let newFilterData = filteredData.map(item => {
-    //                 return item
-    //             })
+        var result = await remoteDBAcoount.allDocs({
+            include_docs: true,
+            attachments: true
+          });
+          if(result.rows){
+              let modifiedArr = result.rows.map(function(item){
+              return item.doc
+          });
+          let filteredData = modifiedArr.filter(item => {
+              return item.Username === username
+            });
+            if(!filteredData.length == 0) {
+                let newFilterData = filteredData.map(item => {
+                    return item
+                })
 
-    //             // dispatch(setStudentInfo(newFilterData))
-    //             const Username = newFilterData[0].Username;
-    //             const Password = newFilterData[0].Password
+                // dispatch(setStudentInfo(newFilterData))
+                const Username = newFilterData[0].Username;
+                const Password = newFilterData[0].Password
 
-    //             if((username == Username ) && (password == Password) ){
-    //                 navigation.navigate('HomeScreen')
+                if((username == Username ) && (password == Password) ){
+                    navigation.navigate('HomeTab')
 
-    //                }else{
-    //                  Alert.alert('StudentID and Birthdate not match')
-    //                }
-    //         }else{
-    //             Alert.alert('StudentID and Birthdate not match')
-    //         }
+                   }else{
+                     Alert.alert('StudentID and Birthdate not match')
+                   }
+            }else{
+                Alert.alert('StudentID and Birthdate not match')
+            }
             
-    //     }
+        }
        
-    //   }
+      }
     
 
   return (
@@ -130,8 +109,8 @@ export default function LoginScreen() {
 
                 />
                 <TextInput
-                // onChangeText={(value) => setUsername(value)}
-                // value={username}
+                onChangeText={(value) => setUsername(value)}
+                value={username}
                 placeholderTextColor={'#c4c7cc'}
                 placeholder={'username'}
                 style = {{fontSize: 17}}
@@ -146,15 +125,16 @@ export default function LoginScreen() {
 
                 />
                 <TextInput
-                // onChangeText={(value) => setPassword(value)}
-                // value={password}
+                onChangeText={(value) => setPassword(value)}
+                value={password}
                 placeholderTextColor={'#c4c7cc'}
                 placeholder={'password'}
                 style = {{fontSize: 17}}
                 />
             </View>
             <Pressable style = {styles.loginButton}
-            onPress = {() => navigation.navigate('HomeTab')}
+            // onPress = {() => navigation.navigate('HomeTab')}
+            onPress = {LoginData}
             android_ripple = {{
 
                 color: '#1240ac'
