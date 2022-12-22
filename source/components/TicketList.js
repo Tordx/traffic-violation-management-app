@@ -15,7 +15,8 @@ export const TicketingList = () => {
 
   useEffect(() => {
     rendertickets()
-  })
+    
+  },[])
 
   const [mytickets, setNewTickets] = useState('');
 
@@ -27,7 +28,7 @@ export const TicketingList = () => {
     });
     if(result.row){
       let modifiedArr =result.rows.map(function(item){
-        return doc
+        return item.doc
       });
       let filteredData = modifiedArr.filter(item => {
         return item;
@@ -43,17 +44,18 @@ export const TicketingList = () => {
   }
   
 
-  const renderItem = ({ item }) => (
- 
+  const renderItem = ({ item }) => {
+  return (
     <View style={styles.item}> 
       <TouchableOpacity>
-        <Text style={styles.title}>#{item.LicenseNumber}</Text>
-        <Text style={styles.name}>{item.drivername}</Text>
+        <Text style={styles.title}>#{item.DriverName}</Text>
+        <Text style={styles.name}>{item.LicenseNumber}</Text>
       </TouchableOpacity>
       
     </View>
+    )
  
-  );
+}
 
   return (
     <SafeAreaView style={styles.container}>
