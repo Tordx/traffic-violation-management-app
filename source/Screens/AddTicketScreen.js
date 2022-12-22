@@ -62,6 +62,7 @@ export default function AddTicketScreen() {
     const [nolicense, setNoLicense] = useState('')
     const [document, setDocument] = useState('')
     const [expiredlicense, setExpiredLicense] = useState('')
+    const [referenceNumber, setReferenceNumber] = useState('this is a reference number');
 
     function _obstruction(text){
         setObstruction(text)
@@ -92,7 +93,7 @@ export default function AddTicketScreen() {
          try {
            var NewViolation = {
             _id: id,
-             DriverName : drivername,
+             DriverName : drivername.toString(),
              DriverAddress : driveraddress,
              ContactNumber : contactnumber,
              LicenseNumber : licensenumber,
@@ -104,33 +105,33 @@ export default function AddTicketScreen() {
              Obstruction : obstruction,
              NotRegistered : registration,
              OrCrExpired : orcr,
+             rfn: referenceNumber.toString(),
            }
            locaDBViolation.put(NewViolation)
            .then((response) =>{
-             Alert.alert('Your Account has been successfully added!')
+            const body = "Hi there" + drivername + "You've been Apprehended and must pay a certain amount, please present this reference number: " + referenceNumber;
+            console.log(body)
              SendSMS.send(
                 {
-                  // Message body
-                  body: response ,
-                  // Recipients Number
+                  body: body,
                   recipients: [contactnumber],
-                  // An array of types 
-                  // "completed" response when using android
                   successTypes: ['sent', 'queued'],
+                  allowAndroidSendWithoutReadPermission: true
                 },
                 (completed, cancelled, error) => {
                   if (completed) {
-                    console.log('SMS Sent Completedxxxxxxxxxxx');
+                    console.log('SMS Sent Complete');
                   } else if (cancelled) {
-                    console.log('SMS Sent Cancelledyyyyyyyyyy');
+                    console.log('SMS Sent Cancelled');
                   } else if (error) {
-                    console.log('Some error occuredddddddddddddddddddd');
+                    console.log('Some error occured');
                   }
                 },
               );
              console.log(response)
              SyncViolation()
              navigation.navigate('HomeTab')
+             Alert.alert('Your Account has been successfully added!')
            })
            .catch(err=>console.log(err))
            
@@ -139,16 +140,32 @@ export default function AddTicketScreen() {
          }
          }
 
-            // Check for perfect 10 digit length
-            // if (contactnumber.length != 10) {
-            //   alert('Please insert correct contact numberooooooooooooooo');
-            //   return;
-            // }
-        
-          
-        
 
+         
     }
+
+    const SubmitSignature = ({base64DataUrl}) => {
+
+      console.log("submitted a signature" + base64DataUrl)
+
+
+  }
+
+  // const nextcondition = () => {
+
+  //     if (drivername.length == 0) {
+  //         Alert.alert("Please insert Driver's Fullname")   
+  //     } else if (driveraddress.length == 0) {
+  //         Alert.alert("Please insert Driver's Address")  
+  //     } else if (contactnumber.length < 11) {
+  //         Alert.alert("Contact number must be 11 Digit")   
+  //     } else if (licensenumber.length < 0) {
+  //         Alert.alert("Driver's License must be at least 12 Alphanumeric ID")   
+  //     } else {
+  //         setNext(false)
+  //     }
+
+  // }
   
     return (
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
@@ -229,7 +246,7 @@ export default function AddTicketScreen() {
                
                 <TouchableOpacity
                     style = {styles.nextbutton}
-                    onPress={nextcondition}
+                    onPress={() => setNext(false)}
                 >
                     <Text style = {styles.buttontext}>NEXT</Text>
                 </TouchableOpacity> 
