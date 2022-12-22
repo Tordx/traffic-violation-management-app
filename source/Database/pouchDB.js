@@ -4,7 +4,7 @@ import PouchDB from 'pouchdb-react-native' ; 'pouchdb-core';
 //ACCOUNT
 PouchDB.plugin(require('pouchdb-adapter-asyncstorage').default)
 export const localDBAccount = new PouchDB('Account', {adapter: 'asyncstorage'})
-export const remoteDBAcoount = new PouchDB('http://admin:admin@192.168.0.199:5984/z_users')
+export const remoteDBAcoount = new PouchDB('http://admin:admin@192.168.0.191:5984/z_users')
 
  export const SyncAccount = () => {
     localDBAccount.sync(remoteDBAcoount, {
