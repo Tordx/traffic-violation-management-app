@@ -15,7 +15,7 @@ export const TicketingList = () => {
 
   useEffect(() => {
     rendertickets()
-    
+
   },[])
 
   const [mytickets, setNewTickets] = useState('');
@@ -27,7 +27,7 @@ export const TicketingList = () => {
       attachments: true,
     });
     if(result.row){
-      let modifiedArr =result.rows.map(function(item){
+      let modifiedArr = result.rows.map(function(item){
         return item.doc
       });
       let filteredData = modifiedArr.filter(item => {
