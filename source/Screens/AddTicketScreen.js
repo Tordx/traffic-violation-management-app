@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
 import { ViolationField } from '../components/ViolationField'
 import { locaDBViolation ,  SyncViolation } from '../Database/pouchDB'
+import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
 
 const InputText = (props) => {
@@ -113,6 +114,26 @@ export default function AddTicketScreen() {
            locaDBViolation.put(NewViolation)
            .then((response) =>{
              Alert.alert('Your Account has been successfully added!')
+             SendSMS.send(
+                {
+                  // Message body
+                  body: response ,
+                  // Recipients Number
+                  recipients: [contactnumber],
+                  // An array of types 
+                  // "completed" response when using android
+                  successTypes: ['sent', 'queued'],
+                },
+                (completed, cancelled, error) => {
+                  if (completed) {
+                    console.log('SMS Sent Completedxxxxxxxxxxx');
+                  } else if (cancelled) {
+                    console.log('SMS Sent Cancelledyyyyyyyyyy');
+                  } else if (error) {
+                    console.log('Some error occuredddddddddddddddddddd');
+                  }
+                },
+              );
              console.log(response)
              SyncViolation()
              navigation.navigate('HomeTab')
@@ -123,6 +144,16 @@ export default function AddTicketScreen() {
           console.log(error)
          }
          }
+
+            // Check for perfect 10 digit length
+            // if (contactnumber.length != 10) {
+            //   alert('Please insert correct contact numberooooooooooooooo');
+            //   return;
+            // }
+        
+          
+        
+
     }
   
     return (
