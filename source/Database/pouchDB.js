@@ -4,7 +4,7 @@ import PouchDB from 'pouchdb-react-native' ; 'pouchdb-core';
 //ACCOUNT
 PouchDB.plugin(require('pouchdb-adapter-asyncstorage').default)
 export const localDBAccount = new PouchDB('Account', {adapter: 'asyncstorage'})
-export const remoteDBAcoount = new PouchDB('http://admin:1234@192.168.0.199:5984/trafficaccount')
+export const remoteDBAcoount = new PouchDB('http://admin:admin@192.168.0.199:5984/z_users')
 
  export const SyncAccount = () => {
     localDBAccount.sync(remoteDBAcoount, {
@@ -24,7 +24,7 @@ export const remoteDBAcoount = new PouchDB('http://admin:1234@192.168.0.199:5984
 //VIOLATION
 PouchDB.plugin(require('pouchdb-adapter-asyncstorage').default)
 export const locaDBViolation = new PouchDB('Violation', {adapter: 'asyncstorage'})
-export const remoteDBViolation = new PouchDB('http://admin:1234@192.168.0.199:5984/violation')
+export const remoteDBViolation = new PouchDB('http://admin:admin@192.168.0.191:5984/z_violation')
 
  export const SyncViolation = () => {
   locaDBViolation.sync(remoteDBViolation, {
