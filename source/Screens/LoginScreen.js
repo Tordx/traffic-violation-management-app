@@ -9,7 +9,9 @@ import {
     Image,
     StatusBar,
     BackHandler,
-    Alert
+    Alert,
+    ToastAndroid,
+    TouchableOpacity,
     
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -42,11 +44,24 @@ export default function LoginScreen() {
         return true;
       };
     
+      useEffect(() => {
+
+            if (username.length === 0) {
+                setInput(true);
+                } else if  (password.length === 0) {
+                    setInput(true);
+                    } else {
+                        setInput(false);
+                    };
+
+      });
 
     const navigation = useNavigation()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [input, setInput] = useState();
+    const [inputsecure, setInputSecure] = useState(true)
 
       const LoginData = async () => {
 
@@ -74,15 +89,18 @@ export default function LoginScreen() {
                     navigation.navigate('HomeTab')
 
                    }else{
-                     Alert.alert('StudentID and Birthdate not match')
+                    ToastAndroid.show('Username and Password did not match',ToastAndroid.LONG)
+                    // Vibration.vibrate();
                    }
             }else{
-                Alert.alert('StudentID and Birthdate not match')
+                ToastAndroid.show('username and password did not match',ToastAndroid.LONG)
+                // Vibration.vibrate();
             }
             
         }
        
       }
+
     
 
   return (
@@ -113,7 +131,7 @@ export default function LoginScreen() {
                 value={username}
                 placeholderTextColor={'#c4c7cc'}
                 placeholder={'username'}
-                style = {{fontSize: 17}}
+                style = {{fontSize: 17, textAlign: 'left'}}
                 />
             </View>
             <View style = {styles.InputContainer}>
@@ -128,25 +146,39 @@ export default function LoginScreen() {
                 onChangeText={(value) => setPassword(value)}
                 value={password}
                 placeholderTextColor={'#c4c7cc'}
+                secureTextEntry = {inputsecure}
                 placeholder={'password'}
-                style = {{fontSize: 17}}
+                style = {{fontSize: 17, textAlign: 'left'}}
                 />
+                <Pressable style = {{position: 'absolute', right: 10}}
+                onPress = {() => setInputSecure(!inputsecure)}
+                >
+                <Icon
+                    
+                    name={inputsecure? 'visibility-off' : 'visibility'}
+                    size = {25}
+                    color =  '#c4c7cc'
+
+                />
+                </Pressable>
             </View>
-            <Pressable style = {styles.loginButton}
-            // onPress = {() => navigation.navigate('HomeTab')}
+            <Pressable style = {[styles.loginButton,{backgroundColor: input? '#00000019': '#1240ac'}]}
+            disabled = {input}
             onPress = {LoginData}
             android_ripple = {{
 
-                color: '#1240ac'
+                color: '#fff'
 
             }}
             >
-                <Text style = {{textAlign: 'center', fontSize: 20, color: '#fff', fontWeight: '700'}} >LOG IN</Text>
+                <Text style = {{textAlign: 'center', fontSize: 20, color: input? '#00000029': '#ffff', fontWeight: '700'}} >LOG IN</Text>
             </Pressable>
             
-            <Pressable style = {{justifyContent: 'center', width: '75%',}}>
-            <Text style = {{marginTop: 10, textAlign: 'center'}}> forgot password </Text>
-            </Pressable>
+            <TouchableOpacity style = {{justifyContent: 'center', width: '75%',}}
+            onPress = {() => navigation.navigate('ForgotPasswordScreen')}
+            >
+            <Text style = {{marginTop: 10, textAlign: 'center', textDecorationLine: 'underline', fontSize: 16}}> forgot password </Text>
+            </TouchableOpacity>
            
         </View>
         
@@ -165,7 +197,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginVertical: 10,
         borderRadius: 5, 
-        borderWidth: 0.5,
     
     },
 
