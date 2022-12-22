@@ -31,7 +31,7 @@ export const Checbox = (props) => {
     <Checkbox
       status={props.status}
       onPress={props.Speeding}
-      color = {props.color}
+      color = '#1240ac'
     />
   );
 };
@@ -56,20 +56,21 @@ export const ViolationField = (props) => {
     const [speeding, setSpeeding] = useState(false);
     const [reckless, setReckless] = useState(false);
 
+    // shows error : undefined
 
-        props.obstruction(obstruction)
-        props.registration(registration)
-        props.orcr(orcr)
-        props.nolicense(nolicense)
-        props.document(document)
-        props.expiredLicense(expiredLicense)
+        // props.obstruction(obstruction)
+        // props.registration(registration)
+        // props.orcr(orcr)
+        // props.nolicense(nolicense)
+        // props.document(document)
+        // props.expiredLicense(expiredLicense)
   
 
     return (
       
-    <View style = {{flex: 1}}>
-          <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 20, marginBottom: 10}}>Driver Related</Text>
-        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
+    <View style = {{flex: 1, justifyContent: 'center', alignItems:'center'}}>
+          <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 20, marginBottom: 10, alignSelf: 'flex-start'}}>Driver Related</Text>
+        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%', marginLeft: 5,}}>
             
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
@@ -77,7 +78,6 @@ export const ViolationField = (props) => {
                         status = {nolicense? 'checked' : 'unchecked'}
                         onPress = {() => setNoLicense(!nolicense)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
                         
 
                     />
@@ -90,7 +90,6 @@ export const ViolationField = (props) => {
                         status = {expiredLicense? 'checked' : 'unchecked'}
                         onPress = {() => setExpiredLicense(!expiredLicense)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{ExpiredLicense}</Text>        
@@ -98,10 +97,9 @@ export const ViolationField = (props) => {
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
         
-                        status = {speeding? 'checked' : 'unchecked'}
-                        onPress = {() => setSpeeding(!speeding)}
+                        status = {document? 'checked' : 'unchecked'}
+                        onPress = {() => setDocument(!document)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                                  
@@ -110,24 +108,22 @@ export const ViolationField = (props) => {
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
         
-                        status = {document? 'checked' : 'unchecked'}
-                        onPress = {() => setDocument(!document)}
+                        status = {speeding? 'checked' : 'unchecked'}
+                        onPress = {() => setSpeeding(!speeding)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{SpeedingVehicle}</Text>    
                         
         </View>   
         </View>
-        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
+        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%', marginLeft: 5,}}>
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
         
-                        status = {document? 'checked' : 'unchecked'}
-                        onPress = {() => setDocument(!document)}
+                        status = {reckless? 'checked' : 'unchecked'}
+                        onPress = {() => setReckless(!reckless)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{RecklessDriving}</Text>    
@@ -136,11 +132,9 @@ export const ViolationField = (props) => {
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
         
-                        status = {document? 'checked' : 'unchecked'}
-                        onPress = {() => setDocument(!document)}
+                        status = {attire? 'checked' : 'unchecked'}
+                        onPress = {() => setAttire(!attire)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
-
                     />
                     <Text style = {styles.Text}>{NoProperGear}</Text>    
                         
@@ -148,25 +142,23 @@ export const ViolationField = (props) => {
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
         
-                        status = {document? 'checked' : 'unchecked'}
-                        onPress = {() => setDocument(!document)}
+                        status = {dui? 'checked' : 'unchecked'}
+                        onPress = {() => setDui(!dui)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{DirivingUnderInfluence}</Text>    
                         
         </View> 
         </View>
-        <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 20, marginBottom: 10}}>Vehicle Related</Text>
-        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
+        <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 10, marginBottom: 10, alignSelf: 'flex-start', }}>Vehicle Related</Text>
+        <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%', marginLeft: 5,}}>
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
         
                         status = {obstruction? 'checked' : 'unchecked'}
                         onPress = {() => setObstruction(!obstruction)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{ObsturctionVehicle}</Text>
@@ -178,7 +170,6 @@ export const ViolationField = (props) => {
                         status = {registration? 'checked' : 'unchecked'}
                         onPress = {() => setRegistration(!registration)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
 
                     />
                     <Text style = {styles.Text}>{RegistrationRelated}</Text>        
@@ -189,26 +180,10 @@ export const ViolationField = (props) => {
                         status = {orcr? 'checked' : 'unchecked'}
                         onPress = {() => setOrcr(!orcr)}
                         style = {styles.CheckBoxStyle}
-                        color = '#a11'
-
                     />
                     <Text style = {styles.Text}>{ORCRrelated}</Text>        
         </View>
         </View>
-        <View style = {styles.Others}>
-                <Icon
-                    style = {{marginLeft: 10,}}
-                    name={'lock'}
-                    size = {25}
-                    color =  '#c4c7cc'
-
-                />
-                <TextInput
-                placeholderTextColor={'#c4c7cc'}
-                placeholder={'password'}
-                style = {{fontSize: 17}}
-                />
-            </View>
     </View>
     )
 
@@ -219,8 +194,8 @@ const styles = StyleSheet.create({
     Others: {
         backgroundColor: '#fffe', 
         height: 50, 
-        width: '86%', 
-        alignItems: 'center', 
+        width: '85%', 
+        alignSelf: 'center',        
         marginVertical: 10, 
         borderRadius: 5, 
         flexDirection: 'row',

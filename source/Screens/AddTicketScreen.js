@@ -5,7 +5,8 @@ import {
     TextInput,
     StyleSheet,
     TouchableOpacity,
-    Alert
+    Alert,
+    ScrollView
 } from 'react-native'
 import React, { useState } from 'react'
 import Icon  from 'react-native-vector-icons/MaterialIcons'
@@ -17,30 +18,23 @@ import { ViolationField } from '../components/ViolationField'
 import { locaDBViolation ,  SyncViolation } from '../Database/pouchDB'
 import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
-
+import { Signature } from '../components/Signature'
 const InputText = (props) => {
 
     // huwag idisable, gumamit ng props
 
     return (
         <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center',}}>
-        <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 30, fontSize: 16, fontWeight: '300'}} >{props.title}</Text>
+        <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 20, fontSize: 16, fontWeight: '300', color: '#808080'}} >{props.title}</Text>
         <View style = {styles.InputContainer}>
-            
-            <Icon
-                style = {{marginLeft: 10,}}
-                name={props.name}
-                size = {25}
-                color =  '#B7CFDC'
-    
-            />
             <TextInput
             
             placeholderTextColor={'#c4c7cc'}
             placeholder={props.placeholder}
-            style = {{fontSize: 17, fontWeight: '300'}}
+            style = {{fontSize: 17, fontWeight: '300', color: '#808080'}}
             value = {props.value}
             onChangeText = {props.onChangeText}
+            keyboardType = {props.keyboardType}
             />
         </View>
 
@@ -158,14 +152,15 @@ export default function AddTicketScreen() {
   
     return (
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
+            <ScrollView style = {{width: '100%', paddingTop: 20}}>
         {next?  
-        <View style = {{width: '100%'}}> 
+        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}> 
             <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
             <InputText
                 onChangeText={(value) => setDriverName(value)}
                 value={drivername}
                 placeholder = 'e.g. John Doe'
-                title = "Driver's Name"
+                title = "Driver's Full Name"
             />
             <InputText
                 onChangeText={(value) => setDriverAddress(value)}
@@ -178,6 +173,7 @@ export default function AddTicketScreen() {
                 value={contactnumber}
                 placeholder = "09xxxxxxxxx"
                 title = "Contact Number"
+                keyboardType = 'numeric'
             />
             <InputText
                 onChangeText={(value) => setLicenseNumber(value)}
@@ -188,7 +184,8 @@ export default function AddTicketScreen() {
              
             </View>
             :
-            <View style = {{width: '100%'}}> 
+            
+            <View style = {{width: '100%', paddingBottom: 100, justifyContent: 'center', alignItems: 'center'}}> 
                 <Text style = {styles.HeaderText}>VEHICLE INFORMATION</Text>
                 <InputText
                     onChangeText={(value) => setLicesnsePlate(value)}
@@ -202,25 +199,37 @@ export default function AddTicketScreen() {
                     placeholder = "Bus, Jeep, Motorcycle ..."
                     title = "Vehicle Type"
                 />
+                <TouchableOpacity
+                    style = {styles.oPenCamera}
+                    onPress={() => console.log('Camera open')}
+                >
+                    <Text style = {[styles.buttontext,{color: 'grey'}]}>Upload Photo</Text>
+                </TouchableOpacity>
                 <Text style = {styles.HeaderText}>TRAFFIC VIOLATION</Text>
-                <View style = {{flexDirection: 'row', justifyContent: 'center',  width: 420}}>
-                    <ViolationField 
-                    obstruction = {_obstruction}
-                    registration = {_registration}
-                    orcr = {_orcr}
-                    nolicense = {_nolicense}
-                    document = {_document}
-                    expiredLicense = {_expiredLicense}
-                     />
-                </View>     
-                </View> 
+                <View style = {{flexDirection: 'row', justifyContent: 'center',  width: 420, marginBottom: 20,}}>
+                    <ViolationField/>
+                </View>
+                
+                <InputText
+                    placeholder = "Specify here ..."
+                    title = "Others"
+                />
+            
+                <Signature
+                
+                onChangeText = {SubmitSignature}
+                error = {(error) => {console.error(error)}}
+                />
+                </View>
                 
                 }
+                </ScrollView>
+
                {next? 
                
                 <TouchableOpacity
                     style = {styles.nextbutton}
-                    onPress={() => setNext(!next)}
+                    onPress={nextcondition}
                 >
                     <Text style = {styles.buttontext}>NEXT</Text>
                 </TouchableOpacity> 
@@ -241,13 +250,28 @@ export default function AddTicketScreen() {
 
 const styles = StyleSheet.create({
 
+    oPenCamera: {
+
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginTop: 5,
+        width: '90%',
+        height: 50,
+        borderWidth: 2,
+        borderColor: '#000',
+        borderStyle: 'dashed',
+        borderRadius: 5,
+
+    },
+
     HeaderText: { 
         
-        alignSelf: 'center', 
-        marginHorizontal: 25, 
+        textAlign: 'center',
+        marginHorizontal: 20, 
         marginVertical: 20, 
         fontSize: 25, 
-        fontWeight: '500'
+        fontWeight: '500',
+        color: '#808080'
     
     },
 
@@ -257,9 +281,9 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         position: 'absolute', 
         bottom: 20,
-        width: '86%',
+        width: '90%',
         height: 50,
-        backgroundColor: '#E57F84',
+        backgroundColor: '#1240ac',
         borderRadius: 5,
 
     },
@@ -278,11 +302,11 @@ const styles = StyleSheet.create({
         
         backgroundColor: '#fffe', 
         height: 50, 
-        width: '86%', 
-        alignItems: 'center', 
-        marginVertical: 10, 
-        borderRadius: 5, 
-        flexDirection: 'row',
+        width: '90%', 
+        alignItems: 'flex-start',
+        alignSelf: 'center',
+        marginVertical: 10,
+        borderRadius: 5,
         borderWidth: 0.3,
         borderColor: '#c1cde0',
         shadowColor: "#000",

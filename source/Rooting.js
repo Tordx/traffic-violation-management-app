@@ -6,6 +6,8 @@ import LoginScreen from './Screens/LoginScreen'
 import HomeTab from './HomeTab';
 import AddTicketScreen from './Screens/AddTicketScreen';
 import AddAccount from './components/AddAccount';
+import SearchScreen from './Screens/SearchScreen';
+import SplashScreen from './Screens/SplashScreen';
 
 export default function Rooting() {
 
@@ -13,7 +15,18 @@ export default function Rooting() {
 
   return (
     <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName='SplashScreen'>
+
+            <Stack.Screen
+            
+                name='SplashScreen'
+                component={SplashScreen}
+                options = {{
+                    headerShown: false,
+                }}
+
+            />
+
             <Stack.Screen
             
                 name='LoginScreen'
@@ -41,15 +54,25 @@ export default function Rooting() {
                 }}
 
             />
-             <Stack.Screen
+            <Stack.Screen
             
-            name='AddAccount'
-            component={AddAccount}
-            options = {{
-                headerShown: false,
-            }}
+                name='AddAccount'
+                component={AddAccount}
+                options = {{
+                    headerShown: false,
+                }}
 
-        />
+            />
+            <Stack.Screen
+            
+                name = 'SearchScreen'
+                component={SearchScreen}
+                options = {{
+                    headerShown: false,
+                }}
+
+
+            />
         </Stack.Navigator>
     </NavigationContainer>
   )

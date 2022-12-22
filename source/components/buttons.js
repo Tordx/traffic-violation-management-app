@@ -8,7 +8,7 @@ export const CloseButton = (props) => {
 
       <TouchableOpacity
       
-      style = {{position: 'absolute', top: 0, left: 0, margin: 10,}}
+      style = {{position: 'absolute', top: 10, left: 0, margin: 10,}}
       onPress = {props.onPress}
 
       >
