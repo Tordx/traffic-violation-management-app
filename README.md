@@ -50,6 +50,8 @@ if [yarn run android](https://yarnpkg.com/) is not recognized by your CLI, in mo
 $ set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
+if issue persist, check related issues at stackoverflow or github community forum.
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
