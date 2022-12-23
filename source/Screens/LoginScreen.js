@@ -1,4 +1,4 @@
-import Reac , {useState, useEffect} from 'react';
+import React , {useState, useEffect, } from 'react';
 import { 
     
     View,
@@ -8,7 +8,7 @@ import {
     Pressable,
     Image,
     StatusBar,
-    BackHandler,
+    BackHandler,    
     Alert,
     ToastAndroid,
     TouchableOpacity,
@@ -16,14 +16,14 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
-import { iconColor, textColor } from '../      ../../Assets/colors';
+import { iconColor, textColor } from '../Assets/colors';
 import { useNavigation } from '@react-navigation/native';
 import { remoteDBAcoount } from '../Database/pouchDB';
 import { version } from '../components/ViolationData';
 import { useDispatch } from 'react-redux';
 import { setUsername } from '../Redux/LoginSlice';
 import { setPassword } from '../Redux/LoginSlice';
-
+import { useBackButton } from '@react-native-community/hooks';
 
 
 export default function LoginScreen() {
@@ -31,11 +31,6 @@ export default function LoginScreen() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        BackHandler.addEventListener("hardwareBackPress", backAction);
-    
-        return () =>
-          BackHandler.removeEventListener("hardwareBackPress", backAction);
-      }, []);
 
       const backAction = () => {
         Alert.alert("Hold on!", "Are you sure you want to go Exit the App?", [
@@ -48,6 +43,11 @@ export default function LoginScreen() {
         ]);
         return true;
       };
+
+      const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
+      return () => handler.remove();
+
+      }, []);
     
       useEffect(() => {
 
