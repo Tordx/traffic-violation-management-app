@@ -1,7 +1,7 @@
 # Traffic Violation Management App
 
 #### Project status: 
-### HOLD
+### ON HOLD
 
 
 ## Get Started
@@ -18,7 +18,7 @@ Clone the repository in git [Traffic Violation Management App](https://github.co
 $ git clone https://github.com/Tordx/traffic-violation-management-app.git
 ```
 
-Run [PowerShell]() as Administrator and direct to your repository folder.
+Run [PowerShell](https://learn.microsoft.com/en-us/powershell/) as Administrator and direct to your repository folder.
 
 Make sure to install all its dependency by running install.
 
@@ -35,7 +35,7 @@ $ cd android && ./gradlew clean && cd..
 
 Make sure you are running the Emulator with SDKVersion 29, preferably Pixel C.
 
-Run your code using the same [PowerShell]() by running this command:
+Run your code using the same [PowerShell](https://learn.microsoft.com/en-us/powershell/) by running this command:
 
 ```bash
 $ npx react-native run-android
@@ -45,7 +45,7 @@ or
 $ yarn run android
 ```
 
-if [yarn run android]() is not recognized by your CLI, please run this command first:
+if [yarn run android](https://yarnpkg.com/) is not recognized by your CLI, in most cases it is because of role permissions. In this case, you may run this command:
 ```bash
 $ set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
