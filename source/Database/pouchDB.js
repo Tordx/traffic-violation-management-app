@@ -40,3 +40,24 @@ export const remoteDBViolation = new PouchDB('http://admin:admin@192.168.0.191:5
     console.log(err);
   });
 }
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// REFERENCE NUMBER
+PouchDB.plugin(require('pouchdb-adapter-asyncstorage').default)
+export const localRN = new PouchDB('RN', {adapter: 'asyncstorage'})
+export const remoteRN = new PouchDB('http://admin:admin@192.168.0.191:5984/z_referencenumber')
+
+ export const SyncRN = () => {
+  localRN.sync(remoteRN, {
+    live: true, 
+    retry: true
+  }).on('change', function () {
+   
+    localRN.allDocs({include_docs:true}).then(function(doc){
+      console.log(doc)
+      console.log('done syc')
+  })
+  }).on('error', function (err) {
+    console.log(err);
+  });
+}
