@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Image, Alert } from 'react-native'
+import { View, Text, Pressable, StyleSheet, Image, Alert, TouchableOpacity } from 'react-native'
 import React from 'react'
 import  Icon from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
@@ -7,22 +7,6 @@ import { useNavigation } from '@react-navigation/native'
 export default function AccountScreen() {
 
   const navigation = useNavigation()
-
-  const logout = () => 
-
-  Alert.alert(
-    "Confirm Log out",
-    "Are you sure you want to logout from device?",
-    [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      { text: "Confirm", onPress: () => navigation.navigate('SplashScreen') },
-      
-    ]
-  );
 
 
   return (
@@ -36,15 +20,15 @@ export default function AccountScreen() {
         }}>
       <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Account</Text>
       </View>
-      <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 5,}}
-        onPress = {logout}
+      <TouchableOpacity style={{right: 0, position: 'absolute', margin: 10, bottom: 5,}}
+        onPress = {() => navigation.navigate('UserSettingScreen')}
         >
         <Icon
-        name='logout'
+        name='settings'
         size={30}
         color = '#fff'
         />
-      </Pressable>
+      </TouchableOpacity>
       </View>
       
       <View style = {{justifyContent: 'center', alignItems: 'center'}}>
