@@ -64,6 +64,6 @@ buck-out/
 /vendor/bundle/
 
 # Database
-Database/
+/Database/
 
 
