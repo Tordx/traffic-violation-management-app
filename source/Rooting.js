@@ -12,6 +12,7 @@ import AddAccount from './components/AddAccount';
 import SearchScreen from './Screens/SearchScreen';
 import SplashScreen from './Screens/SplashScreen';
 import ForgotPasswordScreen from './Screens/ForgotPasswordScreen';
+import UserSettingScreen from './Screens/UserSettingScreen';
 
 export default function Rooting() {
 
@@ -86,6 +87,16 @@ export default function Rooting() {
                 options = {{
                     headerShown: false,
                 }}
+            />
+
+            <Stack.Screen
+            
+                name = 'UserSettingScreen'
+                component={UserSettingScreen}
+                options = {{
+                    headerShown: false,
+                }}
+            
             />
         </Stack.Navigator>
     </NavigationContainer>
