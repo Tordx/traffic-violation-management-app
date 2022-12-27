@@ -23,7 +23,6 @@ import { version } from '../components/ViolationData';
 import { useDispatch } from 'react-redux';
 import { setUsername } from '../Redux/LoginSlice';
 import { setPassword } from '../Redux/LoginSlice';
-import { useBackButton } from '@react-native-community/hooks';
 
 
 export default function LoginScreen() {
@@ -137,7 +136,7 @@ export default function LoginScreen() {
                 value={username}
                 placeholderTextColor={'#c4c7cc'}
                 placeholder={'username'}
-                style = {{fontSize: 17, textAlign: 'left'}}
+                style = {styles.textinput}
                 />
             </View>
             <View style = {styles.InputContainer}>
@@ -154,7 +153,7 @@ export default function LoginScreen() {
                 placeholderTextColor={'#c4c7cc'}
                 secureTextEntry = {inputsecure}
                 placeholder={'password'}
-                style = {{fontSize: 17, textAlign: 'left'}}
+                style = {styles.textinput}
                 />
                 <Pressable style = {{position: 'absolute', right: 10}}
                 onPress = {() => setInputSecure(!inputsecure)}
@@ -196,9 +195,19 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
 
+    textinput: {
+        
+        fontSize: 17, 
+        textAlign: 'left', 
+        height: 50, 
+        width: '85%', 
+        borderRadius: 5, 
+    
+    },
+
     loginButton: {
         
-        width: '86%', 
+        width: '85%', 
         height: 50,  
         justifyContent: 'center',
         marginVertical: 10,
@@ -218,9 +227,7 @@ const styles = StyleSheet.create({
 
     InputContainer: { 
         
-        backgroundColor: '#fffe', 
-        height: 50, 
-        width: '86%', 
+        backgroundColor: '#fffe',
         alignItems: 'center', 
         marginVertical: 10, 
         borderRadius: 5, 
