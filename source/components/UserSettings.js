@@ -71,7 +71,7 @@ export default function UserSettings() {
               return item.doc
           });
           let filteredData = modifiedArr.filter(item => {
-              return item.Username == username
+              return item.Username == username;
             });
             if(!filteredData.length == 0) {
                 let newFilterData = filteredData.map(item => {
