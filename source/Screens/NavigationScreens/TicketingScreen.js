@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Image, ScrollView, StatusBar, TouchableOpacity } from 'react-native'
+import { View, Text, Pressable, StyleSheet, Image, ScrollView, StatusBar, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -7,10 +7,24 @@ import { useNavigation } from '@react-navigation/native'
 import { TicketingList } from '../../components/TicketList'
 import { version } from '../../components/ViolationData'
 import SearchScreen from '../SearchScreen'
+import { Popup } from '../../components/Popup'
 
 export default function TicketingScreen() {
 
     const navigation = useNavigation();
+
+    const confirm = () => {
+
+      Alert.alert("Please Confirm", "You're about to add a citation ticket", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "Proceed", onPress: () => navigation.navigate('AddTicketScreen') }
+      ]);
+      return true;
+    };
 
   return (
     <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}} >
@@ -18,6 +32,7 @@ export default function TicketingScreen() {
       backgroundColor={'#1240ac'}
       barStyle = {'light-content'}
       />
+      <Popup/>
         <View>
           <View style={{width: '100%'}}>
             <TicketingList/>
@@ -30,7 +45,7 @@ export default function TicketingScreen() {
       </View>
         </View>
         <Pressable style={styles.AddTicket} 
-            onPress = {() => navigation.navigate('AddTicketScreen')}
+            onPress = {confirm}
             android_ripple = {{
 
                 color: '#1240ac',
