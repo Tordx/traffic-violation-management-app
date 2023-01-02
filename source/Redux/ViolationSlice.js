@@ -14,6 +14,7 @@
     speeding: false,
     reckless: false,
     document: false,
+    signaturedata: false,
    },
    reducers: {
     setObstruction: (state , action ) => {
@@ -66,6 +67,11 @@
         console.log(action)
         console.log('document')
       },
+      setSignatureData: (state , action ) => {
+        state.document = action.payload
+        console.log(action)
+        console.log('SignatureData')
+      },
    }
  })
  
@@ -80,7 +86,8 @@
  setAttire,
  setSpeeding,
  setReckless,
- setDocument
+ setDocument,
+ setSignatureData,
  } = ViolationData.actions
  
  export default ViolationData.reducer
