@@ -6,16 +6,18 @@ import {
     StyleSheet,
     TouchableOpacity,
     Alert,
-    ScrollView
+    ScrollView,
+    BackHandler,
+    ToastAndroid
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon  from 'react-native-vector-icons/MaterialIcons'
 import { iconColor } from '../Assets/colors'
 import { CloseButton } from '../components/buttons'
 import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
 import { ViolationField } from '../components/ViolationField'
-import { locaDBViolation ,  SyncViolation } from '../Database/pouchDB'
+import { locaDBViolation ,  SyncViolation, remoteRN } from '../Database/pouchDB'
 import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
 import { Signature } from '../components/Signature'
@@ -49,6 +51,25 @@ const InputText = (props) => {
 
 export default function AddTicketScreen() {
 
+  useEffect(() => {
+    
+    updateReferenceNumber()
+    const backAction = () => {
+      Alert.alert("Whoops!", "Please submit the current ticket before exiting", [
+        {
+          text: "Yes",
+          onPress: () => null,
+          style: "cancel"
+        },
+      ]);
+      return true;
+    };
+
+    const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () => handler.remove();
+
+  },[])
+
   const {username} = useSelector((store) => store.login)
   const {password} = useSelector((store) => store.login)
   const {obstruction} = useSelector((store) => store.violation)
@@ -61,24 +82,25 @@ export default function AddTicketScreen() {
   const {speeding} = useSelector((store) => store.violation)
   const {reckless} = useSelector((store) => store.violation)
   const {document} = useSelector((store) => store.violation)
+  const {signaturedata} = useSelector((store) => store.violation)
   
 
     const id = uuid.v4();
     const navigation = useNavigation();
     const [next, setNext] = useState(true);
-    const [drivername, setDriverName] = useState('')
+    const [drivername, setDriverName] = useState(''); 
     const [driveraddress, setDriverAddress] = useState('')
-    const [contactnumber, setContactNumber] = useState('')
-    const [licensenumber, setLicenseNumber] = useState('')
-    const [licenseplate, setLicesnsePlate] = useState('')
-    const [vehicletype, setVehicleType] = useState('')
-    const [Obstruction, setObstruction] = useState('')
-    const [Registration, setRegistration] = useState('')
-    const [Orcr, setORCR] = useState('')
-    const [Nolicense, setNoLicense] = useState('')
-    const [Document, setDocument] = useState('')
-    const [ExpiredLicense, setExpiredLicense] = useState('')
-    const [referenceNumber, setReferenceNumber] = useState('this is a reference number');
+    const [contactnumber, setContactNumber] = useState('');
+    const [licensenumber, setLicenseNumber] = useState(''); 
+    const [licenseplate, setLicesnsePlate] = useState('');
+    const [vehicletype, setVehicleType] = useState('');
+    const [Obstruction, setObstruction] = useState('') ;
+    const [Registration, setRegistration] = useState('');
+    const [Orcr, setORCR] = useState('');
+    const [Nolicense, setNoLicense] = useState('') ;
+    const [Document, setDocument] = useState('');
+    const [ExpiredLicense, setExpiredLicense] = useState('');
+    const [referenceNumber, setReferenceNumber] = useState();
 
     function _obstruction(text){
         setObstruction(text)
@@ -99,6 +121,33 @@ export default function AddTicketScreen() {
         setExpiredLicense(text)
       }
 
+      const updateReferenceNumber = async () => {
+        var result = await remoteRN.allDocs({
+          include_docs: true,
+          attachments: true
+        });
+        if (result.rows) {
+          let modifiedArr = result.rows.map(function(item) {
+            return item.doc
+          });
+          let filteredData = modifiedArr.filter(item => {
+            return item;
+          });
+          if (filteredData) {
+            let newFilterData = filteredData.map(item => {
+              return item;
+            });
+            const updatedDoc = {
+              _id: newFilterData[0]._id,
+              _rev: newFilterData[0]._rev,
+              referenceNumber: newFilterData[0].referenceNumber + 1,
+            };
+            await remoteRN.put(updatedDoc);
+            setReferenceNumber(newFilterData[0].referenceNumber + 1)
+            console.log('New reference number: ', updatedDoc.referenceNumber);
+          }
+        }
+      };
 
     const createViolation = () => {
 
@@ -117,7 +166,7 @@ export default function AddTicketScreen() {
               LicensePlate : licenseplate,
               VehicleType : vehicletype,
               Obstruction : Obstruction,
-              rfn: referenceNumber.toString(),
+              refNum: referenceNumber,
               Registration : Registration,
               OrCr : Orcr,
               Nolicense : Nolicense,
@@ -127,10 +176,11 @@ export default function AddTicketScreen() {
               Speeding : speeding,
               Reckless : reckless,
               Document : Document,
+              SignatureData: signaturedata,
            }
            locaDBViolation.put(NewViolation)
            .then((response) =>{
-            const body = "Hi there" + drivername + "You've been Apprehended and must pay a certain amount, please present this reference number: " + referenceNumber;
+            const body = "Mrs/Ms " + drivername +  " You've been Apprehended and must pay a certain amount, please present this reference number at the cashiers office: TVM"  + referenceNumber;
             console.log(body)
              SendSMS.send(
                 {
@@ -152,7 +202,7 @@ export default function AddTicketScreen() {
              console.log(response)
              SyncViolation()
              navigation.navigate('HomeTab')
-             Alert.alert('Your Account has been successfully added!')
+             ToastAndroid.show('Successfully Added a Citation Ticket', ToastAndroid.SHORT)
            })
            .catch(err=>console.log(err))
            
@@ -165,35 +215,30 @@ export default function AddTicketScreen() {
          
     }
 
-    const SubmitSignature = ({base64DataUrl}) => {
+  const nextcondition = () => {
 
-      console.log("submitted a signature" + base64DataUrl)
-
+      if (drivername.length == 0) {
+          Alert.alert("Please insert Driver's Fullname")   
+      } else if (driveraddress.length == 0) {
+          Alert.alert("Please insert Driver's Address")  
+      } else if (contactnumber.length < 11) {
+          Alert.alert("Contact number must be 11 Digit")   
+      } else if (licensenumber.length < 0) {
+          Alert.alert("Driver's License must be at least 12 Alphanumeric ID")   
+      } else {
+          setNext(false)
+      }
 
   }
-
-  // const nextcondition = () => {
-
-  //     if (drivername.length == 0) {
-  //         Alert.alert("Please insert Driver's Fullname")   
-  //     } else if (driveraddress.length == 0) {
-  //         Alert.alert("Please insert Driver's Address")  
-  //     } else if (contactnumber.length < 11) {
-  //         Alert.alert("Contact number must be 11 Digit")   
-  //     } else if (licensenumber.length < 0) {
-  //         Alert.alert("Driver's License must be at least 12 Alphanumeric ID")   
-  //     } else {
-  //         setNext(false)
-  //     }
-
-  // }
   
     return (
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
             <ScrollView style = {{width: '100%', paddingTop: 20}}>
         {next?  
-        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}> 
+        <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
+          <Text> Citation Reference Number: <Text>{referenceNumber}</Text></Text>
             <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
+            
             <InputText
                 onChangeText={(value) => setDriverName(value)}
                 value={drivername}
@@ -253,11 +298,8 @@ export default function AddTicketScreen() {
                     title = "Others"
                 />
             
-                {/* <Signature
-                
-                onChangeText = {SubmitSignature}
-                error = {(error) => {console.error(error)}}
-                /> */}
+                <Signature
+                />
                 </View>
                 
                 }
@@ -267,7 +309,7 @@ export default function AddTicketScreen() {
                
                 <TouchableOpacity
                     style = {styles.nextbutton}
-                    onPress={() => setNext(false)}
+                    onPress={nextcondition}
                 >
                     <Text style = {styles.buttontext}>NEXT</Text>
                 </TouchableOpacity> 
@@ -278,10 +320,6 @@ export default function AddTicketScreen() {
                 >
                     <Text style = {styles.buttontext}>SUBMIT</Text>
                 </TouchableOpacity>}
-
-            <CloseButton
-            onPress = {() => navigation.goBack('HomeTab')}
-            />
         </LinearGradient>
   )
 }

@@ -2,9 +2,12 @@ import { View, Text, Pressable, StyleSheet, Image, Alert, TouchableOpacity } fro
 import React from 'react'
 import  Icon from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
-
+import { useSelector } from 'react-redux'
+import { Popup } from '../../components/Popup'
 
 export default function AccountScreen() {
+
+  const {username} = useSelector((store) => store.login)
 
   const navigation = useNavigation()
 
@@ -12,6 +15,7 @@ export default function AccountScreen() {
   return (
     
     <View style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      
       <View style = {styles.HeaderContainer} >
         <View style = {{
         justifyContent: 'center',
@@ -39,7 +43,7 @@ export default function AccountScreen() {
 
         />
 
-        <Text style = {styles.officername} >Juan Dela Cruz</Text>
+        <Text style = {styles.officername} >{username}</Text>
       <View>
         <Image/>
         <Text style={styles.officerrank}>Police Officer I</Text>

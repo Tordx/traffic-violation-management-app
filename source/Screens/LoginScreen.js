@@ -87,10 +87,10 @@ export default function LoginScreen() {
 
                 // dispatch(setStudentInfo(newFilterData))
                 const Username = newFilterData[0].Username;
-                const Password = newFilterData[0].Password
+                const Password = newFilterData[0].Password;
                 dispatch(setUsername(username))
                 dispatch(setPassword(password))
-                if((username == Username ) && (password == Password) ){
+                if((username == Username ) && (password == Password)){
                     navigation.navigate('HomeTab')
 
                    }else{
