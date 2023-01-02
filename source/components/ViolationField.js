@@ -51,16 +51,16 @@ export const ViolationField = (props) => {
 
     useEffect(() => {
 
-    //  dispatch(setObstruction(obstruction))
-    //  dispatch(setRegistration(registration))
-    //  dispatch(setOrCr(orcr))
-    //  dispatch(setNoLicense(nolicense))
-    //  dispatch(setExpiredLicense(expiredLicense))
-    //  dispatch(setDUI(dui))
-    //  dispatch(setAttire(attire))
-    //  dispatch(setSpeeding(speeding))
-    //  dispatch(setReckless(reckless))
-    //  dispatch(setDocument(document))
+     dispatch(setObstruction(obstruction))
+     dispatch(setRegistration(registration))
+     dispatch(setOrCr(orcr))
+     dispatch(setNoLicense(nolicense))
+     dispatch(setExpiredLicense(expiredLicense))
+     dispatch(setDUI(dui))
+     dispatch(setAttire(attire))
+     dispatch(setSpeeding(speeding))
+     dispatch(setReckless(reckless))
+     dispatch(setDocument(document))
       
     }, [])
     
@@ -84,16 +84,16 @@ export const ViolationField = (props) => {
     const [speeding, _setSpeeding] = useState(false);
     const [reckless, _setReckless] = useState(false);
 
-    dispatch(setObstruction(obstruction))
-    dispatch(setRegistration(registration))
-    dispatch(setOrCr(orcr))
-    dispatch(setNoLicense(nolicense))
-    dispatch(setExpiredLicense(expiredLicense))
-    dispatch(setDUI(dui))
-    dispatch(setAttire(attire))
-    dispatch(setSpeeding(speeding))
-    dispatch(setReckless(reckless))
-    dispatch(setDocument(document))
+    // dispatch(setObstruction(obstruction))
+    // dispatch(setRegistration(registration))
+    // dispatch(setOrCr(orcr))
+    // dispatch(setNoLicense(nolicense))
+    // dispatch(setExpiredLicense(expiredLicense))
+    // dispatch(setDUI(dui))
+    // dispatch(setAttire(attire))
+    // dispatch(setSpeeding(speeding))
+    // dispatch(setReckless(reckless))
+    // dispatch(setDocument(document))
 
     // shows error : undefined
     
