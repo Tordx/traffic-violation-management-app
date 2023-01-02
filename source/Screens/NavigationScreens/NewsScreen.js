@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#a1b3dd',
 
     
   },
@@ -112,7 +111,6 @@ const styles = StyleSheet.create({
     height: 500,
     padding: 20,
     marginVertical: 3,
-    marginHorizontal: 5,
     borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: {
