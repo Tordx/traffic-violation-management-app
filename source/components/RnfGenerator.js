@@ -12,7 +12,7 @@ export default function RnfGenerator() {
     const [generateRN, setGenerateRN] = useState();
 
 
-    const generateReferenceNumber = () => {
+    const generateReferenceNumber = async() => {
         var result = await remoteRN.allDocs({
             include_docs: true,
             attachments: true
@@ -35,7 +35,7 @@ export default function RnfGenerator() {
 
     useEffect(() => {
         generateReferenceNumber()
-         dispatch(setGenerateRN(generateRN));
+        dispatch(setGenerateRN(generateRN));
     },[])
 
 }
