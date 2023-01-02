@@ -4,22 +4,41 @@ import {
     Text, 
     Modal, 
     TouchableOpacity, 
-    StyleSheet 
+    StyleSheet,
+    Pressable
 
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SignaturePad from 'react-native-signature-pad-v2'
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
+import { useDispatch } from 'react-redux';
+import { setSignatureData } from '../Redux/ViolationSlice';
 
 export const Signature = (props) => {
 
+    const dispatch = useDispatch();
+
+    useEffect (() => {
+        dispatch(setSignatureData(signaturedata))
+
+    },[signaturedata])
+
+
     const [pressed, setPressed] = useState(false);
     const [disable, setDisable] =  useState(false);
+    const [signaturedata, _setSignatureData] = useState(null);
+    
     const openSignature = () => {
 
         setPressed(true)
         setDisable(true)
+    }
+
+    const handleSignatureCapture = (signaturedata) => {
+        setPressed(false);
+        _setSignatureData(signaturedata)
+        console.log('success save')
+        console.log(signaturedata)
     }
 
   return (
@@ -42,15 +61,16 @@ export const Signature = (props) => {
                 
                 <SignaturePad
                 style = {{width: 500, height: 100, backgroundColor: '#fff', justifyContent: 'center'}}
-                onChangeText = {props.onChangeText}
+                onChangeText = {handleSignatureCapture}
+            
                 error = {props.error}
                 />
                 <View style  = {{position: 'absolute', top: 20}}>
                     <Text style = {{fontSize: 30, fontWeight: '500'}}>DRIVERS SIGNATURE</Text>
                 </View>
                 <Pressable
-        style = {{positiion: 'absolute', bottom : 20, width: '90%', height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: '#1240ac', borderRadius: 5}}
-        onPress = {() => setPressed(false)}
+                style = {{positiion: 'absolute', bottom : 20, width: '90%', height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: '#1240ac', borderRadius: 5}}
+                onPress = {handleSignatureCapture}
         >
             <Icon
                 name='check'
