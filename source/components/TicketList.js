@@ -10,6 +10,8 @@ import {
 
 } from 'react-native';
 import { remoteDBViolation } from '../Database/pouchDB';
+import { useSelector } from 'react-redux';
+
 
 export const TicketingList = () => {
 
@@ -17,6 +19,8 @@ export const TicketingList = () => {
     rendertickets()
   },[])
 
+
+  const {username} = useSelector((store) => store.login)
   const [mytickets, setNewTickets] = useState('');
 
   const rendertickets = async() => {
@@ -30,7 +34,7 @@ export const TicketingList = () => {
         return item.doc
     });
     let filteredData = modifiedArr.filter(item => {
-        return item
+        return item.Username == username;
       });
       if(filteredData) {
           let newFilterData = filteredData.map(item => {
@@ -46,7 +50,7 @@ export const TicketingList = () => {
   return (
     <View style={styles.item}> 
       <TouchableOpacity>
-        <Text style={styles.title}>{item._id}</Text>
+        <Text style={styles.title}># {item.refNum}</Text>
         <Text style={styles.name}>{item.DriverName}</Text>
       </TouchableOpacity>
       
