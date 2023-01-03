@@ -8,7 +8,8 @@ import {
     Alert,
     ScrollView,
     BackHandler,
-    ToastAndroid
+    ToastAndroid,
+    Image
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon  from 'react-native-vector-icons/MaterialIcons'
@@ -20,8 +21,11 @@ import { ViolationField } from '../components/ViolationField'
 import { locaDBViolation ,  SyncViolation, remoteRN } from '../Database/pouchDB'
 import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
-import { Signature } from '../components/Signature'
-import { useSelector } from 'react-redux'
+import { Signature } from '../components/Signature';
+import { useSelector } from 'react-redux';
+import { launchCamera } from 'react-native-image-picker'
+import storage from '@react-native-firebase/storage';
+
 
 const InputText = (props) => {
 
@@ -71,21 +75,15 @@ export default function AddTicketScreen() {
   },[])
 
   const {username} = useSelector((store) => store.login)
-  const {password} = useSelector((store) => store.login)
-  const {obstruction} = useSelector((store) => store.violation)
-  const {registration} = useSelector((store) => store.violation)
-  const {orcr} = useSelector((store) => store.violation)
-  const {nolicense} = useSelector((store) => store.violation)
-  const {expiredLicense} = useSelector((store) => store.violation)
   const {dui} = useSelector((store) => store.violation)
   const {attire} = useSelector((store) => store.violation)
   const {speeding} = useSelector((store) => store.violation)
   const {reckless} = useSelector((store) => store.violation)
-  const {document} = useSelector((store) => store.violation)
   const {signaturedata} = useSelector((store) => store.violation)
   
 
     const id = uuid.v4();
+    
     const navigation = useNavigation();
     const [next, setNext] = useState(true);
     const [drivername, setDriverName] = useState(''); 
@@ -101,6 +99,11 @@ export default function AddTicketScreen() {
     const [Document, setDocument] = useState('');
     const [ExpiredLicense, setExpiredLicense] = useState('');
     const [referenceNumber, setReferenceNumber] = useState();
+    const [transferred, setTransferred] = useState(0);
+    const [image, setImage] = useState('');
+    const now = new Date();
+    const time = now.toLocaleTimeString();
+    const date = now.toLocaleDateString();
 
     function _obstruction(text){
         setObstruction(text)
@@ -149,24 +152,48 @@ export default function AddTicketScreen() {
         }
       };
 
-    const createViolation = () => {
+    const createViolation = async() => {
 
         if(1+1 == 3){
           console.log('hey')
-        }
+        } 
        else{
+        const  uri  =  image;
+        const filename = uri.substring(uri.lastIndexOf('/') + 1);
+        const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+        setTransferred(0);
+        const task = storage()
+          .ref(filename)
+          .putFile(uploadUri);
+        // set progress state
+        task.on('state_changed', snapshot => {
+          setTransferred(
+            Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000
+          );
+        });
+        try {
+          await  task;
+        } catch (e) {
+          console.error(e);
+        }
+        const firebasedata = await storage().ref(filename).getDownloadURL();
+        // dispatch(setImages(url));
+        setImage(firebasedata)
          try {
            var NewViolation = {
               _id: id,
+              time: time,
+              date: date,
+              refNum: referenceNumber,
               DriverName : drivername.toString(),
               UserName: username,
+              Image: image,
               DriverAddress : driveraddress,
               ContactNumber : contactnumber,
               LicenseNumber : licensenumber,
               LicensePlate : licenseplate,
               VehicleType : vehicletype,
               Obstruction : Obstruction,
-              refNum: referenceNumber,
               Registration : Registration,
               OrCr : Orcr,
               Nolicense : Nolicense,
@@ -230,6 +257,24 @@ export default function AddTicketScreen() {
       }
 
   }
+
+  const OpenCamera = async() => {
+    
+    launchCamera({cameraType: 'front' , maxHeight: 300 , maxWidth: 300 ,  mediaType: 'photo'}, response => {
+      
+      console.log(response)
+
+      navigation.navigate('AddTicketScreen')
+
+    }).then(image => {
+      console.log('First Process')
+      console.log(image.assets[0].uri)
+      console.log(image.assets[0].fileName)
+      console.log('Sucess upload')
+      setImage(image.assets[0].uri); 
+    });
+
+  }
   
     return (
         <LinearGradient colors={['#fff', '#fff', '#F4EAE6']} style = {styles.container}>
@@ -284,7 +329,7 @@ export default function AddTicketScreen() {
                 />
                 <TouchableOpacity
                     style = {styles.oPenCamera}
-                    onPress={() => console.log('Camera open')}
+                    onPress={OpenCamera}
                 >
                     <Text style = {[styles.buttontext,{color: 'grey'}]}>Upload Photo</Text>
                 </TouchableOpacity>
