@@ -8,7 +8,7 @@
     password: []
    },
    reducers: {
-    setUsername: (state , action ) => {
+      setUsername: (state , action ) => {
         state.username = action.payload
         console.log(action)
         console.log('user')
@@ -18,7 +18,11 @@
         console.log(action)
         console.log('password')
       },
- 
+      clearData: (state) => {
+        state.username = []
+        state.password = []
+       },
+       
    }
  })
  

@@ -9,15 +9,15 @@ import {
 } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import { remoteDBAcoount } from '../Database/pouchDB';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 export default function UserSettings() {
 
     const navigation = useNavigation();
-
     const {username} = useSelector((store) => store.login)
-
+    const dispatch = useDispatch();
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -37,12 +37,18 @@ export default function UserSettings() {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Confirm", onPress: () => navigation.navigate('SplashScreen') },
+        { text: "Confirm", onPress: clearData },
         
-      ]
-    );
+        ]
+        );
+    }
 
-}
+    const clearData = () => {
+    dispatch({ type: 'CLEAR_DATA', payload: '' })  // Dispatch action to reducer
+    console.log(clearData)
+    navigation.navigate('SplashScreen')
+    }
+
 
     useEffect (() => {
 
@@ -57,7 +63,7 @@ export default function UserSettings() {
 
        
 
-    })
+    },[])
 
 
     const changepassword = async() => {
@@ -104,7 +110,6 @@ export default function UserSettings() {
         }
     
 
-  
   return (
     <View style = {{flex: 1, justifyContent: 'center', alignItems: 'center', }}>
         <Text style  = {{fontSize: 20, fontWeight: '500', marginBottom: 20}}> Change password</Text>
