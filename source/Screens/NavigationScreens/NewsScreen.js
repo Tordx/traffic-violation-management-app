@@ -1,84 +1,18 @@
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, Pressable } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-  {
-    id: 'bd7acbe2a-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68af3c-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '586944a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-  {
-    id: 'bd17acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68a1fc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3d5a1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-];
-
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
 export const NewsScreen = () => {
-
-  const renderItem = ({ item }) => (
-    <Item title={item.title} />
-  );
 
   return (
 
     <SafeAreaView style={styles.container}>
-     <View style={styles.listcontainer}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-      </View>
-      <View style = {styles.HeaderContainer} >
-        <View style = {{
-        justifyContent: 'center',
-        alignSelf: 'center',
-        borderRadius: 5,
-        }}>
-      <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Announcements</Text>
-      </View>
-      <Pressable style={{right: 0, position: 'absolute', margin: 10, bottom: 1,}}>
-        <Icon
-        name='search'
-        size={30}
-        color = '#fff'
+        <Image
+        resizeMode = 'cover'
+          style = {{height: '40%', width: '100%', justifyContent: 'center', alignItems: 'center',}}
+          source={{ uri: 'https://media.istockphoto.com/id/1149451413/vector/girl-lift-her-hands-with-confuse-face.jpg?s=612x612&w=0&k=20&c=Yp_Qi7p_OUJJS62QEWJp5YG_OhDwHDwGPHbYVFCZJ7M='}}
         />
-      </Pressable>
-      </View>
+        <Text>No Announcements yet, please check me frequently.</Text>
     </SafeAreaView>
   );
 }
@@ -87,10 +21,10 @@ const styles = StyleSheet.create({
 
   container: {
     
-    width: '100%',
-    height: '100%',
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff'
 
     
   },
@@ -132,7 +66,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',         
     backgroundColor: '#1240ac',
-    height: 60, 
+    height: 75, 
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
