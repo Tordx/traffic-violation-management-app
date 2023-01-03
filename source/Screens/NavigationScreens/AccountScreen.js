@@ -1,15 +1,41 @@
-import { View, Text, Pressable, StyleSheet, Image, Alert, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, Pressable, StyleSheet, Image, Alert, TouchableOpacity, ActivityIndicator } from 'react-native'
+import React, { useState, useEffect } from 'react'  // Import useState and useEffect hooks
 import  Icon from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
-import { Popup } from '../../components/Popup'
+import { remoteDBAcoount } from '../../Database/pouchDB'
 
-export default function AccountScreen() {
-
+function AccountScreen() {
   const {username} = useSelector((store) => store.login)
-
   const navigation = useNavigation()
+  const [FullName, setFullName] = useState('') 
+  const [Rank, setRank] = useState('')  
+
+  useEffect(() => {
+
+    const setUser = async() => {
+      var result = await remoteDBAcoount.allDocs({
+        include_docs: true,
+        attachments: true
+      });
+      if (result.rows) {
+        let modifiedArr = result.rows.map(function(item) {
+          return item.doc
+        });
+        let filteredData = modifiedArr.filter(item => {
+          return item.Username == username;
+        });
+        if (filteredData) {
+          let newFilterData = filteredData.map(item => {
+            return item;
+          });
+          setFullName(newFilterData[0].FullName);
+          setRank(newFilterData[0].Rank);
+        }
+      }
+    } 
+    setUser();
+  },[username])
 
 
   return (
@@ -24,7 +50,7 @@ export default function AccountScreen() {
         }}>
       <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Account</Text>
       </View>
-      <TouchableOpacity style={{right: 0, position: 'absolute', margin: 10, bottom: 5,}}
+      <TouchableOpacity style={{right: 0, position: 'absolute', marginRight: 10,}}
         onPress = {() => navigation.navigate('UserSettingScreen')}
         >
         <Icon
@@ -43,10 +69,9 @@ export default function AccountScreen() {
 
         />
 
-        <Text style = {styles.officername} >{username}</Text>
+        {FullName? (<Text style = {styles.officername} >{FullName}</Text>) : (<ActivityIndicator/>)}
       <View>
-        <Image/>
-        <Text style={styles.officerrank}>Police Officer I</Text>
+        {Rank? (<Text style={styles.officerrank}>{Rank}</Text>) : (<ActivityIndicator/>)}
       </View>
 
       </View>
@@ -118,7 +143,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%', 
     backgroundColor: '#1240ac',
-    height: 60, 
+    height: 75, 
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -137,3 +162,6 @@ const styles = StyleSheet.create({
 
 
 })
+
+
+export default React.memo(AccountScreen)
