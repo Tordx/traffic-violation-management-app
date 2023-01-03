@@ -68,7 +68,7 @@ export default function TicketingScreen() {
         }}>
       <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Citation List</Text>
       </View>
-      <TouchableOpacity style={{right: 0, position: 'absolute', margin: 10, bottom: 1,}}
+      <TouchableOpacity style={{right: 0, position: 'absolute', marginRight: 10,}}
         onPress = {()=> navigation.navigate('SearchScreen')}
       >
         <Icon
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%', 
         backgroundColor: '#1240ac',
-        height: 60, 
+        height: 75, 
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',

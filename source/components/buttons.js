@@ -4,8 +4,6 @@ import  Icon  from 'react-native-vector-icons/MaterialIcons'
 
 export const CloseButton = (props) => {
 
-  
-
     return (
 
       <TouchableOpacity
@@ -16,13 +14,36 @@ export const CloseButton = (props) => {
       >
         <Icon
         
-        name='close'
-        size={35}
-        color = 'black'
+        name='arrow-back'
+        size={33}
+        color = '#808080'
 
         />
       </TouchableOpacity>
 
     )
 
+}
+
+
+export const Backbutton = (props) => {
+
+  return (
+
+    <TouchableOpacity
+    
+    style = {{margin: 15, }}
+    onPress = {props.onPress}
+
+    >
+      <Icon
+      
+      name='arrow-back'
+      size={33}
+      color = '#fff'
+
+      />
+    </TouchableOpacity>
+
+  )
 }

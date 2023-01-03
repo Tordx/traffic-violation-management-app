@@ -23,6 +23,7 @@ import { version } from '../components/ViolationData';
 import { useDispatch } from 'react-redux';
 import { setUsername } from '../Redux/LoginSlice';
 import { setPassword } from '../Redux/LoginSlice';
+import { ActivityIndicator } from 'react-native-paper';
 
 
 export default function LoginScreen() {
@@ -84,13 +85,12 @@ export default function LoginScreen() {
                 let newFilterData = filteredData.map(item => {
                     return item
                 })
-
-                // dispatch(setStudentInfo(newFilterData))
                 const Username = newFilterData[0].Username;
                 const Password = newFilterData[0].Password;
-                dispatch(setUsername(username))
-                dispatch(setPassword(password))
+                
                 if((username == Username ) && (password == Password)){
+                    dispatch(setUsername(username))
+                    dispatch(setPassword(password))
                     navigation.navigate('HomeTab')
 
                    }else{
@@ -176,7 +176,7 @@ export default function LoginScreen() {
 
             }}
             >
-                <Text style = {{textAlign: 'center', fontSize: 20, color: input? '#00000029': '#ffff', fontWeight: '700'}} >LOG IN</Text>
+                {LoginData? (<Text style = {{textAlign: 'center', fontSize: 20, color: input? '#00000029': '#ffff', fontWeight: '700'}} >LOG IN</Text>) : (<ActivityIndicator/>)}
             </Pressable>
             
             <TouchableOpacity style = {{justifyContent: 'center', width: '75%',}}
