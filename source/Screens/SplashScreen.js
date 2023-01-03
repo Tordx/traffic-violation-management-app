@@ -1,19 +1,31 @@
 import React, { useEffect } from 'react';
 import { 
     View, 
-    Text, 
     StyleSheet,
     Image,
     StatusBar,
+    
 } from 'react-native';
-
+import NetInfo from '@react-native-community/netinfo'
 
 export default function SplashScreen ({navigation}) {
 
+
     useEffect(() => {
-setTimeout(() => {
-    navigation.replace('LoginScreen');
-}, 2000);
+
+        const unsubscribe = NetInfo.addEventListener(state => {
+            if (state.isConnected) {
+
+            console.log('Verified Connection')
+            setTimeout(() => {
+                navigation.replace('LoginScreen');
+            }, 2000);
+            } else {
+               Alert.alert('Sorry', 'Please connect to the internet to use the application');
+            }
+         });
+   
+         return unsubscribe;
 
     }, []);
 
