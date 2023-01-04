@@ -154,8 +154,8 @@ export default function AddTicketScreen() {
 
     const createViolation = async() => {
 
-        if(1+1 == 3){
-          console.log('hey')
+        if(image.length === ''){
+          Alert.alert('Photo needed', 'Please upload apprehended MV Photo')
         } 
        else{
         const  uri  =  image;
@@ -248,7 +248,7 @@ export default function AddTicketScreen() {
           Alert.alert("Please insert Driver's Fullname")   
       } else if (driveraddress.length == 0) {
           Alert.alert("Please insert Driver's Address")  
-      } else if (contactnumber.length < 11) {
+      } else if (contactnumber.length != 11) {
           Alert.alert("Contact number must be 11 Digit")   
       } else if (licensenumber.length < 0) {
           Alert.alert("Driver's License must be at least 12 Alphanumeric ID")   
@@ -263,7 +263,6 @@ export default function AddTicketScreen() {
     launchCamera({cameraType: 'front' , maxHeight: 300 , maxWidth: 300 ,  mediaType: 'photo'}, response => {
       
       console.log(response)
-
       navigation.navigate('AddTicketScreen')
 
     }).then(image => {

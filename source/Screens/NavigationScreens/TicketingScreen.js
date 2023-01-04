@@ -66,7 +66,7 @@ export default function TicketingScreen() {
         alignSelf: 'center',
         borderRadius: 5,
         }}>
-      <Text style = {{textAlign: 'center', fontSize: 20, fontWeight: '500', color: '#fff'}}>Citation List</Text>
+      <Text style = {{textAlign: 'center', fontSize: 20, fontFamily: 'codenext-semibold', color: '#fff'}}>Citation List</Text>
       </View>
       <TouchableOpacity style={{right: 0, position: 'absolute', marginRight: 10,}}
         onPress = {()=> navigation.navigate('SearchScreen')}
