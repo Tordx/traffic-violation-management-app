@@ -13,6 +13,7 @@ import SearchScreen from './Screens/SearchScreen';
 import SplashScreen from './Screens/SplashScreen';
 import ForgotPasswordScreen from './Screens/ForgotPasswordScreen';
 import UserSettingScreen from './Screens/UserSettingScreen';
+import TicketScreen from './Screens/TicketScreen';
 
 export default function Rooting() {
 
@@ -93,6 +94,16 @@ export default function Rooting() {
             
                 name = 'UserSettingScreen'
                 component={UserSettingScreen}
+                options = {{
+                    headerShown: false,
+                }}
+            
+            />
+
+            <Stack.Screen
+            
+                name = 'TicketScreen'
+                component={TicketScreen}
                 options = {{
                     headerShown: false,
                 }}

@@ -11,12 +11,14 @@ import {
 import { remoteDBViolation } from '../Database/pouchDB';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from  'react-native-vector-icons/MaterialIcons';
+import { setSelectedTicket } from '../Redux/TicketSlice';
 
 export const TicketingList = () => {
 
   
-
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const {username} = useSelector((store) => store.login);
   const [mytickets, setNewTickets] = useState();
@@ -46,14 +48,20 @@ export const TicketingList = () => {
   },[username, mytickets]);
 
 
-
   const renderItem = ({ item }) => {
   return (
     <View style={styles.item}>
-      <TouchableOpacity style  = {{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',}}>
+      <TouchableOpacity style  = {{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',}}
+      onPress = {() => { 
+        
+        console.log('success')
+        dispatch(setSelectedTicket(item)); 
+        navigation.navigate('TicketScreen');
+      }}
+      >
         <View>
-        <Text style={styles.title}># {item.refNum}</Text>
-        <Text style={styles.name}>{item.DriverName} — {item.date} {item.time}</Text>
+        <Text style = {{fontSize: 25, fontWeight:'900', color: '#111129'}} ># <Text style={styles.title}>{item.refNum}</Text></Text>
+        <Text style={styles.name}>{item.DriverName} — {item.date} {item.time} </Text>
         </View>
         <Icon 
         name = 'more-vert' 
@@ -75,7 +83,9 @@ export const TicketingList = () => {
         keyExtractor={item => item.id}
       />
       ):(
-      <ActivityIndicator size="large" color="#1240ac"/>
+        <View style = {{justifyContent: 'center', alignItems: 'center',}}>
+          <ActivityIndicator size="large" color="#1240ac"/>
+        </View>
       )}
       
     </SafeAreaView>
@@ -109,10 +119,11 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 25,
-    color: '#808080'
+    color: '#111129',
+    fontFamily: 'codenext-bold'
   },
 
   name: {
-    color: '#808080'
+    color: '#111129'
   },
 });

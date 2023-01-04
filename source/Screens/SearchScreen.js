@@ -14,11 +14,13 @@ import { Backbutton, CloseButton } from '../components/buttons'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux';
 import { remoteDBViolation } from '../Database/pouchDB';
-
+import { useDispatch } from 'react-redux';
+import { setSelectedTicket } from '../Redux/TicketSlice';
 
 export default function SearchScreen() {
 
   const navigation = useNavigation()
+  const dispatch = useDispatch()
   const { username } = useSelector((store) => store.login);
   const [newSearch, setNewSearch] = useState();
   const [searchTerm, setSearchTerm] = useState('');
@@ -57,13 +59,23 @@ export default function SearchScreen() {
 
   const renderitem = ({item}) => {
     return (
-      <View style={styles.item}> 
-      <TouchableOpacity>
-        <Text style={styles.title}># {item.refNum}</Text>
-        <Text style={styles.name}>{item.DriverName}</Text>
+      <View style={styles.item}>
+      <TouchableOpacity style  = {{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',}}
+      onPress = {() => { 
+        
+        console.log('success')
+        dispatch(setSelectedTicket(item)); 
+        navigation.navigate('TicketScreen');
+      }}
+      >
+        <View>
+        <Text style = {{fontSize: 25, fontWeight:'900', color: '#111129'}} ># <Text style={styles.title}>{item.refNum}</Text></Text>
+        <Text style={styles.name}>{item.DriverName} —  {item.time} — {item.date}</Text>
+        </View>
       </TouchableOpacity>
       
-    </View>
+    </View> 
+    
     )
   }
 
@@ -86,6 +98,7 @@ export default function SearchScreen() {
         top: 0, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '100%', height: 75,}}>
       <Backbutton
       onPress = {() => navigation.navigate('Ticketing')}
+      color = '#fff'
       />
       <TextInput style = {styles.InputContainer} value={searchTerm} onChange={handleSearchChange} placeholder = "Search by Name, Reference Number...." />
       </View>
@@ -106,6 +119,7 @@ const styles = StyleSheet.create({
 
     
   },
+  
   item: {
     alignSelf: 'center',
     width: 400,
@@ -119,11 +133,12 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 25,
-    color: '#808080'
+    color: '#111129',
+    fontFamily: 'codenext-bold'
   },
 
   name: {
-    color: '#808080'
+    color: '#111129'
   },
 
   InputContainer: { 
