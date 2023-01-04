@@ -48,18 +48,7 @@ export default function LoginScreen() {
       return () => handler.remove();
 
       }, []);
-    
-      useEffect(() => {
-
-            if (username.length === 0) {
-                setInput(true);
-                } else if  (password.length === 0) {
-                    setInput(true);
-                    } else {
-                        setInput(false);
-                    };
-
-      });
+                
 
     const navigation = useNavigation()
 
@@ -118,11 +107,11 @@ export default function LoginScreen() {
         <View style = {styles.loginContainer} >
         <Image        
             source={require('../Assets/Images/tvmlogo.png')}
-            style = {{width: '25%', height: '25%'}}
+            style = {{width: '30%', height: '25%'}}
         />
 
-            <Text style = {{fontSize: 35, fontWeight: 'bold',  textAlign: 'center', color: textColor, marginTop: 15}} > Welcome Back!</Text>
-            <Text style = {{fontSize: 15, textAlign: 'center',  color: textColor, marginBottom: 5}} > Login to your Account </Text>
+            <Text style = {{fontSize: 35, fontFamily: 'codenext-bold',  textAlign: 'center', color: textColor, margin: 15}} > Welcome Back</Text>
+            <Text style = {{fontSize: 15, fontFamily: 'codenext-semibold', textAlign: 'center',  color: textColor, marginBottom: 10}} > Login to your Account </Text>
             <View style = {styles.InputContainer}>
                 <Icon
                     style = {{marginLeft: 10,}}

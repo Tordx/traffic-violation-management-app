@@ -12,6 +12,7 @@ import { remoteDBAcoount } from '../Database/pouchDB';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Black, Gray, PaleBlue } from '../Assets/colors';
 
 export default function UserSettings() {
 
@@ -178,13 +179,13 @@ export default function UserSettings() {
            
         </View>
         <TouchableOpacity
-                style = {[styles.changepassword, {backgroundColor: input? '#00000019' : '#1240ac'}]}
+                style = {[styles.changepassword, {backgroundColor: input? '#00000019' : '#00000009'}]}
                 onPress={changepassword}
             >
-               <Text style = {{textAlign: 'center', fontSize: 20, color: input? '#00000029': '#ffff', fontWeight: '700'}} >Update Password</Text>
+               <Text style = {{textAlign: 'center', fontSize: 20, color: input? '#00000029': Gray, fontWeight: '700'}} >Update Password</Text>
             </TouchableOpacity>
         <TouchableOpacity 
-            style = {{position: 'absolute', bottom: 100}}
+            style = {{bottom: 0, marginTop: 100}}
             onPress = {logout}
         
             ><Text>LOG OUT</Text>
@@ -197,11 +198,14 @@ export default function UserSettings() {
 const styles = StyleSheet.create({
 
     changepassword: {
-        width: 200, 
+        width: 250, 
         height: 50,  
         justifyContent: 'center',
         marginVertical: 10,
-        borderRadius: 5, 
+        borderRadius: 5,
+        borderColor: PaleBlue,
+        borderWidth: 0.3,
+        marginBottom: 100,
     },
 
     textinput: {

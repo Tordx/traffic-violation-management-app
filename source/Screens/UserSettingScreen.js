@@ -3,6 +3,7 @@ import React from 'react'
 import UserSettings from '../components/UserSettings'
 import { CloseButton } from '../components/buttons'
 import { useNavigation } from '@react-navigation/native'
+import { Black } from '../Assets/colors'
 
 export default function UserSettingScreen() {
 
@@ -13,6 +14,7 @@ export default function UserSettingScreen() {
       <UserSettings/>
       <CloseButton
         onPress = {() => navigation.navigate('Account')}
+        color = {Black}
       />
     </View>
   )

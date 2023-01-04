@@ -69,9 +69,9 @@ function AccountScreen() {
 
         />
 
-        {FullName? (<Text style = {styles.officername} >{FullName}</Text>) : (<ActivityIndicator/>)}
+        {FullName? (<Text style = {styles.officername} >{FullName}</Text>) : (<ActivityIndicator size={"large"} />)}
       <View>
-        {Rank? (<Text style={styles.officerrank}>{Rank}</Text>) : (<ActivityIndicator/>)}
+        {Rank? (<Text style={styles.officerrank}>{Rank}</Text>) : (<ActivityIndicator />)}
       </View>
 
       </View>

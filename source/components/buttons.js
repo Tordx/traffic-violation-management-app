@@ -16,7 +16,7 @@ export const CloseButton = (props) => {
         
         name='arrow-back'
         size={33}
-        color = '#808080'
+        color = {props.color}
 
         />
       </TouchableOpacity>
@@ -40,7 +40,7 @@ export const Backbutton = (props) => {
       
       name='arrow-back'
       size={33}
-      color = '#fff'
+      color = {props.color}
 
       />
     </TouchableOpacity>
