@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "source/Assets/fonts/caveat-bold.ttf",
+      "sha1": "b8cf7188694f0ad229fec80e8074b1df6305cdfa"
+    },
+    {
+      "path": "source/Assets/fonts/caveat-medium.ttf",
+      "sha1": "0cd0d0e17561fad5254d00dfc406e0662495de09"
+    },
+    {
+      "path": "source/Assets/fonts/caveat-regular.ttf",
+      "sha1": "6c6e0943c8a1af2aa1fe7d751c62e84e18cc4c72"
+    },
+    {
+      "path": "source/Assets/fonts/caveat-semibold.ttf",
+      "sha1": "f91cf4115830f412e3e58aa87d3dca337b996453"
+    },
+    {
+      "path": "source/Assets/fonts/codenext-bold.ttf",
+      "sha1": "d5ff856febdf194aac6917be874d6c460ee96373"
+    },
+    {
+      "path": "source/Assets/fonts/codenext-semibold.ttf",
+      "sha1": "018601c03447aaa7ebeb7acd901b5bb2489e37c7"
+    }
+  ]
+}
