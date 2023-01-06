@@ -179,7 +179,7 @@ export default function UserSettings() {
            
         </View>
         <TouchableOpacity
-                style = {[styles.changepassword, {backgroundColor: input? '#00000019' : '#00000009'}]}
+                style = {styles.changepassword}
                 onPress={changepassword}
             >
                <Text style = {{textAlign: 'center', fontSize: 20, color: input? '#00000029': Gray, fontWeight: '700'}} >Update Password</Text>
