@@ -1,5 +1,5 @@
 {
-  "name": "Ticketingapp",
+  "name": "ticketingapp",
   "version": "1.0.1",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "@react-navigation/native": "^6.0.14",
     "@react-navigation/stack": "^6.3.5",
     "@reduxjs/toolkit": "^1.9.1",
+    "buffer": "^6.0.3",
     "install": "^0.13.0",
     "pouchdb": "^7.3.1",
     "pouchdb-adapter-asyncstorage": "^6.4.1",
@@ -36,6 +37,7 @@
     "react-native-paper": "^4.12.5",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.2",
+    "react-native-signature-canvas": "^4.5.0",
     "react-native-signature-pad-v2": "^1.1.0",
     "react-native-sms": "^1.11.0",
     "react-native-uuid": "^2.0.1",
