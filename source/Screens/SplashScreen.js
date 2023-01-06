@@ -4,6 +4,7 @@ import {
     StyleSheet,
     Image,
     StatusBar,
+    Alert,
     
 } from 'react-native';
 import NetInfo from '@react-native-community/netinfo'
@@ -27,7 +28,7 @@ export default function SplashScreen ({navigation}) {
    
          return unsubscribe;
 
-    }, []);
+    }, [NetInfo]);
 
     return (
         <View style={styles.container}>

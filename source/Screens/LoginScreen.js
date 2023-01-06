@@ -24,6 +24,7 @@ import { useDispatch } from 'react-redux';
 import { setUsername } from '../Redux/LoginSlice';
 import { setPassword } from '../Redux/LoginSlice';
 import { ActivityIndicator } from 'react-native-paper';
+import { DriverSignature } from '../components/DriverSignature';
 
 
 export default function LoginScreen() {
@@ -113,6 +114,7 @@ export default function LoginScreen() {
             <Text style = {{fontSize: 35, fontFamily: 'codenext-bold',  textAlign: 'center', color: textColor, margin: 15}} > Welcome Back</Text>
             <Text style = {{fontSize: 15, fontFamily: 'codenext-semibold', textAlign: 'center',  color: textColor, marginBottom: 10}} > Login to your Account </Text>
             <View style = {styles.InputContainer}>
+                {/* <DriverSignature/> */}
                 <Icon
                     style = {{marginLeft: 10,}}
                     name={'person'}

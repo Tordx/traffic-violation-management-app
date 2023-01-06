@@ -4,6 +4,7 @@ import  Icon from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
 import { remoteDBAcoount } from '../../Database/pouchDB'
+import { Black } from '../../Assets/colors'
 
 function AccountScreen() {
   const {username} = useSelector((store) => store.login)
@@ -93,7 +94,8 @@ const styles = StyleSheet.create({
 
   officerrank: {
     
-    color: '#808080'
+    color: Black,
+
   
   },
 
@@ -101,15 +103,16 @@ const styles = StyleSheet.create({
     
     fontSize: 35, 
     fontWeight: '500', 
-    color: '#808080'
+    color: Black,
+    fontFamily: 'codenext-bold'
   
   },
 
   profileimage: {
     
     borderRadius: 100, 
-    height: 150, 
-    width: 150, 
+    height: 200, 
+    width: 200, 
     margin: 20
   
   },
