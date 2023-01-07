@@ -6,12 +6,15 @@ import {
   StyleSheet, 
   Text, 
   TouchableOpacity,
-  ActivityIndicator, 
+  ActivityIndicator,
+  RefreshControl,
+  BackHandler,
+
 } from 'react-native';
 import { remoteDBViolation } from '../Database/pouchDB';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from  'react-native-vector-icons/MaterialIcons';
 import { setSelectedTicket } from '../Redux/TicketSlice';
 
@@ -22,31 +25,48 @@ export const TicketingList = () => {
   const dispatch = useDispatch();
   const {username} = useSelector((store) => store.login);
   const [mytickets, setNewTickets] = useState();
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    const rendertickets = async() => {
-      var result = await remoteDBViolation.allDocs({
-        include_docs: true,
-        attachments: true,
-      });
-      if (result.rows) {
-        let modifiedArr = result.rows.map(function(item) {
-          return item.doc;
-        });
-        let filteredData = modifiedArr.filter(item => {
-          return item.UserName === username;
-        });
-        if (filteredData) {
-          let newFilterData = filteredData.map(item => {
-            return item;
-          });
-          setNewTickets(newFilterData);
-        } 
-      } 
-    };
     rendertickets();
+    
+      const backAction = () => {
+        navigation.goBack('TicketingScreen')
+      };
+
+      const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
+      return () => handler.remove();
+
   },[username, mytickets]);
 
+    
+  const rendertickets = async() => {
+    var result = await remoteDBViolation.allDocs({
+      include_docs: true,
+      attachments: true,
+    });
+    if (result.rows) {
+      let modifiedArr = result.rows.map(function(item) {
+        return item.doc;
+      });
+      let filteredData = modifiedArr.filter(item => {
+        return item.UserName === username;
+      });
+      if (filteredData) {
+        let newFilterData = filteredData.map(item => {
+          return item;
+        });
+        setNewTickets(newFilterData);
+      } 
+    } 
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    rendertickets();
+    setRefreshing(false);
+  }
+  
 
   const renderItem = ({ item }) => {
   return (
@@ -81,6 +101,12 @@ export const TicketingList = () => {
         data={mytickets}
         renderItem={renderItem}
         keyExtractor={item => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
       />
       ):(
         <View style = {{justifyContent: 'center', alignItems: 'center',}}>
