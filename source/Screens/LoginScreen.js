@@ -80,7 +80,7 @@ export default function LoginScreen() {
                 const Fullname  = newFilterData[0].FullName;
                  // anti key sensitive
                 if((username.toLowerCase() == Username.toLowerCase()) && (password == Password)){
-                    dispatch(setUsername(username))
+                    dispatch(setUsername(username.toLowerCase()))
                     dispatch(setPassword(password))
                     dispatch(setFullname(Fullname))
                     navigation.navigate('HomeTab')
