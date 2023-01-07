@@ -18,13 +18,15 @@ import { CloseButton } from '../components/buttons'
 import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
 import { ViolationField } from '../components/ViolationField'
-import { locaDBViolation ,  SyncViolation, remoteRN } from '../Database/pouchDB'
+import { locaDBViolation ,  SyncViolation, remoteRN , remoteDBAcoount } from '../Database/pouchDB'
 import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
 import { DriverSignature } from '../components/DriverSignature';
 import { useSelector } from 'react-redux';
 import { launchCamera } from 'react-native-image-picker'
 import storage from '@react-native-firebase/storage';
+
+
 
 
 const InputText = (props) => {
@@ -75,6 +77,7 @@ export default function AddTicketScreen() {
 
   },[])
 
+  const {fulldetails} = useSelector((store) => store.login)
   const {username} = useSelector((store) => store.login)
   const {fullname} = useSelector((store) => store.login)
   const {dui} = useSelector((store) => store.violation)
@@ -108,6 +111,9 @@ export default function AddTicketScreen() {
     const time = now.toLocaleTimeString();
     const date = now.toLocaleDateString();
 
+    // console.log('fulldetails');
+    // console.log(fulldetails);
+    // console.log('fulldetails');
       const updateReferenceNumber = async () => {
         var result = await remoteRN.allDocs({
           include_docs: true,
@@ -160,6 +166,16 @@ export default function AddTicketScreen() {
         } catch (e) {
           console.error(e);
         }
+        await remoteDBAcoount.get(fulldetails._id).then(function(doc) {
+          return remoteDBAcoount.put({
+            _id: fulldetails._id,
+            ...doc,
+            Citation: fulldetails.Citation + 1
+          });
+        }).then(function(response) {
+        }).catch(function (err) {
+          console.log(err);
+        });
         const firebasedata = await storage().ref(filename).getDownloadURL();
         // dispatch(setImages(url));
         setImage(firebasedata)
