@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon  from 'react-native-vector-icons/MaterialIcons'
-import { Black, iconColor } from '../Assets/colors'
+import { Black, Gray, HighlightColor, iconColor } from '../Assets/colors'
 import { CloseButton } from '../components/buttons'
 import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
@@ -25,6 +25,7 @@ import { DriverSignature } from '../components/DriverSignature';
 import { useSelector } from 'react-redux';
 import { launchCamera } from 'react-native-image-picker'
 import storage from '@react-native-firebase/storage';
+import { consent } from '../components/ViolationData'
 
 
 
@@ -146,7 +147,9 @@ export default function AddTicketScreen() {
 
         if(image === ''){
           Alert.alert('Photo needed', 'Please upload apprehended MV Photo')
-        } 
+        } else if (signaturedata === ''){
+          Alert.alert('Signature needed', "The Driver's signature is needed")
+        }
        else{
         const  uri  =  image;
         const filename = uri.substring(uri.lastIndexOf('/') + 1);
@@ -179,6 +182,7 @@ export default function AddTicketScreen() {
         const firebasedata = await storage().ref(filename).getDownloadURL();
         // dispatch(setImages(url));
         setImage(firebasedata)
+        ToastAndroid.show('Successfully Uploaded Image', ToastAndroid.SHORT)
          try {
            var NewViolation = {
               _id: id,
@@ -232,7 +236,7 @@ export default function AddTicketScreen() {
              console.log(response)
              SyncViolation()
              navigation.navigate('HomeTab')
-             ToastAndroid.show('Successfully Added a Citation Ticket', ToastAndroid.SHORT)
+             ToastAndroid.show('Successfully Added TVM' + referenceNumber, ToastAndroid.SHORT)
            })
            .catch(err=>console.log(err))
            
@@ -283,7 +287,7 @@ export default function AddTicketScreen() {
             <ScrollView style = {{width: '100%', paddingTop: 20}}>
         {next?  
         <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
-          <Text> Citation Reference Number: <Text>{referenceNumber}</Text></Text>
+          <Text> Citation Reference Number: <Text>TVM{referenceNumber}</Text></Text>
             <Text style = {styles.HeaderText}>PERSONAL INFORMATION</Text>
             
             <InputText
@@ -308,9 +312,13 @@ export default function AddTicketScreen() {
             <InputText
                 onChangeText={(value) => setLicenseNumber(value)}
                 value={licensenumber}
-                placeholder = "A12-34567890"
+                placeholder = "A12-34567890 - N/A"
                 title = "License Number"
             />
+            <View style = {{margin: 7}}>
+            <Text style = {{color: HighlightColor, fontWeight: 'bold'}}>REMINDER READ THIS TO THE APPREHENDED:</Text>
+            <Text style = {{fontSize: 16, textAlign: 'justify', color: Gray}}>{consent}</Text>
+            </View>
              
             </View>
             :
@@ -397,7 +405,7 @@ const styles = StyleSheet.create({
         marginVertical: 20, 
         fontSize: 25, 
         fontWeight: '500',
-        color: '#808080'
+        color: Black
     
     },
 
@@ -406,7 +414,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center', 
         position: 'absolute', 
-        bottom: 20,
+        bottom: 10,
         width: '90%',
         height: 50,
         backgroundColor: '#1240ac',
