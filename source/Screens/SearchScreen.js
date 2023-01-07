@@ -39,7 +39,7 @@ export default function SearchScreen() {
         return item.doc;
       });
       let filteredData = modifiedArr.filter((item) => {
-        return item.UserName === username && 
+        return item && 
         (new RegExp(searchTerm, 'i').test(item.refNum) ||
         new RegExp(searchTerm, 'i').test(item.DriverName) 
         )
