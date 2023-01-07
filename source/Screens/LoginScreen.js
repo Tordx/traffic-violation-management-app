@@ -21,7 +21,7 @@ import { useNavigation } from '@react-navigation/native';
 import { remoteDBAcoount } from '../Database/pouchDB';
 import { version } from '../components/ViolationData';
 import { useDispatch } from 'react-redux';
-import { setFullname, setUsername } from '../Redux/LoginSlice';
+import { setFullname, setUsername , setFullDetais } from '../Redux/LoginSlice';
 import { setPassword } from '../Redux/LoginSlice';
 import { ActivityIndicator } from 'react-native-paper';
 import { DriverSignature } from '../components/DriverSignature';
@@ -78,8 +78,10 @@ export default function LoginScreen() {
                 const Username = newFilterData[0].Username;
                 const Password = newFilterData[0].Password;
                 const Fullname  = newFilterData[0].FullName;
+                const FullDetails = newFilterData[0]
                  // anti key sensitive
                 if((username.toLowerCase() == Username.toLowerCase()) && (password == Password)){
+                    dispatch(setFullDetais(FullDetails))
                     dispatch(setUsername(username))
                     dispatch(setPassword(password))
                     dispatch(setFullname(Fullname))
