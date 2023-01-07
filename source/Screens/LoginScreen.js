@@ -81,6 +81,7 @@ export default function LoginScreen() {
                 const FullDetails = newFilterData[0]
                  // anti key sensitive
                 if((username.toLowerCase() == Username.toLowerCase()) && (password == Password)){
+                    dispatch(setUsername(username.toLowerCase()))
                     dispatch(setFullDetais(FullDetails))
                     dispatch(setUsername(username))
                     dispatch(setPassword(password))
