@@ -4,17 +4,17 @@
  export const ViolationData = createSlice({
    name: 'violationdata',
    initialState: {
-    obstruction: false,
-    registration: false,
-    orcr: false,
-    nolicense: false,
-    expiredLicense: false,
-    dui: false,
-    attire: false,
-    speeding: false,
-    reckless: false,
-    document: false,
-    signaturedata: false,
+    obstruction: [],
+    registration: [],
+    orcr: [],
+    nolicense: [],
+    expiredLicense: [],
+    dui: [],
+    attire: [],
+    speeding: [],
+    reckless: [],
+    document: [],
+    signaturedata: [],
    },
    reducers: {
     setObstruction: (state , action ) => {
@@ -68,7 +68,7 @@
         console.log('document')
       },
       setSignatureData: (state , action ) => {
-        state.document = action.payload
+        state.signaturedata = action.payload
         console.log(action)
         console.log('SignatureData')
       },

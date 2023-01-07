@@ -42,30 +42,18 @@ export const Checbox = (props) => {
     <Checkbox
       status={props.status}
       onPress={props.Speeding}
-      color = '#1240ac'
+      color = {props.color}
+      
     />
   );
 };
 
 export const ViolationField = (props) => {
 
-    useEffect(() => {
-
-     dispatch(setObstruction(obstruction))
-     dispatch(setRegistration(registration))
-     dispatch(setOrCr(orcr))
-     dispatch(setNoLicense(nolicense))
-     dispatch(setExpiredLicense(expiredLicense))
-     dispatch(setDUI(dui))
-     dispatch(setAttire(attire))
-     dispatch(setSpeeding(speeding))
-     dispatch(setReckless(reckless))
-     dispatch(setDocument(document))
-      
-    }, [])
+    
+    const dispatch = useDispatch()
     
 
-    const dispatch = useDispatch()
 
     //vehicle related
     
@@ -84,27 +72,6 @@ export const ViolationField = (props) => {
     const [speeding, _setSpeeding] = useState(false);
     const [reckless, _setReckless] = useState(false);
 
-    // dispatch(setObstruction(obstruction))
-    // dispatch(setRegistration(registration))
-    // dispatch(setOrCr(orcr))
-    // dispatch(setNoLicense(nolicense))
-    // dispatch(setExpiredLicense(expiredLicense))
-    // dispatch(setDUI(dui))
-    // dispatch(setAttire(attire))
-    // dispatch(setSpeeding(speeding))
-    // dispatch(setReckless(reckless))
-    // dispatch(setDocument(document))
-
-    // shows error : undefined
-    
-        // props.obstruction(obstruction)
-        // props.registration(registration)
-        // props.orcr(orcr)
-        // props.nolicense(nolicense)
-        // props.document(document)
-        // props.expiredLicense(expiredLicense)
-        // dispatch(setObstruction(obstruction))
-
     return (
       
     <View style = {{flex: 1, justifyContent: 'center', alignItems:'center'}}>
@@ -115,8 +82,12 @@ export const ViolationField = (props) => {
                     <Checkbox
                         
                         status = {nolicense? 'checked' : 'unchecked'}
-                        onPress = {() => _setNoLicense(!nolicense)}
+                        onPress = {() => { 
+                            _setNoLicense(!nolicense); 
+                            dispatch(setObstruction(nolicense?'' : 'No License'));
+                            console.log('Choosen')}}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
                         
 
                     />
@@ -127,8 +98,14 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {expiredLicense? 'checked' : 'unchecked'}
-                        onPress = {() => _setExpiredLicense(!expiredLicense)}
+                        onPress = {() => { 
+                            
+                            _setExpiredLicense(!expiredLicense); 
+                            dispatch(setExpiredLicense(expiredLicense? '': 'Expired License'));
+                            console.log('Choosen')
+                        }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
 
                     />
                     <Text style = {styles.Text}>{ExpiredLicense}</Text>        
@@ -137,8 +114,14 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {document? 'checked' : 'unchecked'}
-                        onPress = {() => _setDocument(!document)}
+                        onPress = {() => {
+                            
+                            _setDocument(!document); 
+                            dispatch(setDocument(document? '': 'Document'));
+                            console.log('Choosen')
+                        }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
 
                     />
                                  
@@ -148,8 +131,14 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {speeding? 'checked' : 'unchecked'}
-                        onPress = {() => _setSpeeding(!speeding)}
+                        onPress = {() => {
+                            
+                            _setSpeeding(!speeding); 
+                            dispatch(setSpeeding(speeding? '': 'Speeding'));
+                            console.log('Choosen')
+                        }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
 
                     />
                     <Text style = {styles.Text}>{SpeedingVehicle}</Text>    
@@ -161,8 +150,14 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {reckless? 'checked' : 'unchecked'}
-                        onPress = {() => _setReckless(!reckless)}
+                        onPress = {() => {
+                            
+                            _setReckless(!reckless); 
+                            dispatch(setReckless(reckless? '': 'Reckless Driving'))
+                            console.log('Choosen')
+                        }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
 
                     />
                     <Text style = {styles.Text}>{RecklessDriving}</Text>    
@@ -172,8 +167,14 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {attire? 'checked' : 'unchecked'}
-                        onPress = {() => _setAttire(!attire)}
+                        onPress = {
+                            
+                            () => {_setAttire(!attire); 
+                                dispatch(setAttire(attire? '': 'Attire'));
+                                console.log('Choosen')
+                            }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
                     />
                     <Text style = {styles.Text}>{NoProperGear}</Text>    
                         
@@ -182,8 +183,14 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {dui? 'checked' : 'unchecked'}
-                        onPress = {() => _setDui(!dui)}
+                        onPress = {() => {
+                            
+                            _setDui(!dui); 
+                            dispatch(setDUI(dui? '' : 'DUI'))
+                            console.log('Choosen')
+                        }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
 
                     />
                     <Text style = {styles.Text}>{DirivingUnderInfluence}</Text>    
@@ -196,8 +203,13 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {obstruction? 'checked' : 'unchecked'}
-                        onPress = {() => _setObstruction(!obstruction)}
+                        onPress = {() => {
+                            _setObstruction(!obstruction); 
+                            dispatch(setObstruction(obstruction? '' : 'Obstruction'))
+                            console.log('Choosen')
+                    }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
 
                     />
                     <Text style = {styles.Text}>{ObsturctionVehicle}</Text>
@@ -207,8 +219,14 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {registration? 'checked' : 'unchecked'}
-                        onPress = {() => _setRegistration(!registration)}
+                        onPress = {() => {
+                            
+                            _setRegistration(!registration); 
+                            dispatch(setRegistration(registration? '' : 'Registration'));
+                            console.log('Choosen')
+                        }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
 
                     />
                     <Text style = {styles.Text}>{RegistrationRelated}</Text>        
@@ -217,8 +235,13 @@ export const ViolationField = (props) => {
                     <Checkbox
         
                         status = {orcr? 'checked' : 'unchecked'}
-                        onPress = {() => _setOrcr(!orcr)}
+                        onPress = {() => {
+                            _setOrcr(!orcr); 
+                            dispatch(setOrCr(orcr? '' : 'ORCR'))
+                            console.log('Choosen')
+                        }}
                         style = {styles.CheckBoxStyle}
+                        color = '#1240ac'
                     />
                     <Text style = {styles.Text}>{ORCRrelated}</Text>        
         </View>

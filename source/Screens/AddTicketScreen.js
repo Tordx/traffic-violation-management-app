@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon  from 'react-native-vector-icons/MaterialIcons'
-import { iconColor } from '../Assets/colors'
+import { Black, iconColor } from '../Assets/colors'
 import { CloseButton } from '../components/buttons'
 import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
@@ -21,7 +21,7 @@ import { ViolationField } from '../components/ViolationField'
 import { locaDBViolation ,  SyncViolation, remoteRN } from '../Database/pouchDB'
 import SendSMS from 'react-native-sms';
 import uuid from 'react-native-uuid';
-import { Signature } from '../components/Signature';
+import { DriverSignature } from '../components/DriverSignature';
 import { useSelector } from 'react-redux';
 import { launchCamera } from 'react-native-image-picker'
 import storage from '@react-native-firebase/storage';
@@ -34,17 +34,16 @@ const InputText = (props) => {
     return (
         <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center',}}>
         <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 20, fontSize: 16, fontWeight: '300', color: '#808080'}} >{props.title}</Text>
-        <View style = {styles.InputContainer}>
+       
             <TextInput
             
             placeholderTextColor={'#c4c7cc'}
             placeholder={props.placeholder}
-            style = {{fontSize: 17, fontWeight: '300', color: '#808080'}}
+            style = {styles.InputContainer}
             value = {props.value}
             onChangeText = {props.onChangeText}
             keyboardType = {props.keyboardType}
             />
-        </View>
 
         </View>
     )
@@ -72,57 +71,42 @@ export default function AddTicketScreen() {
     const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => handler.remove();
 
+    
+
   },[])
 
   const {username} = useSelector((store) => store.login)
+  const {fullname} = useSelector((store) => store.login)
   const {dui} = useSelector((store) => store.violation)
   const {attire} = useSelector((store) => store.violation)
   const {speeding} = useSelector((store) => store.violation)
   const {reckless} = useSelector((store) => store.violation)
   const {signaturedata} = useSelector((store) => store.violation)
-  
+  const {registration} = useSelector((store) => store.violation)
+  const {obstruction} = useSelector((store) => store.violation)
+  const {orcr} = useSelector((store) => store.violation)
+  const {expiredLicense} = useSelector((store) => store.violation)
+  const {nolicense} = useSelector((store) => store.violation)
+  const {document} = useSelector((store) => store.violation)
 
     const id = uuid.v4();
     
     const navigation = useNavigation();
     const [next, setNext] = useState(true);
-    const [drivername, setDriverName] = useState(''); 
-    const [driveraddress, setDriverAddress] = useState('')
-    const [contactnumber, setContactNumber] = useState('');
-    const [licensenumber, setLicenseNumber] = useState(''); 
-    const [licenseplate, setLicesnsePlate] = useState('');
-    const [vehicletype, setVehicleType] = useState('');
-    const [Obstruction, setObstruction] = useState('') ;
-    const [Registration, setRegistration] = useState('');
-    const [Orcr, setORCR] = useState('');
-    const [Nolicense, setNoLicense] = useState('') ;
-    const [Document, setDocument] = useState('');
-    const [ExpiredLicense, setExpiredLicense] = useState('');
+    const [drivername, setDriverName] = useState(); 
+    const [driveraddress, setDriverAddress] = useState()
+    const [contactnumber, setContactNumber] = useState();
+    const [licensenumber, setLicenseNumber] = useState(); 
+    const [licenseplate, setLicesnsePlate] = useState();
+    const [vehicletype, setVehicleType] = useState();
     const [referenceNumber, setReferenceNumber] = useState();
+    const [others, setOthers] = useState('');
     const [transferred, setTransferred] = useState(0);
     const [image, setImage] = useState('');
+    const [status, setStatus] = useState('Unpaid');
     const now = new Date();
     const time = now.toLocaleTimeString();
     const date = now.toLocaleDateString();
-
-    function _obstruction(text){
-        setObstruction(text)
-      }
-      function _registration(text){
-        setRegistration(text)
-      }
-      function _orcr(text){
-        setORCR(text)
-      }
-      function _nolicense(text){
-        setNoLicense(text)
-      }
-      function _document(text){
-        setDocument(text)
-      }
-      function _expiredLicense(text){
-        setExpiredLicense(text)
-      }
 
       const updateReferenceNumber = async () => {
         var result = await remoteRN.allDocs({
@@ -154,7 +138,7 @@ export default function AddTicketScreen() {
 
     const createViolation = async() => {
 
-        if(image.length === ''){
+        if(image === ''){
           Alert.alert('Photo needed', 'Please upload apprehended MV Photo')
         } 
        else{
@@ -186,6 +170,7 @@ export default function AddTicketScreen() {
               date: date,
               refNum: referenceNumber,
               DriverName : drivername.toString(),
+              FullName: fullname,
               UserName: username,
               Image: image,
               DriverAddress : driveraddress,
@@ -193,17 +178,19 @@ export default function AddTicketScreen() {
               LicenseNumber : licensenumber,
               LicensePlate : licenseplate,
               VehicleType : vehicletype,
-              Obstruction : Obstruction,
-              Registration : Registration,
-              OrCr : Orcr,
-              Nolicense : Nolicense,
-              ExpiredLicense : ExpiredLicense,
+              Obstruction : obstruction,
+              Registration : registration,
+              OrCr : orcr,
+              Nolicense : nolicense,
+              ExpiredLicense : expiredLicense,
               DUI : dui,
               Attire : attire,
               Speeding : speeding,
               Reckless : reckless,
-              Document : Document,
+              Document : document,
+              Others: others,
               SignatureData: signaturedata,
+              Status: status,
            }
            locaDBViolation.put(NewViolation)
            .then((response) =>{
@@ -338,11 +325,14 @@ export default function AddTicketScreen() {
                 </View>
                 
                 <InputText
+                
+                    onChangeText = {(value => setOthers(value))}
+                    value = {others}
                     placeholder = "Specify here ..."
                     title = "Others"
                 />
             
-                <Signature
+                <DriverSignature
                 />
                 </View>
                 
@@ -420,6 +410,9 @@ const styles = StyleSheet.create({
 
     InputContainer: { 
         
+        color: Black,
+        fontSize: 17,
+        fontWeight: '300',
         backgroundColor: '#fffe', 
         height: 50, 
         width: '90%', 
