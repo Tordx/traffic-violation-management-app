@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet, Image, ScrollView, StatusBar, TouchableOpacity, Alert } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { HighlightColor } from '../../Assets/colors'
