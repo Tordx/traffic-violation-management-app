@@ -21,7 +21,7 @@ import { useNavigation } from '@react-navigation/native';
 import { remoteDBAcoount } from '../Database/pouchDB';
 import { version } from '../components/ViolationData';
 import { useDispatch } from 'react-redux';
-import { setUsername } from '../Redux/LoginSlice';
+import { setFullname, setUsername } from '../Redux/LoginSlice';
 import { setPassword } from '../Redux/LoginSlice';
 import { ActivityIndicator } from 'react-native-paper';
 import { DriverSignature } from '../components/DriverSignature';
@@ -69,7 +69,7 @@ export default function LoginScreen() {
               return item.doc
           });
           let filteredData = modifiedArr.filter(item => {
-              return item.Username === username
+              return item.Username === username.toLowerCase()
             });
             if(!filteredData.length == 0) {
                 let newFilterData = filteredData.map(item => {
@@ -77,10 +77,12 @@ export default function LoginScreen() {
                 })
                 const Username = newFilterData[0].Username;
                 const Password = newFilterData[0].Password;
-                
-                if((username == Username ) && (password == Password)){
+                const Fullname  = newFilterData[0].FullName;
+                 // anti key sensitive
+                if((username.toLowerCase() == Username.toLowerCase()) && (password == Password)){
                     dispatch(setUsername(username))
                     dispatch(setPassword(password))
+                    dispatch(setFullname(Fullname))
                     navigation.navigate('HomeTab')
 
                    }else{
@@ -114,7 +116,6 @@ export default function LoginScreen() {
             <Text style = {{fontSize: 35, fontFamily: 'codenext-bold',  textAlign: 'center', color: textColor, margin: 15}} > Welcome Back</Text>
             <Text style = {{fontSize: 15, fontFamily: 'codenext-semibold', textAlign: 'center',  color: textColor, marginBottom: 10}} > Login to your Account </Text>
             <View style = {styles.InputContainer}>
-                {/* <DriverSignature/> */}
                 <Icon
                     style = {{marginLeft: 10,}}
                     name={'person'}
@@ -124,10 +125,11 @@ export default function LoginScreen() {
                 />
                 <TextInput
                 onChangeText={(value) => setUsernames(value)}
+                style = {styles.textinput}
                 value={username}
                 placeholderTextColor={'#c4c7cc'}
                 placeholder={'username'}
-                style = {styles.textinput}
+                autoCapitalize = 'none'
                 />
             </View>
             <View style = {styles.InputContainer}>

@@ -5,7 +5,8 @@
    name: 'logindata',
    initialState: {
     username: [],
-    password: []
+    password: [],
+    fullname: [],
    },
    reducers: {
       setUsername: (state , action ) => {
@@ -18,6 +19,11 @@
         console.log(action)
         console.log('password')
       },
+      setFullname: (state, action) => {
+        state.fullname = action.payload
+        console.log(action)
+        console.log('fullname')
+      },
       clearData: (state) => {
         state.username = []
         state.password = []
@@ -27,6 +33,6 @@
  })
  
  // Action creators are generated for each case reducer function
- export const {setUsername , setPassword} = LoginData.actions
+ export const {setUsername , setPassword, setFullname} = LoginData.actions
  
  export default LoginData.reducer
