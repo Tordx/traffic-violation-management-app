@@ -106,6 +106,7 @@ export default function AddTicketScreen() {
     const [others, setOthers] = useState('');
     const [transferred, setTransferred] = useState(0);
     const [image, setImage] = useState('');
+    const [firebaseimage, setFireBaseImage] = useState();
     const [status, setStatus] = useState('Unpaid');
     const now = new Date();
     const time = now.toLocaleTimeString();
@@ -177,8 +178,6 @@ export default function AddTicketScreen() {
           console.log(err);
         });
         const firebasedata = await storage().ref(filename).getDownloadURL();
-        // dispatch(setImages(url));
-        setImage(firebasedata)
          try {
            var NewViolation = {
               _id: id,
@@ -188,7 +187,7 @@ export default function AddTicketScreen() {
               DriverName : drivername.toString(),
               FullName: fullname,
               UserName: username,
-              Image: image,
+              Image: firebasedata,
               DriverAddress : driveraddress,
               ContactNumber : contactnumber,
               LicenseNumber : licensenumber,
