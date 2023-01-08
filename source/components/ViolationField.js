@@ -75,7 +75,7 @@ export const ViolationField = (props) => {
     return (
       
     <View style = {{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-          <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 20, marginBottom: 10, alignSelf: 'flex-start'}}>Driver Related</Text>
+          <Text style = {{marginLeft: 10, fontSize: 20, fontFamily: 'codenext-semibold', marginTop: 20, marginBottom: 10, alignSelf: 'flex-start'}}>Driver Related</Text>
         <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%', marginLeft: 5,}}>
             
         <View style = {styles.CheckboxContainer}>
@@ -197,7 +197,7 @@ export const ViolationField = (props) => {
                         
         </View> 
         </View>
-        <Text style = {{marginLeft: 10, fontSize: 20, fontWeight: '300', marginTop: 10, marginBottom: 10, alignSelf: 'flex-start', }}>Vehicle Related</Text>
+        <Text style = {{marginLeft: 10, fontSize: 20, fontFamily: 'codenext-semibold', marginTop: 10, marginBottom: 10, alignSelf: 'flex-start', }}>Vehicle Related</Text>
         <View style = {{flexDirection: 'row', justifyContent: 'flex-start', width: '100%', marginLeft: 5,}}>
         <View style = {styles.CheckboxContainer}>
                     <Checkbox
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
         textAlign: 'left', 
         fontSize: 15,
         margin: 0,
-        fontWeight: '300'
+        fontFamily: 'codenext-semibold',
 
     },
 

@@ -13,7 +13,7 @@ export const Popup = () => {
     <View>
         
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={isModalVisible}
         onRequestClose={() => setModalVisible(false)}
@@ -22,7 +22,7 @@ export const Popup = () => {
             
         <View 
         
-        style = {{justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', backgroundColor: '#00000069'}}>
+        style = {{justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', backgroundColor: '#00000019'}}>
       
         <View style = {{width: '80%', height: '50%', backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderRadius: 20,}}>
           
@@ -38,7 +38,7 @@ export const Popup = () => {
           
           </View>
           <TouchableOpacity
-                style = {{justifyContent: 'center', alignItems: 'center',position: 'absolute', bottom: 100, borderRadius: 100, width: 35, height: 35, borderColor: '#fff', borderWidth: 1}}
+                style = {{justifyContent: 'center', alignItems: 'center',position: 'absolute', bottom: 100, borderRadius: 100, width: 35, height: 35, borderColor: '#fff', borderWidth: 2}}
                 onPress={() => setModalVisible(false)}>
                 <Icon
                 name='close'

@@ -102,7 +102,7 @@ export default function UserSettings() {
                       await remoteDBAcoount.put(updatedDoc);
                       console.log('Password Changed');
                       console.log(updatedDoc)
-                      Alert.alert("PasswordSuccessfully changed")
+                      Alert.alert("PasswordSuccessfully changed, Please re-login")
                       navigation.navigate('LoginScreen')
                 } 
                 }   
