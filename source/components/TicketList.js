@@ -29,14 +29,6 @@ export const TicketingList = () => {
 
   useEffect(() => {
     rendertickets();
-    
-      const backAction = () => {
-        navigation.goBack('TicketingScreen')
-      };
-
-      const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
-      return () => handler.remove();
-
   },[username, mytickets]);
 
     
@@ -100,7 +92,7 @@ export const TicketingList = () => {
      {mytickets? (<FlatList
         data={mytickets}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item._id}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

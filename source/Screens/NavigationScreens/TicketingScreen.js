@@ -1,4 +1,15 @@
-import { View, Text, Pressable, StyleSheet, Image, ScrollView, StatusBar, TouchableOpacity, Alert } from 'react-native'
+import {
+
+  View, 
+  Text, 
+  Pressable, 
+  StyleSheet, 
+  StatusBar, 
+  TouchableOpacity, 
+  Alert, 
+  BackHandler 
+
+} from 'react-native'
 import React, { useEffect } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -6,12 +17,12 @@ import { HighlightColor } from '../../Assets/colors'
 import { useNavigation } from '@react-navigation/native'
 import { TicketingList } from '../../components/TicketList'
 import { version } from '../../components/ViolationData'
-import SearchScreen from '../SearchScreen'
 import { Popup } from '../../components/Popup'
 
 export default function TicketingScreen() {
 
     const navigation = useNavigation();
+
 
     const confirm = () => {
 

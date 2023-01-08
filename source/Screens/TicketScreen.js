@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
   
   View, 
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Modal,
-  ScrollView
+  BackHandler
   
 } from 'react-native'
 import { useSelector } from 'react-redux';
@@ -25,12 +25,23 @@ export default function TicketScreen() {
   const navigation = useNavigation()
 
   let textColor;
-if (selectedTicket.Status === 'Unpaid') {
-  textColor = HighlightColor;
-} else if (selectedTicket.Status === 'Paid') {
-  textColor = Green;
-}
+    if (selectedTicket.Status === 'Unpaid') {
+      textColor = HighlightColor;
+    } else if (selectedTicket.Status === 'Paid') {
+      textColor = Green;
+    } 
 
+  useEffect(() => {
+    
+    
+    const backAction = () => {
+      navigation.navigate('Ticketing')
+    };
+
+    const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () => handler.remove();
+
+  },[])
   
 
   return (
