@@ -9,7 +9,7 @@ import {
     ScrollView,
     BackHandler,
     ToastAndroid,
-    Image
+    Image,
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon  from 'react-native-vector-icons/MaterialIcons'
@@ -25,7 +25,8 @@ import { DriverSignature } from '../components/DriverSignature';
 import { useSelector } from 'react-redux';
 import { launchCamera } from 'react-native-image-picker'
 import storage from '@react-native-firebase/storage';
-import { consent } from '../components/ViolationData'
+import { consent } from '../components/ViolationData';
+import Terms from '../components/Terms'
 
 
 
@@ -36,7 +37,7 @@ const InputText = (props) => {
 
     return (
         <View style = {{width: '100%', justifyContent: 'center', alignItems: 'center',}}>
-        <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 20, fontSize: 16, fontWeight: '300', color: '#808080'}} >{props.title}</Text>
+        <Text style = {{ alignSelf: 'flex-start', marginHorizontal: 20, fontSize: 16, fontFamily: 'codenext-semibold', color: '#808080'}} >{props.title}</Text>
        
             <TextInput
             
@@ -57,13 +58,17 @@ const InputText = (props) => {
 
 export default function AddTicketScreen() {
 
+  
+    
+
   useEffect(() => {
     
     updateReferenceNumber()
+    
     const backAction = () => {
       Alert.alert("Whoops!", "Please submit the current ticket before exiting", [
         {
-          text: "Yes",
+          text: "OK",
           onPress: () => null,
           style: "cancel"
         },
@@ -75,7 +80,6 @@ export default function AddTicketScreen() {
     return () => handler.remove();
 
     
-
   },[])
 
   const {fulldetails} = useSelector((store) => store.login)
@@ -97,13 +101,13 @@ export default function AddTicketScreen() {
     
     const navigation = useNavigation();
     const [next, setNext] = useState(true);
-    const [drivername, setDriverName] = useState(); 
-    const [driveraddress, setDriverAddress] = useState()
-    const [contactnumber, setContactNumber] = useState();
-    const [licensenumber, setLicenseNumber] = useState(); 
-    const [licenseplate, setLicesnsePlate] = useState();
-    const [vehicletype, setVehicleType] = useState();
-    const [referenceNumber, setReferenceNumber] = useState();
+    const [drivername, setDriverName] = useState(''); 
+    const [driveraddress, setDriverAddress] = useState('')
+    const [contactnumber, setContactNumber] = useState('');
+    const [licensenumber, setLicenseNumber] = useState(''); 
+    const [licenseplate, setLicesnsePlate] = useState('');
+    const [vehicletype, setVehicleType] = useState('');
+    const [referenceNumber, setReferenceNumber] = useState('');
     const [others, setOthers] = useState('');
     const [transferred, setTransferred] = useState(0);
     const [image, setImage] = useState('');
@@ -113,9 +117,6 @@ export default function AddTicketScreen() {
     const time = now.toLocaleTimeString();
     const date = now.toLocaleDateString();
 
-    // console.log('fulldetails');
-    // console.log(fulldetails);
-    // console.log('fulldetails');
       const updateReferenceNumber = async () => {
         var result = await remoteRN.allDocs({
           include_docs: true,
@@ -148,7 +149,7 @@ export default function AddTicketScreen() {
 
         if(image === ''){
           Alert.alert('Photo needed', 'Please upload apprehended MV Photo')
-        } else if (signaturedata === ''){
+        } else if (signaturedata === null){
           Alert.alert('Signature needed', "The Driver's signature is needed")
         }
        else{
@@ -181,7 +182,6 @@ export default function AddTicketScreen() {
           console.log(err);
         });
         const firebasedata = await storage().ref(filename).getDownloadURL();
-        // dispatch(setImages(url));
         setImage(firebasedata)
         ToastAndroid.show('Successfully Uploaded Image', ToastAndroid.SHORT)
          try {
@@ -252,9 +252,9 @@ export default function AddTicketScreen() {
 
   const nextcondition = () => {
 
-      if (drivername.length == 0) {
+      if (drivername === '') {
           Alert.alert("Please insert Driver's Fullname")   
-      } else if (driveraddress.length == 0) {
+      } else if (driveraddress === '') {
           Alert.alert("Please insert Driver's Address")  
       } else if (contactnumber.length != 11) {
           Alert.alert("Contact number must be 11 Digit")   
@@ -271,6 +271,7 @@ export default function AddTicketScreen() {
     launchCamera({cameraType: 'front' , maxHeight: 300 , maxWidth: 300 ,  mediaType: 'photo'}, response => {
       
       console.log(response)
+      ToastAndroid.show('Successfully added Photo', ToastAndroid.SHORT)
       navigation.navigate('AddTicketScreen')
 
     }).then(image => {
@@ -316,10 +317,7 @@ export default function AddTicketScreen() {
                 placeholder = "A12-34567890 - N/A"
                 title = "License Number"
             />
-            <View style = {{margin: 7}}>
-            <Text style = {{color: HighlightColor, fontWeight: 'bold'}}>REMINDER READ THIS TO THE APPREHENDED:</Text>
-            <Text style = {{fontSize: 16, textAlign: 'justify', color: Gray}}>{consent}</Text>
-            </View>
+            <Terms/>
              
             </View>
             :
@@ -342,7 +340,7 @@ export default function AddTicketScreen() {
                     style = {styles.oPenCamera}
                     onPress={OpenCamera}
                 >
-                    <Text style = {[styles.buttontext,{color: 'grey'}]}>Upload Photo</Text>
+                    <Text style = {[styles.buttontext,{color: Gray}]}>Upload Photo</Text>
                 </TouchableOpacity>
                 <Text style = {styles.HeaderText}>TRAFFIC VIOLATION</Text>
                 <View style = {{flexDirection: 'row', justifyContent: 'center',  width: 420, marginBottom: 20,}}>
@@ -400,7 +398,7 @@ const styles = StyleSheet.create({
     },
 
     HeaderText: { 
-        
+        fontFamily: 'codenext-bold',
         textAlign: 'center',
         marginHorizontal: 20, 
         marginVertical: 20, 
@@ -428,7 +426,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 17,
         fontWeight: '500',
-        color: '#fff'
+        color: '#fff',
+        fontFamily: 'codenext-semibold',
 
     },
 
@@ -437,7 +436,7 @@ const styles = StyleSheet.create({
         
         color: Black,
         fontSize: 17,
-        fontWeight: '300',
+        fontFamily: 'codenext-semibold',
         backgroundColor: '#fffe', 
         height: 50, 
         width: '90%', 
