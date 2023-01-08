@@ -1,4 +1,4 @@
-import {BackHandler, StatusBar } from 'react-native'
+import { BackHandler, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import  Icon from 'react-native-vector-icons/MaterialIcons'
@@ -32,6 +32,7 @@ export default function HomeTab() {
         const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
         return () => handler.remove();
       },[])
+      
   return (
 
     <Tab.Navigator
