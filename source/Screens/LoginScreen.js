@@ -12,11 +12,12 @@ import {
     Alert,
     ToastAndroid,
     TouchableOpacity,
+    Modal,
     
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
-import { iconColor, textColor } from '../Assets/colors';
+import { Blue, Gray, iconColor, textColor } from '../Assets/colors';
 import { useNavigation } from '@react-navigation/native';
 import { remoteDBAcoount } from '../Database/pouchDB';
 import { version } from '../components/ViolationData';
@@ -57,9 +58,12 @@ export default function LoginScreen() {
     const [password, setPasswords] = useState('')
     const [input, setInput] = useState();
     const [inputsecure, setInputSecure] = useState(true)
+    const [isModalVisible, setisModalVisible] = useState(false);
 
       const LoginData = async () => {
 
+        
+        setisModalVisible(true)
         var result = await remoteDBAcoount.allDocs({
             include_docs: true,
             attachments: true
@@ -81,20 +85,24 @@ export default function LoginScreen() {
                 const FullDetails = newFilterData[0]
                  // anti key sensitive
                 if((username.toLowerCase() == Username.toLowerCase()) && (password == Password)){
+                    
                     dispatch(setUsername(username.toLowerCase()))
                     dispatch(setFullDetais(FullDetails))
                     dispatch(setUsername(username))
                     dispatch(setPassword(password))
                     dispatch(setFullname(Fullname))
                     navigation.navigate('HomeTab')
+                    setisModalVisible(false)
 
                    }else{
                     ToastAndroid.show('Username and Password did not match',ToastAndroid.LONG)
-                    // Vibration.vibrate();
+                    
+                    setisModalVisible(false)
                    }
             }else{
                 ToastAndroid.show('username and password did not match',ToastAndroid.LONG)
-                // Vibration.vibrate();
+                
+                setisModalVisible(false)
             }
             
         }
@@ -163,7 +171,7 @@ export default function LoginScreen() {
                 />
                 </Pressable>
             </View>
-            <Pressable style = {[styles.loginButton,{backgroundColor: input? '#00000019': '#1240ac'}]}
+            <Pressable style = {[styles.loginButton,{backgroundColor:'#00000019'}]}
             disabled = {input}
             onPress = {LoginData}
             android_ripple = {{
@@ -182,6 +190,23 @@ export default function LoginScreen() {
             </TouchableOpacity>
            
         </View>
+
+            <Modal
+                visible = {isModalVisible}
+                transparent = {true}
+                animationType = 'fade'
+            >
+                <StatusBar
+                    hidden = {true}
+                    />
+                <View style ={{flex: 1, backgroundColor: '#00000039', justifyContent: 'center', alignItems: 'center',}}>
+                    
+                    <View style = {{width: 350, height: 100, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderRadius: 5}}>
+                        <ActivityIndicator size={'small'} color = {'#1240ac'}/>
+                        <Text style = {{marginLeft: 20}}>Logging in, Please wait...</Text>
+                    </View>
+                </View>
+            </Modal>
         
             <Text style = {{fontSize: 10, color: '#fff', position: 'absolute', bottom: 5}} >{version}</Text>
             
@@ -208,6 +233,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginVertical: 10,
         borderRadius: 5, 
+        borderWidth: 1,
+        borderColor: Gray
     
     },
 
