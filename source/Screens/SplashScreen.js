@@ -20,7 +20,7 @@ export default function SplashScreen ({navigation}) {
             console.log('Verified Connection')
             setTimeout(() => {
                 navigation.replace('LoginScreen');
-            }, 2000);
+            }, 1000);
             } else {
                Alert.alert('Sorry', 'Please connect to the internet to use the application');
             }

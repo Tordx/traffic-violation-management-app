@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, Image } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const NewsScreen = () => {
