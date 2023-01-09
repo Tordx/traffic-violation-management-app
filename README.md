@@ -1,7 +1,7 @@
 # Traffic Violation Management App
 
 #### Project status: 
-### ON HOLD
+### SOON TO BE DELIVERED
 
 
 ## Get Started
