@@ -1,5 +1,12 @@
-import { View, Text, BackHandler, StatusBar } from 'react-native'
 import React, {useEffect} from 'react'
+import { 
+  
+  View, 
+  Text,
+  BackHandler, 
+  StatusBar,
+
+} from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 export default function ForgotPasswordScreen() {
 
@@ -8,8 +15,7 @@ export default function ForgotPasswordScreen() {
     useEffect(() => {
         BackHandler.addEventListener("hardwareBackPress", backAction);
     
-        return () =>
-          BackHandler.removeEventListener("hardwareBackPress", backAction);
+        return () => true
       }, []);
 
       const backAction = () => {

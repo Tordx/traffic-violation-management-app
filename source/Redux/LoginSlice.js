@@ -38,7 +38,6 @@
    }
  })
  
- // Action creators are generated for each case reducer function
  export const {setUsername , setPassword, setFullname , setFullDetais} = LoginData.actions
  
  export default LoginData.reducer

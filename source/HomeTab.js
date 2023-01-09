@@ -10,29 +10,29 @@ import NewsScreen from './Screens/NavigationScreens/NewsScreen'
 export default function HomeTab() {
 
   
+  useEffect(() => {
+
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to go Exit the App?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
+
+    const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () => handler.remove();
+
+    }, []);
+              
 
   const Tab = createBottomTabNavigator();
 
-      
-      useEffect(() => {
-        
-    
-        const backAction = () => {
-          Alert.alert("Hold on!", "Are you sure you want to go Exit the App?", [
-            {
-              text: "Cancel",
-              onPress: () => null,
-              style: "cancel"
-            },
-            { text: "YES", onPress: () => BackHandler.exitApp() }
-          ]);
-          return true;
-        };
-  
-        const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
-        return () => handler.remove();
-      },[])
-      
+
   return (
 
     <Tab.Navigator

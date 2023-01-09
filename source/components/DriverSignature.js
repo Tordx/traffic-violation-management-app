@@ -7,17 +7,13 @@ import {
     Modal, 
     TouchableOpacity, 
     StyleSheet,
-    Pressable,
     Alert
 
 } from 'react-native'
 import SignaturePad from 'react-native-signature-pad-v2'
-import Signature from 'react-native-signature-canvas'
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
 import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { setSignatureData } from '../Redux/ViolationSlice';
-import storage from '@react-native-firebase/storage'
 
 export const DriverSignature = (props) => {
 

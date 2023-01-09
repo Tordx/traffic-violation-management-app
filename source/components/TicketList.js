@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   RefreshControl,
-  BackHandler,
 
 } from 'react-native';
 import { remoteDBViolation } from '../Database/pouchDB';
@@ -17,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Icon from  'react-native-vector-icons/MaterialIcons';
 import { setSelectedTicket } from '../Redux/TicketSlice';
+import { Black, Blue } from '../Assets/colors';
 
 export const TicketingList = () => {
 
@@ -71,7 +71,7 @@ export const TicketingList = () => {
         navigation.navigate('TicketScreen');
       }}
       >
-        <View>
+        <View style = {{width: '100%'}}>
         <Text style = {{fontSize: 25, fontWeight:'900', color: '#111129'}} ># <Text style={styles.title}>{item.refNum}</Text></Text>
         <Text style={styles.name}>{item.DriverName} — {item.date} {item.time} </Text>
         </View>
@@ -105,7 +105,6 @@ export const TicketingList = () => {
           <ActivityIndicator size="large" color="#1240ac"/>
         </View>
       )}
-      
     </SafeAreaView>
   );
 }
@@ -126,13 +125,13 @@ const styles = StyleSheet.create({
   },
   item: {
     alignSelf: 'center',
-    width: 400,
+    width: '100%',
     height: 100,
     padding: 20,
     marginVertical: 3,
     marginHorizontal: 5,
     borderBottomWidth: 0.3,
-    borderColor: '#808080',
+    borderColor: Black,
   },
 
   title: {

@@ -9,7 +9,7 @@ import {
     ScrollView,
     BackHandler,
     ToastAndroid,
-    Image,
+    
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon  from 'react-native-vector-icons/MaterialIcons'

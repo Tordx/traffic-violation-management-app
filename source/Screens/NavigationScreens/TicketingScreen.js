@@ -7,7 +7,7 @@ import {
   StatusBar, 
   TouchableOpacity, 
   Alert, 
-  BackHandler 
+  Image 
 
 } from 'react-native'
 import React, { useEffect } from 'react'
@@ -50,8 +50,7 @@ export default function TicketingScreen() {
             <Text>End of the list</Text>
             </View>
        
-      <View style = {{height: 100, justifyContent: 'center',
-        alignItems: 'center',}}>
+      <View style = {{height: 100, justifyContent: 'center',alignItems: 'center',}}>
       <Text style = {{textAlign: 'center', fontSize: 30, fontWeight: '500'}}>NO NEW FIELDS HERE </Text>
       </View>
         </View>
@@ -72,13 +71,8 @@ export default function TicketingScreen() {
         </Pressable>
         
         <View style = {styles.HeaderContainer} >
-        <View style = {{
-        justifyContent: 'center',
-        alignSelf: 'center',
-        borderRadius: 5,
-        }}>
-      <Text style = {{textAlign: 'center', fontSize: 20, fontFamily: 'codenext-semibold', color: '#fff'}}>Citation List</Text>
-      </View>
+     
+      <Text style = {{textAlign: 'left', fontSize: 20, fontFamily: 'codenext-bold', color: '#fff'}}>Citation List</Text>
       <TouchableOpacity style={{right: 0, position: 'absolute', marginRight: 10,}}
         onPress = {()=> navigation.navigate('SearchScreen')}
       >
