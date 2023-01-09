@@ -1,43 +1,33 @@
-import { View, Text, Pressable, StyleSheet, Image, Alert, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { 
+  
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  TouchableOpacity, 
+  ActivityIndicator 
+
+} from 'react-native'
 import React, { useState, useEffect } from 'react'  // Import useState and useEffect hooks
 import  Icon from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
-import { remoteDBAcoount } from '../../Database/pouchDB'
 import { Black } from '../../Assets/colors'
 
 function AccountScreen() {
-  const {username} = useSelector((store) => store.login)
-  const navigation = useNavigation()
-  const [FullName, setFullName] = useState('') 
-  const [Rank, setRank] = useState('')  
+  const {fulldetails} = useSelector((store) => store.login)
+  const navigation = useNavigation();
+  const [FullName, setFullName] = useState(false)
+  const [Rank, setRank] = useState(false)
+  const [image, setImage] = useState('https://i.imgur.com/XwEDEkd.png')
 
   useEffect(() => {
 
-    const setUser = async() => {
-      var result = await remoteDBAcoount.allDocs({
-        include_docs: true,
-        attachments: true
-      });
-      if (result.rows) {
-        let modifiedArr = result.rows.map(function(item) {
-          return item.doc
-        });
-        let filteredData = modifiedArr.filter(item => {
-          return item.Username == username;
-        });
-        if (filteredData) {
-          let newFilterData = filteredData.map(item => {
-            return item;
-          });
-          setFullName(newFilterData[0].FullName);
-          setRank(newFilterData[0].Rank);
-        }
-      }
-    } 
-    setUser();
-  },[username])
-
+    if(fulldetails.FullName) {setFullName(true)}
+    if(fulldetails.Rank) {setRank(true)}
+    if(fulldetails.Image) {setImage(fulldetails.Image)}
+    
+  },[fulldetails])
 
   return (
     
@@ -63,28 +53,17 @@ function AccountScreen() {
       </View>
       
       <View style = {{justifyContent: 'center', alignItems: 'center'}}>
-        <Image
         
-        source={require('../../Assets/Images/sample_officer.png')}
-        style = {styles.profileimage}
+        <Image
+          source={{uri: image}}
+          style = {styles.profileimage} />
 
-        />
-
-        {FullName? (<Text style = {styles.officername} >{FullName}</Text>) : (<ActivityIndicator size={"large"} />)}
+        {FullName? (<Text style = {styles.officername} >{fulldetails.FullName}</Text>) : (<ActivityIndicator size={"large"} />)}
       <View>
-        {Rank? (<Text style={styles.officerrank}>{Rank}</Text>) : (<ActivityIndicator />)}
+        {Rank? (<Text style={styles.officerrank}>{fulldetails.Rank}</Text>) : (<ActivityIndicator />)}
       </View>
 
       </View>
-
-      {/* <Pressable style={styles.AddUser} > 
-            <Icon
-            name='add'
-            color= '#fff'
-            size={50}
-             onPress = {() => navigation.navigate('AddAccount')}
-            />
-        </Pressable> */}
 
     </View>
   )
