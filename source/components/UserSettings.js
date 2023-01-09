@@ -5,7 +5,8 @@ import {
     TouchableOpacity, 
     TextInput, 
     StyleSheet, 
-    Alert 
+    Alert
+
 } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import { remoteDBAcoount } from '../Database/pouchDB';
@@ -26,23 +27,6 @@ export default function UserSettings() {
     const [inputsecure, setInputSecure] = useState(true);
     const [newinputsecure, setNewInputSecure] = useState(true);
     const [confirminputsecure, setConfirmInputSecure] = useState(true);
-
-    const logout = () => {
-
-    Alert.alert(
-      "Confirm Log out",
-      "Are you sure you want to logout from device?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "Confirm", onPress: clearData },
-        
-        ]
-        );
-    }
 
     const clearData = () => {
     dispatch({ type: 'CLEAR_DATA', payload: '' })  // Dispatch action to reducer
@@ -92,11 +76,16 @@ export default function UserSettings() {
                 } else if (newPassword != confirmPassword){
                     Alert.alert("Please Confirm your New password");
                 } else {
+
+                    // If doc is updated, it won't update other parameters
                     const updatedDoc = {
                         _id: newFilterData[0]._id,
                         _rev: newFilterData[0]._rev,
                         Username: newFilterData[0].Username,
+                        Fullname: newFilterData[0].FullName,
+                        Rank: newFilterData[0].Rank,
                         Password: newPassword,
+                        Citation: newFilterData[0].Citation,
                         
                       };
                       await remoteDBAcoount.put(updatedDoc);
@@ -182,15 +171,8 @@ export default function UserSettings() {
                 style = {styles.changepassword}
                 onPress={changepassword}
             >
-               <Text style = {{textAlign: 'center', fontSize: 20, color: input? '#00000029': Gray, fontWeight: '700'}} >Update Password</Text>
+               <Text style = {{textAlign: 'center', fontSize: 20, fontFamily: 'codenext-semibold', color: Gray}} >Update Password</Text>
             </TouchableOpacity>
-        <TouchableOpacity 
-            style = {{bottom: 0, marginTop: 100}}
-            onPress = {logout}
-        
-            ><Text>LOG OUT</Text>
-        </TouchableOpacity>
-
     </View>
   )
 }
@@ -198,14 +180,14 @@ export default function UserSettings() {
 const styles = StyleSheet.create({
 
     changepassword: {
-        width: 250, 
+        width: 300, 
         height: 50,  
         justifyContent: 'center',
         marginVertical: 10,
         borderRadius: 5,
-        borderColor: PaleBlue,
-        borderWidth: 0.3,
         marginBottom: 100,
+        borderColor: '#1240ac',
+        borderWidth: .5,
     },
 
     textinput: {
