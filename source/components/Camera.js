@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import {View, Text, Pressable , Alert} from 'react-native'
+import {
+  
+  Text, 
+  Pressable, 
+  Alert
+
+} from 'react-native'
 import {launchCamera, cameraType} from 'react-native-image-picker';
 import { useNavigation } from '@react-navigation/native';
 import { BackHandler } from 'react-native';
 import storage from '@react-native-firebase/storage';
-import uuid from 'react-native-uuid';
 import { useDispatch } from 'react-redux';
 import { setImages } from '../Redux/TaskReducer';
 import { useSelector } from 'react-redux';
