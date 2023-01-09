@@ -31,17 +31,19 @@ export default function TicketScreen() {
       textColor = Green;
     } 
 
-  useEffect(() => {
-    
-    
-    const backAction = () => {
-      navigation.navigate('Ticketing')
-    };
+ 
+    useEffect(() => {
 
-    const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
-    return () => handler.remove();
+      const backAction = () => {
+         navigation.navigate('HomeTab')
+        return true;
+      };
 
-  },[])
+      const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
+      return () => handler.remove();
+
+      }, []);
+                
   
 
   return (

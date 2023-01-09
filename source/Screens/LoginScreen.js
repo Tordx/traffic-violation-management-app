@@ -30,27 +30,19 @@ import { DriverSignature } from '../components/DriverSignature';
 
 export default function LoginScreen() {
 
-    const dispatch = useDispatch()
-
     useEffect(() => {
 
-      const backAction = () => {
-        Alert.alert("Hold on!", "Are you sure you want to go Exit the App?", [
-          {
-            text: "Cancel",
-            onPress: () => null,
-            style: "cancel"
-          },
-          { text: "YES", onPress: () => BackHandler.exitApp() }
-        ]);
-        return true;
-      };
+        const backAction = () => {
+          BackHandler.exitApp()
+          return true;
+        };
+    
+        const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
+        return () => handler.remove();
+    },[])
 
-      const handler = BackHandler.addEventListener('hardwareBackPress', backAction);
-      return () => handler.remove();
+    const dispatch = useDispatch()
 
-      }, []);
-                
 
     const navigation = useNavigation()
 
