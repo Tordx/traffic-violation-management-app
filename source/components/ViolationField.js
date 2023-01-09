@@ -3,8 +3,7 @@ import {
     
     View, 
     Text, 
-    StyleSheet, 
-    TextInput
+    StyleSheet,
 
 } from 'react-native';
 import { Checkbox } from 'react-native-paper';
