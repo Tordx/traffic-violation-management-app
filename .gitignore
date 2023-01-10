@@ -63,7 +63,3 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-# Database
-/Database/
-
-

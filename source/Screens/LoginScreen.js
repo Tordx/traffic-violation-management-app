@@ -55,7 +55,7 @@ export default function LoginScreen() {
       const LoginData = async () => {
 
         
-        setisModalVisible(true)
+        
         var result = await remoteDBAcoount.allDocs({
             include_docs: true,
             attachments: true
@@ -71,6 +71,7 @@ export default function LoginScreen() {
                 let newFilterData = filteredData.map(item => {
                     return item
                 })
+                setisModalVisible(true)
                 const Username = newFilterData[0].Username;
                 const Password = newFilterData[0].Password;
                 const Fullname  = newFilterData[0].FullName;
@@ -80,8 +81,6 @@ export default function LoginScreen() {
                     
                     dispatch(setUsername(username.toLowerCase()))
                     dispatch(setFullDetais(FullDetails))
-                    dispatch(setUsername(username))
-                    dispatch(setPassword(password))
                     dispatch(setFullname(Fullname))
                     navigation.navigate('HomeTab')
                     setisModalVisible(false)
@@ -92,7 +91,7 @@ export default function LoginScreen() {
                     setisModalVisible(false)
                    }
             }else{
-                ToastAndroid.show('username and password did not match',ToastAndroid.LONG)
+                ToastAndroid.show('Username and password did not match',ToastAndroid.LONG)
                 
                 setisModalVisible(false)
             }

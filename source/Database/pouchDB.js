@@ -22,7 +22,6 @@ export const remoteDBAcoount = new PouchDB('http://admin:admin@192.168.0.191:598
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //VIOLATION
-PouchDB.plugin(require('pouchdb-adapter-asyncstorage').default)
 export const locaDBViolation = new PouchDB('Violation', {adapter: 'asyncstorage'})
 export const remoteDBViolation = new PouchDB('http://admin:admin@192.168.0.191:5984/z_violation')
 
@@ -43,7 +42,6 @@ export const remoteDBViolation = new PouchDB('http://admin:admin@192.168.0.191:5
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // REFERENCE NUMBER
-PouchDB.plugin(require('pouchdb-adapter-asyncstorage').default)
 export const localRN = new PouchDB('RN', {adapter: 'asyncstorage'})
 export const remoteRN = new PouchDB('http://admin:admin@192.168.0.191:5984/z_referencenumber')
 
